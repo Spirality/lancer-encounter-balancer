@@ -1,0 +1,16 @@
+[{
+    "id": "sdn_champion",
+    "name": "CHAMPION",
+    "description": "Both within and outside of hierarchical force organization, some percentage of trained pilots can be expected to rise above the rest to a notable degree. Within more formal military command structures, these standouts are often recommended for advanced training and possible integration into special forces, but even in less regulated environments or those that operate along non-standard lines, these exemplary combatants occupy a wide variety of prominent roles and elevated positions from the ceremonial to the celebrated, including fraternal orders, elite bodyguards, venerated arena fighters, and chosen warriors. These champions typically employ equally non-standard loadouts along with customized chassis, many of which are just as famous, or infamous, as those who pilot them.",
+    "base_features": ["npc_champion_Superiority", "npc_champion_Peerless", "npc_champion_Challenger", "npc_champion_ChampionsRaiment"],
+    "optional_features": ["npc_champion_Nemesis", "npc_champion_Unassailable", "npc_champion_HonorGuard", "npc_champion_IntoTheFray", "npc_champion_ShatteredVisage", "npc_champion_GlorySeeker"],
+    "power": 50
+    },
+{
+    "id": "sdn_scrapper",
+    "name": "SCRAPPER",
+    "description": "Alternately referred to as junkers, technicals, or more formally as improvised combat vehicles, Scrapper-designate chassis are a product of limited resources and mechanical ingenuity. Where well-funded armies will field standardized frames, guerrilla forces, bandits, terrorists, and pirates will often utilize salvaged military-grade or civilian chassis, modified with additional weapons and armor to supplement their forces. Additional examples can occasionally be found in polities which have undergone a catastrophic breakdown of societal and technological infrastructure due to uncontrolled use of weapons of mass destruction or unplanned isolation from interstellar civilization. Inventive pilots trapped behind enemy lines for extended period of time have also frequently been known to make non-standard modifications to their chassis in a bid for survival.",
+    "base_features": ["npc_scrapper_PersonalTouch", "npc_scrapper_ScrapperSystems"],
+    "optional_features": ["npc_scrapper_MountedTurret", "npc_scrapper_UpArmouredHull", "npc_scrapper_Piledriver", "npc_scrapper_UnstableReactor", "npc_scrapper_FragmentedNHP", "npc_scrapper_PatchKit", "npc_scrapper_IED"],
+    "power": 50
+    }]

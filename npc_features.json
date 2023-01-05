@@ -1,0 +1,1865 @@
+[
+    {
+        "id": "npc_carrier_MID",
+        "name": "MECHANIZED INFANTRY DOCTRINE",
+        "type": "Trait",
+        "origin": {
+            "name": "Carrier",
+            "type": "Class",
+            "base": true
+        },
+        "locked": false,
+        "effect": "The Carrier can transport one Squad or a number of characters whose combined Size are less than its own. Allied Humans and Size 1/2 mechs may use the Carrier as hard cover, and it grants hard cover to all adjacent Squads from all directions."
+    },
+    {
+        "id": "npc_carrier_RapidDeployment",
+        "name": "RAPID DEPLOYMENT",
+        "type": "Trait",
+        "origin": {
+            "name": "Carrier",
+            "type": "Class",
+            "base": true
+        },
+        "tags" : [{"id": "tg_full_action"}],
+        "locked": false,
+        "effect": "Take a single Squad or a number of characters whose combined Size are less than the Carrier's own adjacent to this mech and load them onboard. They occupy the same space as the Carrier, and are both immune to damage and can not be targeted or affected by attacks while onboard. The Carrier then moves 10 spaces, ignoring engagement, reactions, and difficult terrain. At the end of this movement the loaded characters automatically redeploy to open spaces adjacent to the Carrier."
+
+    },  
+    {
+            "id": "npc_carrier_RemoteMachineGun",
+            "name": "REMOTE MACHINE GUN",
+            "type": "Weapon",
+            "weapon_type": "Main Cannon",
+            "origin": {
+                "name": "Carrier",
+                "type": "Class",
+                "base": true
+            },
+            "locked": false,
+            "on_hit": "On hit, the target becomes Impaired until the end of their next turn. For the duration, if your target moves more than 1 space they clear Impaired, but they take {2/3/4} kinetic damage. This effect immediately ends when the Carrier is destroyed.",
+            "damage": [
+                {
+                    "type": "Kinetic",
+                    "damage": [4,5,6]
+                }
+            ],
+            "attack_bonus": [1,2,3],
+            "range": [
+                {
+                    "type": "Range",
+                    "val": 8,
+                    "override": false,
+                    "bonus": 0
+                }
+            ],
+            "tags": [{"id": "tg_smart"}]
+        },
+        {
+            "id": "npc_carrier_SmokeLaunchers",
+            "name": "SMOKE LAUNCHERS",
+            "type": "System",
+            "origin": {
+                "name": "Carrier",
+                "type": "Class",
+                "base": false
+            },
+            "tags" : [{"id": "tg_free_action"}, {"id": "tg_recharge", "val": 6}],
+            "locked": false,
+            "effect": "Create one or two blast 2 zones within range 5 of the Carrier. These zones last until the end of the Carrier's next turn, and all characters and objects within these zones gain soft cover."
+    
+        },
+        {
+            "id": "npc_carrier_AGL",
+            "name": "AUTOMATIC GRENADE LAUNCHER",
+            "type": "Weapon",
+            "weapon_type": "Main Launcher",
+            "origin": {
+                "name": "Carrier",
+                "type": "Class",
+                "base": false
+            },
+            "locked": false,
+            "on_hit": "Targets hit by this weapon must pass an Agility check or become Impaired until the end of their next turn.",
+            "effect": "The Carrier cannot fire this weapon on its own. An adjacent Squad, Human, or Size 1/2 mech can attack with this weapon as a Skirmish.",
+            "damage": [
+                {
+                    "type": "Explosive",
+                    "damage": [4,5,6]
+                }
+            ],
+            "attack_bonus": [2,4,6],
+            "range": [
+                {
+                    "type": "Range",
+                    "val": 10,
+                    "override": false,
+                    "bonus": 0
+                },
+                {
+                    "type": "Blast",
+                    "val": 1
+                }
+            ]
+        },
+        {
+            "id": "npc_carrier_Masterkey",
+            "name": "MASTERKEY",
+            "type": "System",
+            "weapon_type": "Heavy Cannon",
+            "origin": {
+                "name": "Carrier",
+                "type": "Class",
+                "base": false
+            },
+            "tags" : [{"id": "tg_quick_action"}, {"id": "tg_recharge", "val": 6}],
+            "locked": false,
+            "effect": "The Carrier launches a specialized breaching round designed to create openings for allied units to move through. Treat this as a Cone 3 area within range 5 that cannot change directions. Objects, cover, and terrain in this area take {10/20/30} AP explosive damage, and all characters in the area must pass a Hull save or be knocked back 2 spaces and knocked prone."   
+        },
+        {
+            "id": "npc_carrier_TriageDrones",
+            "name": "TRIAGE DRONES",
+            "type": "Reaction",
+            "origin": {
+                "name": "Carrier",
+                "type": "Class",
+                "base": false
+            },
+            "tags" : [{"id": "tg_reaction"}, {"id": "tg_recharge", "val": 5}],
+            "locked": false,
+            "trigger": "A Biological character within the Carrier's Sensors is hit by an attack.",
+            "effect": "That character gains resistance to all damage, heat, and burn from that attack. They may then reroll the next attack they make, though they must keep the second result."    
+        },
+        {
+            "id": "npc_carrier_FCC",
+            "name": "FIRE-CONTROL CROSSLINK",
+            "type": "System",
+            "origin": {
+                "name": "Carrier",
+                "type": "Class",
+                "base": false
+            },
+            "locked": false,
+            "effect": "1/round, whenever the Carrier makes a successful attack, an allied character within the Carrier's sensor range gains +1 Accuracy to their next attack if it is against the same target. 1/round, whenever an allied character within the Carrier's sensor range makes a successful attack, the Carrier gains +1 Accuracy to its next attack if it is against the same target."   
+        },
+        {
+            "id": "npc_conscript_QoQ",
+            "name": "QUANTITY OVER QUALITY",
+            "type": "Trait",
+            "origin": {
+                "name": "Conscript",
+                "type": "Class",
+                "base": true
+            },
+            "locked": false,
+            "effect": "Conscripts are deployed in pairs. Each has identical stats and systems, and they both act together, one after the other, when activated during combat. Conscripts cannot take the Grunt, Elite, Ultra, or Veteran templates, and can never gain structure."   
+        },
+        {
+            "id": "npc_conscript_CannonFodder",
+            "name": "CANNON FODDER",
+            "type": "Trait",
+            "origin": {
+                "name": "Conscript",
+                "type": "Class",
+                "base": true
+            },
+            "locked": false,
+            "effect": "Whenever an allied character adjacent to a Conscript is hit by a ranged or melee attack, as a reaction they may force that attack to hit the Conscript instead."   
+        },
+        {
+            "id": "npc_conscript_PanicFire",
+            "name": "PANIC FIRE",
+            "type": "Trait",
+            "origin": {
+                "name": "Conscript",
+                "type": "Class",
+                "base": true
+            },
+            "locked": false,
+            "effect": "The Conscript wildly fires its weapon without regard for technique or accuracy, inexpertly granting its allies covering fire. Choose one target within the Conscript's sensor range and line of sight. That target takes +1 Difficulty on all attacks they make until the end of the Conscript's next turn. This effect immediately ends if the Conscript is destroyed."    
+        },
+        {
+            "id": "npc_conscript_DisposablePDW",
+            "name": "DISPOSABLE PDW",
+            "type": "Weapon",
+            "weapon_type": "Main CQB",
+            "origin": {
+                "name": "Conscript",
+                "type": "Class",
+                "base": true
+            },
+            "locked": false,
+            "effect": "When the Conscript attacks with this weapon it can choose to empty the magazine. If it does so, treat its range as Cone 5 but the Disposable PDW must be reloaded before it can be used again (as though it was Loading).",
+            "damage": [
+                {
+                    "type": "Kinetic",
+                    "damage": [4,5,6]
+                }
+            ],
+            "attack_bonus": [1,1,1],
+            "range": [
+                {
+                    "type": "Range",
+                    "val": 5,
+                    "override": false,
+                    "bonus": 0
+                },
+                {
+                    "type": "Threat",
+                    "val": 3,
+                    "override": false,
+                    "bonus": 0
+                }
+            ]
+        },
+        {
+            "id": "npc_conscript_Panzerfaust",
+            "name": "PANZERFAUST",
+            "type": "System",
+            "origin": {
+                "name": "Conscript",
+                "type": "Class",
+                "base": false
+            },
+            "locked": false,
+            "tags" : [{"id": "tg_quick_action"}, {"id": "tg_recharge", "val": "6 "}],
+            "effect": "The Conscript launches an explosive warhead which detonates in a Blast 1 area within range 10. All characters within the affected area must pass a Hull save or take {4/6/8} explosive damage and be knocked prone."    
+        },        
+        {
+            "id": "npc_conscript_SurvivalInstincts",
+            "name": "SURVIVAL INSTINCTS",
+            "type": "Trait",
+            "origin": {
+                "name": "Conscript",
+                "type": "Class",
+                "base": false
+            },
+            "locked": false,
+            "effect": "Whenever either of a pair of Conscripts is destroyed, the remaining one gains resistance to all damage until the end of their next turn and may immediately Boost as a reaction, ignoring engagement and reactions." 
+        },
+        {
+            "id": "npc_conscript_MilitiaRifle",
+            "name": "MILITIA RIFLE",
+            "type": "Weapon",
+            "weapon_type": "Main Rifle",
+            "origin": {
+                "name": "Conscript",
+                "type": "Class",
+                "base": false
+            },
+            "locked": false,
+            "effect": "This weapon system replaces the Disposable PDW. The Conscript can now use Panic Fire on targets within range 10.",
+            "damage": [
+                {
+                    "type": "Kinetic",
+                    "damage": [4,5,6]
+                }
+            ],
+            "attack_bonus": [1,2,3],
+            "range": [
+                    {
+                        "type": "Range",
+                        "val": 10,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ],
+            "tags": [{"id": "tg_reliable", "val": "1/1/2"}]
+            },
+            {
+                "id": "npc_conscript_CombatShield",
+                "name": "COMBAT SHIELD",
+                "type": "System",
+                "origin": {
+                    "name": "Conscript",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "tags" : [{"id": "tg_shield"}],
+                "effect": "The Conscript gains +2 hitpoints and counts as one Size larger for purposes of engagement."       
+            },     
+            {
+            
+                "id": "npc_conscript_AAD",
+                "name": "ANTI-ARMOR DETPACK",
+                "type": "Weapon",
+                "weapon_type": "Main Melee",
+                "origin": {
+                    "name": "Conscript",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "The Conscript may choose to make this attack with +2 Accuracy instead of +1 Difficulty, but on hit they are immediately destroyed.",
+                "on_hit": "The target becomes Slowed and Shredded until the end of its next turn.",
+                "damage": [
+                    {
+                        "type": "Explosive",
+                        "damage": [6,8,10]
+                    }
+                ],
+                "attack_bonus": [1,2,3],
+                "range": [
+                    {
+                        "type": "Threat",
+                        "val": 1,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ],
+                "tags": [{"id": "tg_inaccurate"}, {"id": "tg_ap"}, {"id": "tg_limited", "val": 1}]
+            },
+            {
+                "id": "npc_gladiator_MaulFist",
+                "name": "MAUL FIST",
+                "type": "Weapon",
+                "weapon_type": "Main Melee",
+                "origin": {
+                    "name": "Gladiator",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "on_hit": "Targets hit by this weapon must pass a Hull save or become knocked prone and Impaired until the end of their next turn.",
+                "damage": [
+                    {
+                        "type": "Kinetic",
+                        "damage": [5,7,9]
+                    }
+                ],
+                "attack_bonus": [1,2,3],
+                "range": [
+                    {
+                        "type": "Threat",
+                        "val": 1,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ]
+            },
+            {
+            
+                "id": "npc_gladiator_HydraulicClaw",
+                "name": "HYDRAULIC CLAW",
+                "type": "Trait",
+                "origin": {
+                    "name": "Gladiator",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "When the Gladiator grapples a character, they can immediately move that character to a free space adjacent to it. While grappling, the Gladiator can take reactions."
+            },
+            {
+                
+                "id": "npc_gladiator_ShoulderCharge",
+                "name": "SHOULDER CHARGE",
+                "type": "Reaction",
+                "origin": {
+                    "name": "Gladiator",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "tags" : [{"id": "tg_recharge", "val": 5}],
+                "trigger": "A hostile character starts any movement within the Gladiator's line of sight.",
+                "effect": "The Gladiator may move 6 spaces as a reaction directly towards the triggering character, ignoring engagement and reactions. The Gladiator must end this movement adjacent to them if possible, and if it does then the triggering character must pass a Hull save or be knocked prone."      
+            },
+            {
+                "id": "npc_gladiator_G&P",
+                "name": "GROUND AND POUND",
+                "type": "Reaction",
+                "origin": {
+                    "name": "Gladiator",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "trigger": "A prone character adjacent to the Gladiator stands from prone.",
+                "effect": "The Gladiator may immediately make an attack against them with the Maul Fist. This reaction can be taken as many times per round as it is triggered."
+            },
+            {   
+                "id": "npc_gladiator_TorqueFlail",
+                "name": "TORQUE FLAIL",
+                "type": "Weapon",
+                "weapon_type": "Main Melee",
+                "origin": {
+                    "name": "Gladiator",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "on_hit": "Targets hit by this weapon must pass an Agility save or become Slowed until the end of their next turn.",
+                "damage": [
+                    {
+                        "type": "Kinetic",
+                        "damage": [4,6,8]
+                    }
+                ],
+                "attack_bonus": [1,2,3],
+                "range": [
+                    {
+                        "type": "Threat",
+                        "val": 3,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ]
+            },
+            { 
+                "id": "npc_gladiator_BreachingDrill",
+                "name": "BREACHING DRILL",
+                "type": "Weapon",
+                "weapon_type": "Heavy Melee",
+                "origin": {
+                    "name": "Gladiator",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "on_hit": "On hit, the target must pass a Hull save or become Immobilized and Shredded until the end of their next turn. This weapon deals {10/15/20} AP kinetic damage to objects, cover, terrain, and the environment.",
+                "damage": [
+                    {
+                        "type": "Kinetic",
+                        "damage": [8,10,12]
+                    }
+                ],
+                "attack_bonus": [1,2,3],
+                "range": [
+                    {
+                        "type": "Threat",
+                        "val": 1,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ],
+                "tags": [{"id": "tg_inaccurate"}, {"id": "tg_ap"}]
+            },
+            {
+                "id": "npc_gladiator_SpikedShield",
+                "name": "SPIKED SHIELD",
+                "type": "Weapon",
+                "weapon_type": "Main Melee",
+                "origin": {
+                    "name": "Gladiator",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "1/round, when the Gladiator or an adjacent allied character is hit by a melee attack, the Gladiator or that character may gain resistance to all damage from that attack as a reaction. The attacker then takes {2/3/4} AP kinetic damage.",
+                "damage": [
+                    {
+                        "type": "Kinetic",
+                        "damage": [2,3,4]
+                    }
+                ],
+                "attack_bonus": [1,2,3],
+                "range": [
+                    {
+                        "type": "Threat",
+                        "val": 1,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ],
+                "tags": [{"id": "tg_accurate"}, {"id": "tg_ap"}, {"id": "tg_knockback", "val": 2}]
+            },
+            {
+                "id": "npc_gladiator_GDS",
+                "name": "GO DOWN SWINGING",
+                "type": "Trait",
+                "origin": {
+                    "name": "Conscript",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "When the Gladiator is destroyed, they may first immediately move its speed and then make an attack with a weapon of its choice."
+        
+            },                       
+            {
+                "id": "npc_nightmare_FugueState",
+                "name": "FUGUE STATE",
+                "origin": {
+                  "type": "Class",
+                  "name": "Nightmare",
+                  "base": true
+                },
+                "locked": false,
+                "type": "Tech",
+                "effect": "On hit, the target takes {3/4/5} heat and the Nightmare can immediately cause the target to move up to its speed in a direction of the Nightmare's choice. The target may choose to ignore this movement, but if they do so then they become Slowed and cannot take reactions until the end of their next turn.",
+                "tags": [{"id": "tg_quick_tech"}],
+                "tech_type": "Quick",
+                "attack_bonus": [2, 4, 6]
+              },
+              {
+                "id": "npc_nightmare_ParalyticEngram",
+                "name": "PARALYTIC ENGRAM",
+                "origin": {
+                  "type": "Class",
+                  "name": "Nightmare",
+                  "base": true  
+                },
+                "locked": false,
+                "type": "Tech",
+                "effect": "On hit, the target is Immobilized until the end of their next turn. Once the target is no longer Immobilized they must pass a Systems save or become Impaired and Slowed until the end of their next turn.",
+                "tags": [{"id": "tg_quick_tech"}, {"id": "tg_recharge", "val": 5}],
+                "tech_type": "Quick",
+                "attack_bonus": [2, 4, 6]
+              },           {
+                "id": "npc_nightmare_IntegratedBasilisk",
+                "name": "INTEGRATED BASILISK",
+                "type": "Trait",
+                "origin": {
+                    "name": "Nightmare",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "If the first attack roll a character makes on their turn against the Nightmare misses, they automatically become Impaired until the end of their next turn."
+        
+            },
+              {
+                "id": "npc_nightmare_AmygdalaSpike",
+                "name": "AMYGDALA SPIKE",
+                "type": "System",
+                "origin": {
+                    "name": "Nightmare",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_quick_action"}, {"id": "tg_recharge", "val": 6}],
+                "effect": "All hostile characters in a Burst 2 area must pass a Systems save or immediately use their reaction this turn to move a distance equal to their speed as far away from the Nightmare as possible."                
+            },
+            {
+                "id": "npc_nightmare_Liberation",
+                "name": "LIBERATION",
+                "origin": {
+                  "type": "Class",
+                  "name": "Nightmare",
+                  "base": false
+                },
+                "locked": false,
+                "type": "Tech",
+                "effect": "The Nightmare chooses a hostile character in range and forces them to immediately, as a reaction, move their speed and use up to two weapons to attack characters in range. The Nightmare chooses the direction of this movement, the weapons used, and all targets. If the target has any equipped systems with the AI tag, these attacks also gain +1 Accuracy. A character may ignore this effect by becoming Stunned until the end of their next turn.",
+                "tags": [{"id": "tg_full_tech"}, {"id": "tg_limited", "val": 1}],
+                "tech_type": "Full"
+              },
+              {
+                "id": "npc_nightmare_EphialtesStrain",
+                "name": "EPHIALTES STRAIN",
+                "origin": {
+                  "type": "Class",
+                  "name": "Nightmare",
+                  "base": false
+                },
+                "locked": false,
+                "type": "Tech",
+                "effect": "On hit, the target becomes infected with an ontological virus which lasts until the end of the scene. They take +1 Difficulty on all attack rolls and each failed attack roll they make causes them to take {2/3/4} heat. They may clear this infection either by passing a quick action Systems save with +1 Difficulty or by making an attack against another hostile character with an Improvised Attack or a weapon of their choice. This attack gains +1 Accuracy instead of +1 Difficulty. Only one target may be infected by this virus at a time.",
+                "tags": [{"id": "tg_quick_tech"}],
+                "tech_type": "Quick",
+                "attack_bonus": [2, 4, 6]
+              },
+              {
+            
+                "id": "npc_nightmare_InductiveTalons",
+                "name": "INDUCTIVE TALONS",
+                "type": "Weapon",
+                "weapon_type": "Main Melee",
+                "origin": {
+                    "name": "Nightmare",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "The Nightmare gains +1 Accuracy and deals +2 heat on hit with tech attacks against adjacent characters.",
+                
+                "damage": [
+                    {
+                        "type": "Kinetic",
+                        "damage": [6,8,10]
+                    }
+                ],
+                "attack_bonus": [1,2,3],
+                "range": [
+                    {
+                        "type": "Threat",
+                        "val": 1,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ]                
+            },
+            {
+                "id": "npc_nightmare_RadiativeThanatocode",
+                "name": "RADIATIVE THANATOCODE",
+                "type": "Trait",
+                "origin": {
+                    "name": "Nightmare",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "When the Nightmare is destroyed it creates a Burst 2 area centered around it that persists until the end of the scene. The first time an enemy enters this area on their turn, or if they start their turn there, they must pass a Systems save or take {3/4/5} heat."
+        
+            },
+            {
+                "id": "npc_ogre_ImpactGauntlets",
+                "name": "IMPACT GAUNTLETS",
+                "type": "Weapon",
+                "weapon_type": "Main Melee",
+                "origin": {
+                    "name": "Ogre",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "This weapon can be used while Jammed, and whenever it would be destroyed the Ogre becomes Impaired until the end of its next turn instead.",
+                "damage": [
+                    {
+                        "type": "Kinetic",
+                        "damage": [6,8,10]
+                    }
+                ],
+                "attack_bonus": [1,2,3],
+                "range": [
+                    {
+                        "type": "Threat",
+                        "val": 1,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ]
+            },
+            {
+                "id": "npc_ogre_MeteorFist",
+                "name": "METEOR FIST",
+                "type": "Trait",
+                "origin": {
+                    "name": "Ogre",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "When the Ogre makes a melee attack, they can fly up to 3 spaces directly toward a targeted character before the attack. This movement ignores engagement and doesn't provoke reactions."
+            },
+            {
+                "id": "npc_ogre_RisingUppercut",
+                "name": "RISING UPPERCUT",
+                "type": "Trait",
+                "origin": {
+                    "name": "Ogre",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "type": "Reaction",
+                "effect": "The target must pass a Hull save or be knocked back 3 spaces and knocked Prone. On a successful save they are knocked back 1 space and not knocked Prone. The Ogre then moves the same number of spaces towards the target by the most direct route possible.",
+                "tags": [{"id": "tg_round","val": 1},{"id": "tg_reaction"}],
+                "trigger": "The Ogre hits with a melee attack."
+            },
+            {
+                "id": "npc_ogre_BackhandStrike",
+                "name": "BACKHAND STRIKE",
+                "type": "Trait",
+                "origin": {
+                    "name": "Ogre",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "type": "Reaction",
+                "effect": "A different target adjacent to the Ogre takes {3/4/5} kinetic damage and must pass an Agility save or become Impaired until the end of their next turn.",
+                "tags": [{"id": "tg_round","val": 1},{"id": "tg_reaction"}],
+                "trigger": "The Ogre hits with a melee attack."
+            },
+            {
+                "id": "npc_ogre_Infighting",
+                "name": "INFIGHTING",
+                "type": "Trait",
+                "origin": {
+                    "name": "Ogre",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "While grappling, the Ogre can Boost and take reactions."
+            },
+            {
+                "id": "npc_ogre_Retribution",
+                "name": "RETRIBUTION",
+                "type": "Trait",
+                "origin": {
+                    "name": "Ogre",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "Whenever the Ogre takes damage, their next attack deals {+2/+3/+4} bonus damage. This bonus stacks up to +8. Bonuses are lost when the Ogre attacks, or at the end of their next turn."
+            },
+            {
+                "id": "npc_ogre_MachineGunKnuckle",
+                "name": "MACHINE GUN KNUCKLE",
+                "type": "Trait",
+                "origin": {
+                    "name": "Ogre",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "type": "Reaction",
+                "effect": "The Ogre moves up to 3 spaces, ignoring engagement and reactions, and then makes a melee attack against all characters in a Burst 1 area at +1 vs evasion/tier. On hit, targets take {3/4/5} kinetic damage.",
+                "tags": [{"id": "tg_round","val": 1},{"id": "tg_reaction"}],
+                "trigger": "The Ogre hits with a melee attack."
+            },
+            {
+                "id": "npc_ogre_CounterStance",
+                "name": "COUNTER STANCE",
+                "type": "Trait",
+                "origin": {
+                    "name": "Ogre",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "type": "Reaction",
+                "effect": "Until the start of the Ogre's next turn, they gain resistance to melee attacks unless the attacker takes {4/6/8} kinetic damage before rolling.",
+                "tags": [{"id": "tg_round","val": 1},{"id": "tg_reaction"}],
+                "trigger": "The Ogre hits with a melee attack."
+            },
+            {
+                "id": "npc_ogre_PiledriverShockwave",
+                "name": "PILEDRIVER SHOCKWAVE",
+                "type": "System",
+                "origin": {
+                    "name": "Ogre",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_full_action"}, {"id": "tg_recharge", "val": "5"}],
+                "effect": "The Ogre flies 5 spaces, though it must land at the end of this movement or fall. They then create a Burst 2 area when they land. Unless they can fly, all characters in this area must pass an Agility save or take {4/6/8} kinetic damage and be knocked Prone."
+            },
+            {
+                "id": "npc_ogre_CalamityThrow",
+                "name": "CALAMITY THROW",
+                "type": "System",
+                "origin": {
+                    "name": "Ogre",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_full_action"}, {"id": "tg_recharge", "val": "5"}],
+                "effect": "The Ogre chooses an adjacent character and forces them to pass a Hull save. On a successful save, they become grappled by the Ogre and take {4/5/6} kinetic damage. If they fail the save, the Ogre grabs them and hurls them with incredible violence. The target is knocked back 5 spaces in a direction of the Ogre's choice, they take {8/10/12} kinetic damage, and are knocked Prone. If they collide with another character, that character must pass a Hull save or take half damage and also be knocked Prone, and if they collide with an object, deployable, or piece of terrain it takes {10/20/30} AP kinetic damage."
+            },
+            {
+                "id": "npc_phantom_PhaseGenerator",
+                "name": "PHASE GENERATOR",
+                "type": "System",
+                "origin": {
+                    "name": "Phantom",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "tags": [{"id": "tg_protocol"}],
+                "effect": "While this system is active, the Phantom shifts out of phase and becomes Intangible, but their imperfect phasing technology means they can still be targeted by tech attacks. The Phantom may end this effect as a protocol. If the Phantom overheats, this system is disabled until the end of their next turn and its effect immediately ends."       
+            },
+            {
+            
+                "id": "npc_phantom_PhaseBlade",
+                "name": "PHASE BLADE",
+                "type": "Weapon",
+                "weapon_type": "Main Melee",
+                "origin": {
+                    "name": "Phantom",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "When the Phantom activates its Phase Generator, this weapon becomes charged with disruptive energy and the next attack made with it does 8/12/16 energy damage on hit instead. That attack's damage cannot be reduced in any way.",
+                
+                "damage": [
+                    {
+                        "type": "Energy",
+                        "damage": [4,6,8]
+                    }
+                ],
+                "attack_bonus": [2,4,6],
+                "range": [
+                    {
+                        "type": "Threat",
+                        "val": 1,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ],
+                "tags": [{"id": "tg_accurate"}, {"id": "tg_ap"}]               
+            },
+            {
+                "id": "npc_phantom_DistortionPulse",
+                "name": "DISTORTION PULSE",
+                "origin": {
+                  "type": "Class",
+                  "name": "Phantom",
+                  "base": false
+                },
+                "locked": false,
+                "type": "Tech",
+                "effect": "This ability can only be used while the Phantom is Intangible. The Phantom creates a Blast 1 area of spatial distortion within sensor range that counts as difficult terrain for both Intangible and tangible characters. When the Phantom deactivates its Phase Generator as a protocol, this distortion violently implodes and all other characters within the area, Intangible and tangible, must pass a Systems save or take {2/3/4} heat and be knocked Prone. Only one of these distortions can be active at a time, and if another is created then the old one collapses harmlessly.",
+                "tags": [{"id": "tg_quick_tech"}],
+                "tech_type": "Quick"
+              },
+            {
+                "id": "npc_phantom_Slipweave",
+                "name": "SLIPWEAVE",
+                "type": "Trait",
+                "origin": {
+                    "name": "Phantom",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "The Phantom has resistance to attacks made as a reaction."       
+            },
+            {
+                "id": "npc_phantom_GITS",
+                "name": "GHOST IN THE SHELL",
+                "type": "Trait",
+                "origin": {
+                    "name": "Phantom",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "1/round while the Phase Generator is active the Phantom can choose one tangible character they move through. That character must pass an Engineering save or take {2/3/4} heat and become Slowed until the end of their next turn."
+        
+            },
+            {
+                "id": "npc_phantom_SpatialDisjunction",
+                "name": "SPATIAL DISJUNCTION",
+                "type": "Trait",
+                "origin": {
+                    "name": "Phantom",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "When the Phantom deactivates its Phase Generator as a protocol, it may teleport 3 spaces as part of that protocol."
+                
+            },
+            {
+                "id": "npc_phantom_NullVectorDrive",
+                "name": "NULL-VECTOR DRIVE",
+                "type": "Trait",
+                "origin": {
+                    "name": "Phantom",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "While the Phase Generator is active the Phantom gains hover flight when it moves or boosts. If the Phase Generator deactivates while this mech is in mid-air it immediately falls."
+                
+            },
+            {
+                "id": "npc_phantom_WraithKnives",
+                "name": "WRAITH KNIVES",
+                "type": "System",
+                "origin": {
+                    "name": "Phantom",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+              "tags": [{"id": "tg_quick_action"},{"id": "tg_limited", "val": 3}],
+                "effect": "The Phantom expends a charge to throw a phase-active knife at a character within range 3, making a ranged attack at +2 vs evasion/tier. On hit, the target takes {4/6/8} AP kinetic damage and becomes Intangible until the end of their next turn. "
+                
+            },
+            {
+                "id": "npc_phantom_PhaseRipper",
+                "name": "PHASE RIPPER",
+                "type": "System",
+                "origin": {
+                    "name": "Phantom",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "On a successful hit with a charged Phase Blade, the target is teleported 3 spaces in a direction of the Phantom's choosing. If that space is occupied by another character, that character must pass an Engineering save or take {4/5/6} kinetic damage and become Shredded until the end of their next turn. The target is then placed in the nearest free space adjacent to the other character."
+                
+            },
+            {
+                "id": "npc_reaver_LegionBody",
+                "name": "LEGION BODY",
+                "type": "Trait",
+                "origin": {
+                    "name": "Reaver",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "At the end of the Reaver’s turn, they regain 1/4 of their total HP. They don’t regain any HP if they have taken burn during the same round. The Reaver is surrounded by a Burst 2 area of swarming nanites that follow its every move. Hostile characters that begin their turn in this area take {3/4/5} AP kinetic damage and must pass an Engineering save or become Slowed until the end of their next turn. The first time a Reaver is reduced to or below half their structure during a scene (or reduced to or below half their maximum HP if they only have a single point of structure) this trait is permanently disabled."
+            },
+            {
+                "id": "npc_reaver_ContainmentBreach",
+                "name": "CONTAINMENT BREACH",
+                "type": "Trait",
+                "origin": {
+                    "name": "Reaver",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "This trait only becomes active when the Legion Body trait has been permanently disabled. Combat damage causes the Reaver's nanite swarm to begin consuming everything around it in an uncontrollable frenzy, creating a new Burst 2 area. Hostile characters that begin their turn in this area take {3/4/5} burn, and must pass an Engineering save or become Slowed and have all HP or Overshield they gain reduced by half until the end of their next turn. On a successful save, they are not Slowed."
+            },
+            {
+                "id": "npc_reaver_HeavyFrame",
+                "name": "HEAVY FRAME",
+                "type": "Trait",
+                "origin": {
+                    "name": "Reaver",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "The Reaver cannot be knocked prone, back, pushed, or pulled by any actor smaller than itself."
+            },
+            {
+            
+                "id": "npc_reaver_DisplacementLash",
+                "name": "DISPLACEMENT LASH",
+                "type": "Weapon",
+                "weapon_type": "Heavy Melee",
+                "origin": {
+                    "name": "Reaver",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "The Reaver may attack one or two targets within range and line of sight when it uses this weapon. On hit, targets must pass a Systems save or be pulled to a free space adjacent to the Reaver, or as close as possible while still obeying obstructions.",
+                
+                "damage": [
+                    {
+                        "type": "Kinetic",
+                        "damage": [4,4,4]
+                    }
+                ],
+                "attack_bonus": [2,4,6],
+                "range": [
+                    {
+                        "type": "Threat",
+                        "val": 3,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ],
+                "tags": [{"id": "tg_smart"}]
+            },
+            {
+                "id": "npc_reaver_VeilHive",
+                "name": "VEIL HIVE",
+                "type": "Trait",
+                "origin": {
+                    "name": "Reaver",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_quick_action"}],
+                "effect": "The area created by the Reaver's Legion Body and/or Containment Breach traits also counts as soft cover for allied characters within it."
+            },
+            {
+                "id": "npc_reaver_Cannibalize",
+                "name": "CANNIBALIZE",
+                "type": "System",
+                "origin": {
+                    "name": "Reaver",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_full_action"}, {"id": "tg_recharge", "val": "6"}],
+                "effect": "Choose a single character within the Reaver's Legion Body and/or Containment Breach area that has at least 1 repair. That mech loses 1 repair and the Reaver regains {5/7/9} HP and clears one condition."
+            },
+            {
+                "id": "npc_reaver_GreywashCoating",
+                "name": "GREYWASH COATING",
+                "type": "Trait",
+                "origin": {
+                    "name": "Reaver",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_quick_action"}],
+                "effect": "1/round whenever the Reaver is hit by a successful ranged or melee attack, a single character within range 3 takes {2/3/4} burn."
+            },
+            {
+                "id": "npc_reaver_FocusedDispersal",
+                "name": "FOCUSED DISPERSAL",
+                "type": "System",
+                "origin": {
+                    "name": "Reaver",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_full_action"}],
+                "effect": "The Reaver becomes Immobilized until the end of its next turn, but its Legion Body and/or Containment Breach area becomes a cone 5 area originating from the Reaver in any direction."
+            },
+            {
+                "id": "npc_reaver_LingeringSwarm",
+                "name": "LINGERING SWARM",
+                "type": "Trait",
+                "origin": {
+                    "name": "Reaver",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "When the Reaver is destroyed, it melts down into a swarm of agitated greywash. Remove the Reaver from play and replace it with a blast 1 area in the nearest free space that lasts for the rest of the scene. This area may overlap other units, counts as difficult terrain, and any character which enters the area for the first time during their turn or begins their turn in this area takes {2/3/4} AP kinetic damage. At the beginning of each round, this area may move up to 3 spaces in any direction."
+            },           
+            {
+                "id": "npc_sergeant_SquadLeader",
+                "name": "SQUAD LEADER",
+                "type": "Trait",
+                "origin": {
+                    "name": "Sergeant",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "tags": [{"id": "tg_quick_action"}],
+                "effect": "1/round, if the Sergeant is not Jammed they may choose one or two allied characters within sensor range. Until the end of their next turns, those characters receive +1 Accuracy to their next attack or the next save they inflict is made with +1 Difficulty to the roll. No more than one enemy in any given scene can be a Sergeant."
+            },
+            {
+                "id": "npc_sergeant_CoordinatedManeuvers",
+                "name": "COORDINATED MANEUVERS",
+                "type": "Trait",
+                "origin": {
+                    "name": "Sergeant",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "tags": [{"id": "tg_quick_action"}, {"id": "tg_recharge", "val": 5}],
+                "effect": "Choose one or two allied characters within the Sergeant's sensor range. Those characters may move up to 3 spaces in any direction, ignoring reaction attacks and engagement."
+            },
+            {
+                "id": "npc_sergeant_AssaultCarbine",
+                "name": "ASSAULT CARBINE",
+                "type": "Weapon",
+                "weapon_type": "Main CQB",
+                "origin": {
+                    "name": "Sergeant",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "damage": [
+                    {
+                        "type": "Kinetic",
+                        "damage": [4,6,8]
+                    }
+                ],
+                "attack_bonus": [2,4,6],
+                "range": [
+                    {
+                        "type": "Range",
+                        "val": 8,
+                        "override": false,
+                        "bonus": 0
+                    },
+                    {
+                        "type": "Threat",
+                        "val": 3,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ],
+                "effect": "Before or after attacking with this weapon (including as a reaction), the Sergeant may move 2 spaces. This movement ignores engagement and doesn't provoke reactions."
+            },
+            {
+                "id": "npc_sergeant_5RR",
+                "name": "FIVE ROUNDS RAPID",
+                "type": "Trait",
+                "origin": {
+                    "name": "Sergeant",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_full_action"}, {"id": "tg_recharge", "val": 6}],
+                "effect": "Choose one or two allied characters within the Sergeant's sensor range that have not yet acted this round. The Sergeant and those characters may then immediately make a Skirmish as a reaction, in any order. Those allied characters are then considered to have taken their turns for the round."
+            },
+            {
+                "id": "npc_sergeant_AmbushTactics",
+                "name": "AMBUSH TACTICS",
+                "type": "Trait",
+                "origin": {
+                    "name": "Sergeant",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_full_action"}, {"id": "tg_limited", "val": 1}],
+                "effect": "You may immediately place up to 4 Grunts on the battlefield in any free spaces within the Sergeant's sensor range. These Grunts may act in the round in which they come into play, but only after all other turns have been taken."
+                
+            },
+            {
+                "id": "npc_sergeant_PourItOn",
+                "name": "POUR IT ON",
+                "type": "Trait",
+                "origin": {
+                    "name": "Sergeant",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_quick_action"}],
+                "effect": "Choose an allied character within the Sergeant's Sensors. That unit deals +1d6 bonus damage on hit with its next ranged or melee attack."
+                
+            },
+            {
+                "id": "npc_sergeant_TrueGrit",
+                "name": "TRUE GRIT",
+                "type": "Reaction",
+                "origin": {
+                    "name": "Sergeant",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_reaction"}, {"id": "tg_recharge", "val": 6}],
+                "trigger": "An allied character within Sensors is reduced to 0 HP.",
+                "effect": "That character is instead reduced to 1 HP."
+            },
+            {
+                "id": "npc_sergeant_JawsOfHell",
+                "name": "JAWS OF HELL",
+                "type": "Trait",
+                "origin": {
+                    "name": "Sergeant",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "1/round, whenever an allied character is destroyed the Sergeant and all other allied characters within the Sergeant's sensor range gain +1 Accuracy to their next attack."
+            },
+            {
+                "id": "npc_termite_LaserDrill",
+                "name": "LASER DRILL",
+                "type": "Weapon",
+                "weapon_type": "Main Cannon",
+                "origin": {
+                    "name": "Termite",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "damage": [
+                    {
+                        "type": "Energy",
+                        "damage": [3,3,3]
+                    },
+                    {
+                        "type": "Burn",
+                        "damage": [2, 3, 4]
+                    }
+                ],
+                "attack_bonus": [1,2,3],
+                "range": [
+                    {
+                        "type": "Line",
+                        "val": 5,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ],
+                "tags": [{"id": "tg_ap"}]
+            },
+            {
+                "id": "npc_termite_Bulwark",
+                "name": "BULWARK MODS",
+                "type": "Trait",
+                "origin": {
+                    "name": "Termite",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "The Termite ignores difficult terrain and dangerous terrain."
+            },
+            {
+                "id": "npc_termite_DemoPlating",
+                "name": "DEMOLITION PLATING",
+                "type": "Trait",
+                "origin": {
+                    "name": "Termite",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "The Termite has resistance to explosive damage."
+
+            },
+            {
+                "id": "npc_termite_CrateringCharge",
+                "name": "CRATERING CHARGE",
+                "type": "System",
+                "origin": {
+                    "name": "Termite",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "Create a blast 1 area within range 5. All cover, terrain, objects, and deployables within that area take {10/20/30} AP explosive damage and all characters within that area must pass an Agility save or take {4/6/8} explosive damage and be knocked prone, taking half damage and not falling prone on a success. This area then becomes then becomes a crater one space deep which counts as difficult terrain for the rest of the scene.",
+                "tags": [{"id": "tg_quick_action"}, {"id": "tg_recharge", "val": 5}]
+            },
+            {
+                "id": "npc_termite_ConcussionGrenade",
+                "name": "CONCUSSION GRENADE",
+                "type": "System",
+                "origin": {
+                    "name": "Termite",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "Create a blast 1 explosion within range 5. All characters within this area must pass a Hull save or be knocked back 2 spaces from the center of the blast and become Impaired until the end of their next turn.",
+                "tags": [{"id": "tg_quick_action"}]
+            },
+            {
+                "id": "npc_termite_DetpasteGun",
+                "name": "DETPASTE GUN",
+                "type": "System",
+                "origin": {
+                    "name": "Termite",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "Create a blast 1 area within range 5 and line of sight. This area becomes difficult terrain for the rest of the scene. As a quick action the Termite can detonate this area, returning it to normal and dealing {3/4/5} burn to all characters in the area unless they pass an Agility save.",
+                "tags": [{"id": "tg_quick_action"}, {"id": "tg_recharge", "val": 5}]
+            },
+            {
+                "id": "npc_termite_ThermalSmoke",
+                "name": "THERMAL SMOKE",
+                "type": "System",
+                "origin": {
+                    "name": "Termite",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "Create a Blast 2 area within range 5. Characters other than the Termite cannot trace line of sight into or out of the area. Characters partially within the area have line of sight to characters within and outside the area. Any character except the Termite that enters this zone for the first time on their turn or that begins their turn inside the zone takes 2/3/4 heat. This effect lasts until the end of the Termite's next turn, or until the Termite uses this system again.",
+                "tags": [{"id": "tg_quick_action"}, {"id": "tg_recharge", "val": 5}]
+            },
+            {
+                "id": "npc_termite_ReactiveArmour",
+                "name": "REACTIVE ARMOR",
+                "type": "Reaction",
+                "origin": {
+                    "name": "Termite",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "trigger": "The Termite is hit by a melee attack.",
+                "effect": "The Termite gains resistance to all damage from that attack. The attacker must then pass a Hull save or be knocked back 2 spaces directly away from the Termite and knocked prone.",
+                "tags": [{"id": "tg_reaction"}, {"id": "tg_round","val": 1}]
+            },
+            {
+                "id": "npc_termite_SatchelCharge",
+                "name": "SATCHEL CHARGE",
+                "type": "System",
+                "origin": {
+                    "name": "Termite",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "The Termite may deploy this charge in a free space within range 3, or they may target a character within range 3 by making a ranged attack at +1 vs evasion/tier to attach the charge to that character. When deployed into a free space, the Termite may detonate this charge as a protocol, dealing 10/20/30 AP explosive damage to cover, terrain, objects, and deployables within a Burst 1 area, and forcing all characters in the area to pass an Agility save or take 8/10/12 explosive damage. On a successful save, characters take half damage. When attached to a character, the charge automatically detonates at the end of their next turn instead in a Burst 1 area with the listed damage and effects. Any character the charge is attached to automatically fails the save and also becomes Shredded until the end of their next turn.",
+                "tags": [{"id": "tg_quick_action"}, {"id": "tg_recharge", "val": 6}]
+            },
+            
+            
+            {
+                "id": "npc_titan_UnstoppableForce",
+                "name": "UNSTOPPABLE FORCE",
+                "type": "Trait",
+                "origin": {
+                    "name": "Titan",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "The Titan ignores difficult terrain, cannot be knocked back or prone by characters smaller than itself, and can freely occupy spaces containing other characters. Whenever the Titan moves into a space occupied by an enemy for the first time on its turn, that enemy must pass an Agility save or take {4/6/8} kinetic damage and be knocked prone."
+
+            },
+            {
+                "id": "npc_titan_Superweapon",
+                "name": "SUPERWEAPON",
+                "type": "Trait",
+                "origin": {
+                    "name": "Titan",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "Titans cannot take the Grunt template, and only a single Titan may be present in any given scene."
+
+            },
+            {
+                "id": "npc_titan_SecondaryDamage",
+                "name": "SECONDARY DAMAGE",
+                "type": "Trait",
+                "origin": {
+                    "name": "Titan",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "The Titan does not begin play with this trait active. Once the Titan has lost half of its structure or more (or once its HP is reduced to half of its maximum value or less if it only has a single point of structure) this trait becomes active and it becomes visibly unstable, resulting in secondary detonations and damage alarms. At the start of the Titan's next turn, all characters within a Burst 3 area must immediately pass an Agility save or take 6/8/10 explosive damage and be knocked back 3 spaces. On a successful save, they take half damage and are knocked back 1 space."
+            },
+                        {
+                "id": "npc_titan_SovereignShielding",
+                "name": "SOVEREIGN SHIELDING",
+                "type": "Reaction",
+                "origin": {
+                    "name": "Titan",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "tags": [{"id": "tg_reaction"}, {"id": "tg_recharge", "val": 6}],
+                "trigger": "The Titan is hit by an attack that originated beyond range 3.",
+                "effect": "The Titan gains resistance to all damage from that attack. When the Secondary Damage trait is first activated, this system automatically recharges."
+            },
+            {
+                "id": "npc_titan_FLB",
+                "name": "FIRE-LINKED BATTERIES",
+                "type": "Weapon",
+                "weapon_type": "Superheavy Cannon",
+                "origin": {
+                    "name": "Titan",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "damage": [
+                    {
+                        "type": "Explosive",
+                        "damage": [8,10,12]
+                    }
+                ],
+                "attack_bonus": [1,2,3],
+                "range": [
+                    {
+                        "type": "Range",
+                        "val": "One or Two Targets within Range 20",
+                        "override": true,
+                        "bonus": 0
+                    }
+                ],
+                "effect": "This weapon cannot fire at targets within range 3 or closer of the Titan. The first time this weapon would be destroyed, reduce the number of targets it can attack to one instead."
+            },
+            {
+                "id": "npc_titan_SpinalLance",
+                "name": "SPINAL LANCE",
+                "type": "Weapon",
+                "weapon_type": "Superheavy Cannon",
+                "origin": {
+                    "name": "Titan",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "damage": [
+                    {
+                        "type": "Energy",
+                        "damage": [10,15,20]
+                    }
+                ],
+                "attack_bonus": [1,2,3],
+                "range": [
+                    {
+                        "type": "Line",
+                        "val": 20,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ],
+                "effect": "This weapon replaces the Fire-Linked Batteries, and cannot fire at targets within range 3 or closer of the Titan. Any objects, cover, or terrain in this weapon's area are instantly destroyed, and any character hit by this attack must pass an Engineering save or become Impaired and Shredded until the end of their next turn. When the Secondary Damage trait is active, this weapon loses Loading but the Titan takes 1d6+1 heat every time it fires.",
+                "tags": [{"id": "tg_ap"}, {"id": "tg_loading"}, {"id": "tg_ordnance"}]
+            },
+            {
+                "id": "npc_titan_LaunchDecks",
+                "name": "LAUNCH DECKS",
+                "type": "Trait",
+                "origin": {
+                    "name": "Titan",
+                    "type": "Class",
+                    "base": false   
+                },
+                "locked": false,
+                "effect": "The Titan can act as a carrier platform for a number of mechs whose combined Size is less than its own. Allied mechs may begin combat aboard the Titan or may dock with them by spending a quick action while adjacent to them. While aboard the Titan they benefit from soft cover, occupy the same space as the Titan, and move when Titan does, ignoring engagement and reactions. Mechs the Titan is carrying may launch themselves from it as a protocol, moving their speed and gaining +1 Accuracy to their next ranged or melee attack. When the Secondary Damage trait is first activated, all mechs aboard the Titan take 5 AP explosive damage and may immediately launch from it as a reaction."
+            },
+            {
+                "id": "npc_titan_Dreadnought",
+                "name": "DREADNOUGHT",
+                "type": "Trait",
+                "origin": {
+                    "name": "Titan",
+                    "type": "Class",
+                    "base": false   
+                },
+                "locked": false,
+                "effect": "The Titan gains immunity to Slowed, and whenever they move or Boost they may move through structures, objects, and other obstructions in the environment regardless of their Size. Any such obstacles moved through in this way are destroyed and become difficult terrain. When the Secondary Damage trait is active the Titan's speed becomes 4, but whenever they move through obstructions or obstacles in this fashion they become Impaired until the end of their next turn."
+            },
+            {
+                "id": "npc_titan_PDA",
+                "name": "POINT-DEFENSE ARRAY",
+                "type": "Weapon",
+                "weapon_type": "Main Cannon",
+                "origin": {
+                    "name": "Titan",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "damage": [
+                    {
+                        "type": "Explosive",
+                        "damage": [4,4,4]
+                    }
+                ],
+                "attack_bonus": [2,4,6],
+                "range": [
+                    {
+                        "type": "Range",
+                        "val": 3,
+                        "override": false,
+                        "bonus": 0
+                    },
+                    {
+                        "type": "Threat",
+                        "val": 3,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ],
+                "effect": "This weapon can attack twice at tier II and three times at tier III. When the Secondary Damage trait is active, at the end of the Titan's turn it must make an attack with this weapon against the nearest character within range, friend or foe, as a free action."
+            },
+            {
+                "id": "npc_titan_PalisadeConfig",
+                "name": "PALISADE CONFIGURATION",
+                "type": "Trait",
+                "origin": {
+                    "name": "Titan",
+                    "type": "Class",
+                    "base": false   
+                },
+                "locked": false,
+                "effect": "Allied characters can use the Titan for hard cover. When the Secondary Damage trait is active, disable this trait and choose two free spaces within range 3 of the Titan, then pick a player to choose two more free spaces within range 3. Chunks of armor and debris blown from the Titan's chassis land there, becoming Size 1 obstructions which provide hard cover for the rest of the scene."
+            },
+            
+            {
+                "id": "npc_valkyrie_NanocarbonPartizan",
+                "name": "NANOCARBON PARTIZAN",
+                "type": "Weapon",
+                "weapon_type": "Main Melee",
+                "origin": {
+                    "name": "Valkyrie",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "damage": [
+                    {
+                        "type": "Kinetic",
+                        "damage": [7,7,7]
+                    }
+                ],
+                "attack_bonus": [2,4,6],
+                "range": [
+                    {
+                        "type": "Threat",
+                        "val": 3,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ],
+                "tags": [{"id": "tg_accurate"}, {"id": "tg_knockback", "val": 1}],
+                "effect": "At Tier 2, this weapon can make two attacks at a time, targeting either the same character or two different ones. At Tier 3, it can make three attacks at a time."
+
+            },
+            {
+                "id": "npc_valkyrie_SSCTotalSuite",
+                "name": "SSC TOTAL SUITE",
+                "type": "System",
+                "origin": {
+                    "name": "Valkyrie",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "The Valkyrie has hover flight whenever it moves or boosts."
+
+            },
+            {
+                "id": "npc_valkyrie_FlybyStrike",
+                "name": "FLYBY STRIKE",
+                "type": "Trait",
+                "origin": {
+                    "name": "Valkyrie",
+                    "type": "Class",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "1/round, when the Valkyrie hits a target with an attack while Boosting, that character must pass a Hull save or be knocked prone. When the Valkyrie Boosts and splits their movement with an attack using the Nanocarbon Partizan, they may freely divide attacks among their targets at any points during this movement. The Valkyrie must be flying to use this trait."
+                
+            },
+            {
+                "id": "npc_valkyrie_BurnoutBoosterRig",
+                "name": "BURNOUT BOOSTER RIG",
+                "type": "System",
+                "origin": {
+                    "name": "Valkyrie",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_quick_action"}, {"id": "tg_limited", "val": 1}],
+                "effect": "The Valkyrie Boosts up to 20 spaces. This movement does not provoke reaction attacks and ignores engagement. The Valkyrie must be flying to use this system."
+            },
+            {
+                "id": "npc_valkyrie_FireflyMicromissiles",
+                "name": "FIREFLY MICROMISSILES",
+                "type": "System",
+                "origin": {
+                    "name": "Valkyrie",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_quick_action"}, {"id": "tg_recharge", "val": 6}],
+                "effect": "All characters within Burst 2 must pass an Agility save or take {4/6/8} explosive damage + {2/3/4} heat and become Slowed until the end of their next turn. On a successful save, they take half damage, half heat, and are not Slowed."
+            },
+            {
+                "id": "npc_valkyrie_FlashblindHalo",
+                "name": "FLASHBLIND HALO",
+                "type": "Reaction",
+                "origin": {
+                    "name": "Valkyrie",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_reaction"}, {"id": "tg_recharge", "val": 6}],
+                "trigger": "A hostile character moves adjacent to the Valkyrie.",
+                "effect": "That character must pass a Systems save or become Jammed until the end of its next turn."
+            },
+            {
+                "id": "npc_valkyrie_ChaffLaunchers",
+                "name": "CHAFF LAUNCHERS",
+                "type": "Trait",
+                "origin": {
+                    "name": "Valkyrie",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "The Valkyrie gains soft cover until the start of their next turn whenever they Boost."
+                
+            },
+            {
+                "id": "npc_valkyrie_ManeuveringThrusters",
+                "name": "MANEUVERING THRUSTERS",
+                "type": "System",
+                "origin": {
+                    "name": "Valkyrie",
+                    "type": "Class",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_free_action"}],
+                "effect": "1/round as a free action the Valkyrie may move 2 spaces in any direction. This movement does not provoke reaction attacks and ignores engagement. The Valkyrie must be flying to use this system."            
+            },
+            {
+                "id": "npc_champion_Superiority",
+                "name": "SUPERIORITY",
+                "origin": {
+                  "type": "Template",
+                  "name": "CHAMPION",
+                  "base": true
+                },
+                "locked": false,
+                "type": "Trait",
+                "effect": "The Champion gains +1 Structure and +1 Stress.",
+                "bonus": {"structure": 1,"stress": 1}
+            },
+            {
+                "id": "npc_champion_Peerless",
+                "name": "PEERLESS",
+                "origin": {
+                  "type": "Template",
+                  "name": "CHAMPION",
+                  "base": true
+                },
+                "locked": false,
+                "type": "Trait",
+                "effect": "The Champion cannot take the Grunt template, and only a single Champion may be present in any scene."
+            },
+            {
+                "id": "npc_champion_Challenger",
+                "name": "CHALLENGER",
+                "origin": {
+                  "type": "Template",
+                  "name": "CHAMPION",
+                  "base": true
+                },
+                "locked": false,
+                "type": "Trait",
+                "effect": "The first time on the Champion's turn that they attack a hostile character within range 10, hit or miss, they may give that character a Champion's Mark as a free action. The Champion gains +1 Accuracy on all melee and ranged attacks against that character, but +1 Difficulty to all attacks against any other target. On critical hit against a marked target, they may consume the mark and gain 5/6/8 Overshield. Only one character can be marked this way at a time, and a new mark can't be placed until the old one is consumed or the Champion causes the target to take structure damage, which clears the mark. While a mark is active, the Champion cannot voluntarily move away from that character. Before combat begins, the Champion may choose a PC: that character begins combat with a Champion's Mark already upon them.",
+                "tags": [{"id": "tg_free_action"}]
+            },
+            {
+                "id": "npc_champion_ChampionsRaiment",
+                "name": "CHAMPION'S RAIMENT",
+                "origin": {
+                  "type": "Template",
+                  "name": "CHAMPION",
+                  "base": true
+                },
+                "locked": false,
+                "type": "Trait",
+                "effect": "The Champion chooses an additional base weapon or system from a different class, and one option from the Champion Systems and Traits list."
+            },
+            {
+                "id": "npc_champion_Nemesis",
+                "name": "NEMESIS",
+                "origin": {
+                  "type": "Template",
+                  "name": "CHAMPION",
+                  "base": false
+                },
+                "locked": false,
+                "type": "Trait",
+                "effect": "The Champion gains an additional +1 Accuracy on ranged and melee attacks against characters with a Champion's Mark. Characters with a Champion's Mark gain +1 Accuracy on all attacks against the Champion."
+            },
+            {
+                "id": "npc_champion_Unassailable",
+                "name": "UNASSAILABLE",
+                "origin": {
+                  "type": "Template",
+                  "name": "CHAMPION",
+                  "base": false
+                },
+                "locked": false,
+                "type": "Trait",
+                "effect": "1/round, the Champion may automatically pass any check or save against a character with a Champion's Mark.",
+                "tags": [{"id": "tg_round","val": 1}]
+            },
+            {
+                "id": "npc_champion_HonorGuard",
+                "name": "HONOR GUARD",
+                "origin": {
+                    "type": "Template",
+                    "name": "CHAMPION",
+                    "base": false
+                  },
+                  "locked": false,
+                  "type": "Reaction",
+                "effect": "The Champion can consume the Champion's Mark to grant that allied character resistance to all damage from that attack.",
+                "tags": [{"id": "tg_round","val": 1},{"id": "tg_reaction"}],
+                "trigger": "An allied character within range 3 is hit by an attack from a character with a Champion's Mark."
+            },
+            {
+                "id": "npc_champion_IntoTheFray",
+                "name": "INTO THE FRAY",
+                "origin": {
+                    "type": "Template",
+                    "name": "CHAMPION",
+                    "base": false
+                  },
+                  "locked": false,
+                  "type": "Reaction",
+                "effect": "The Champion or an allied character in line of sight of the Champion may Boost directly towards the triggering character.",
+                "tags": [{"id": "tg_round","val": 1},{"id": "tg_reaction"}],
+                "trigger": "A character with a Champion's Mark in line of sight moves."
+            },
+            {
+                "id": "npc_champion_ShatteredVisage",
+                "name": "SHATTERED VISAGE",
+                "origin": {
+                    "type": "Template",
+                    "name": "CHAMPION",
+                    "base": false
+                  },
+                  "locked": false,
+                  "type": "Reaction",
+                "effect": "That hit automatically becomes a Critical Hit, and its damage cannot be reduced in any way.",
+                "tags": [{"id": "tg_reaction"},{"id": "tg_limited", "val": 1}],
+                "trigger": "The first time a Champion is reduced to or below half their structure during a scene, it immediately refreshes all Recharge abilities and gains the <b>Retribution</b> reaction with the following trigger: The Champion hits with a ranged or melee attack."
+            },
+            {
+                "id": "npc_champion_GlorySeeker",
+                "name": "GLORY SEEKER",
+                "origin": {
+                  "type": "Template",
+                  "name": "CHAMPION",
+                  "base": false
+                },
+                "locked": false,
+                "type": "Trait",
+                "effect": "While a character has a Champion's Mark, the Champion cannot benefit from Hidden, Invisible, or cover against them, but they have resistance against all damage dealt by that character."
+            },
+            {
+                "id": "npc_scrapper_PersonalTouch",
+                "name": "PERSONAL TOUCH",
+                "type": "Trait",
+                "origin": {
+                    "name": "Scrapper",
+                    "type": "Template",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "The Scrapper gains +1 Accuracy to any one type of save and check (Hull, Agility, Systems, or Engineering) but takes +1 Difficulty to a different type."               
+            },
+            {
+                "id": "npc_scrapper_ScrapperSystems",
+                "name": "SCRAPPER SYSTEMS",
+                "type": "Trait",
+                "origin": {
+                    "name": "Scrapper",
+                    "type": "Template",
+                    "base": true
+                },
+                "locked": false,
+                "effect": "When choosing optional systems, the Scrapper can also choose from the Scrapper Systems and Traits list."               
+            },
+            {
+                "id": "npc_scrapper_MountedTurret",
+                "name": "MOUNTED TURRET",
+                "type": "Weapon",
+                "weapon_type": "Main Cannon",
+                "origin": {
+                    "name": "Scrapper",
+                    "type": "Template",
+                    "base": false
+                },
+                "locked": false,
+                "damage": [
+                    {
+                        "type": "Kinetic",
+                        "damage": [4,6,8]
+                    }
+                ],
+                "attack_bonus": [1,2,3],
+                "range": [
+                    {
+                        "type": "Range",
+                        "val": 5,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ],
+                "effect": "This weapon cannot be used normally, but the Scrapper may attack with it as a free action at the end of their turn. When a ranged or melee attack critically hits the Scrapper, this weapon is destroyed in addition to that attack's normal damage and effects and cannot be repaired."
+            },
+            {
+                "id": "npc_scrapper_UpArmouredHull",
+                "name": "UP-ARMORED HULL",
+                "type": "Trait",
+                "origin": {
+                    "name": "Scrapper",
+                    "type": "Template",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "The Scrapper gains +5 HP but they can no longer Boost."               
+            },
+            {
+                "id": "npc_scrapper_Piledriver",
+                "name": "PILEDRIVER",
+                "type": "Weapon",
+                "weapon_type": "Heavy Melee",
+                "origin": {
+                    "name": "Scrapper",
+                    "type": "Template",
+                    "base": false
+                },
+                "locked": false,
+                "damage": [
+                    {
+                        "type": "Kinetic",
+                        "damage": [6,9,12]
+                    }
+                ],
+                "attack_bonus": [1,2,3],
+                "range": [
+                    {
+                        "type": "Threat",
+                        "val": 2,
+                        "override": false,
+                        "bonus": 0
+                    }
+                ],
+                "tags": [{"id": "tg_knockback", "val": 5}, {"id": "tg_recharge", "val": 5}, {"id": "tg_inaccurate"}],
+                "effect": "On hit, the Scrapper loses 5 HP and the target must pass a Hull save or be knocked prone, automatically failing this save if they collide with an obstruction large enough to stop their movement."
+            },
+			{
+                "id": "npc_scrapper_UnstableReactor",
+                "name": "UNSTABLE REACTOR",
+                "type": "Trait",
+                "origin": {
+                    "name": "Scrapper",
+                    "type": "Template",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "Whenever the Scrapper is Immobilized, Jammed, or Stunned, roll a d6. On a 1-4 they ignore this effect, becoming Impaired instead. On a 5+ the Scrapper immediately explodes in a Burst 2 area. All characters within this area must pass an Agility save or take {8/10/12} explosive damage, taking half damage on a successful save."               
+            },
+            {
+                "id": "npc_scrapper_FragmentedNHP",
+                "name": "FRAGMENTED NHP",
+                "type": "System",
+                "origin": {
+                    "name": "Scrapper",
+                    "type": "Template",
+                    "base": false
+                },
+                "locked": false,
+                "effect": "The Scrapper gains the AI tag and can function autonomously without a pilot. At the start of the Scrapper's turn roll a d6. On a 1-3 they may move 3 spaces ignoring engagement and reactions. On a 4-6 they gain +1 Accuracy on all attacks until the start of their next turn. 1/scene, when the Scrapper is hit by an Invade action, the attacker may force the NHP to enter cascade instead of choosing a regular option (the attacker is made aware of this option on hit). When the NHP is cascading in this way the Scrapper loses control of their mech during their next turn and must move directly towards the closest allied character (choosing randomly if more than one is equally close) and attack them with as many weapons as possible, regaining control of their mech at the end of their next turn. If they cannot move within range of a valid target or there are no other characters remaining, they become Stunned until the end of their next turn instead."               
+            },
+            {
+                "id": "npc_scrapper_PatchKit",
+                "name": "PATCH KIT",
+                "type": "System",
+                "origin": {
+                    "name": "Scrapper",
+                    "type": "Template",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_limited", "val": 1}, {"id": "tg_full_action"}, {"id": "tg_quick_action"}],
+                "effect": "The Scrapper regains 1d6 HP as a quick action or 1d6+3 HP as a full action."
+                
+            },
+            {
+                "id": "npc_scrapper_IED",
+                "name": "IMPROVISED EXPLOSIVE DEVICE",
+                "type": "System",
+                "origin": {
+                    "name": "Scrapper",
+                    "type": "Template",
+                    "base": false
+                },
+                "locked": false,
+                "tags": [{"id": "tg_limited", "val": 1}],
+                "effect": "At the beginning of combat, choose an area no closer than 5 spaces from any enemy to deploy an Improvised Explosive Device. Detecting an IED requires a successful Systems check, and disarming it requires a successful Systems check from an adjacent space or it immediately detonates. The Scrapper may detonate it as a quick action, creating a Burst 1 area centered on the IED. All characters within this area must pass an Agility save or take 2d6 + {4/6/8} explosive damage and be knocked prone, taking half damage and not falling prone on a successful save."                
+            }
+    ]
+    
