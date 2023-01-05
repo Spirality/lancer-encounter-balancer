@@ -40,20 +40,20 @@ class NPC_Class_Stats:
         self.activations = activations
     
     def get_hull(self, tier):
-        return hull[tier - 1]
+        return self.hull[tier - 1]
     
     def get_agility(self, tier):
-        return agility[tier - 1]
+        return self.agility[tier - 1]
     
     def get_systems(self, tier):
-        return systems[tier - 1]
+        return self.systems[tier - 1]
     
     def get_engineering(self, tier):
-        return engineering[tier - 1]
+        return self.engineering[tier - 1]
 
 def load_npc_class(npc_data):
     stats = NPC_Class_Stats(**npc_data["stats"])
-    return NPC_Class(name=npc_data["name"], role=npc_data["role"], info=npc_data["info"], stats=npc_data["stats"], base_features=npc_data["base_features"], opt_features=npc_data["optional_features"])
+    return NPC_Class(name=npc_data["name"], role=npc_data["role"], info=npc_data["info"], stats=stats, base_features=npc_data["base_features"], opt_features=npc_data["optional_features"])
 
 lcp_data = """{
     "id": "npcc_ace",
@@ -155,7 +155,9 @@ lcp_data = """{
     ],
     "power": 100
   } """
-Ace = json.loads(lcp_data, object_hook=load_npc_class)
+
+loaded_json = json.loads(lcp_data)
+Ace = load_npc_class(loaded_json)
 
 # aaaaaaaaaaaaaaaaaaaaaaaaaa
 
