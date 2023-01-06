@@ -22,10 +22,13 @@ class NPC_Class:
         return self.stats.get_engineering(tier=tier)
 
 class NPC_Class_Stats:
+  # These stats are largely unnecessary for the initial project of an "at a glance" combat balancer tool, but we're taking them into account anyway
     def __init__(self, armor, hp, evade, edef, heatcap, speed, sensor, save, hull, agility, systems, engineering, size, activations):
+      # TODO: Make this list auto-populate instead of all this being written out manually
         self.armor = armor
         self.hp = hp
         assert self.hp is not None, f'{self_name} must have a value for HP!'
+          # Learning error catching :)
         self.evade = evade
         self.edef = edef
         self.heatcap = heatcap
@@ -52,8 +55,10 @@ class NPC_Class_Stats:
         return self.engineering[tier - 1]
 
 def load_npc_class(npc_data):
-    stats = NPC_Class_Stats(**npc_data["stats"])
-    return NPC_Class(name=npc_data["name"], role=npc_data["role"], info=npc_data["info"], stats=stats, base_features=npc_data["base_features"], opt_features=npc_data["optional_features"])
+  # This is the part where we actually load the json and start organizing it
+  # Time to figure out how to make it automatically sort out all the different classes that it finds...
+  stats = NPC_Class_Stats(**npc_data["stats"])
+  return NPC_Class(name=npc_data["name"], role=npc_data["role"], info=npc_data["info"], stats=stats, base_features=npc_data["base_features"], opt_features=npc_data["optional_features"])
 
 lcp_data = """{
     "id": "npcc_ace",
@@ -159,9 +164,10 @@ lcp_data = """{
 loaded_json = json.loads(lcp_data)
 Ace = load_npc_class(loaded_json)
 
-# aaaaaaaaaaaaaaaaaaaaaaaaaa
+# Most of the above json stuff is placeholder until I can figure out what I'm actually doing with loading files and sorting through info
 
 class NPC:
+  # Putting the band together
     def __init__(self, name, npc_class, tier):
         self.name = name
         self.npc_class = npc_class
