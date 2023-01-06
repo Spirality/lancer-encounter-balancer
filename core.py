@@ -60,109 +60,13 @@ def load_npc_class(npc_data):
   stats = NPC_Class_Stats(**npc_data["stats"])
   return NPC_Class(name=npc_data["name"], role=npc_data["role"], info=npc_data["info"], stats=stats, base_features=npc_data["base_features"], opt_features=npc_data["optional_features"])
 
-lcp_data = """{
-    "id": "npcc_ace",
-    "name": "ACE",
-    "role": "striker",
-    "info": {
-      "flavor": "The first person to embody the “Ace” archetype was Aisling Jensen, an auxiliary pilot active during the liberation of Verdana. Knights of the chassis and sky, Aces like Aisling throw their mechs into battle with high-speed strafing runs, agile maneuvers, and reckless feats of daring. Cocky and self-assured, Aces relish a good duel.",
-      "tactics": "Aces are very fast and reactive strikers that can use Evasive Maneuvers to mitigate dangerous or high-damage attacks. Barrel Roll is most effective against heavy weapons. Their Seeking weapons ignore cover and don’t require line of sight, allowing them to deal consistent damage. Relatively low HP makes Aces vulnerable to sustained damage, and they are relatively weak against tech attacks."
-    },
-    "stats": {
-      "armor": [
-        0,
-        0,
-        0
-      ],
-      "hp": [
-        10,
-        12,
-        14
-      ],
-      "evade": [
-        12,
-        15,
-        18
-      ],
-      "edef": [
-        8,
-        8,
-        10
-      ],
-      "heatcap": [
-        8,
-        8,
-        8
-      ],
-      "speed": [
-        5,
-        6,
-        7
-      ],
-      "sensor": [
-        10,
-        10,
-        10
-      ],
-      "save": [
-        10,
-        12,
-        14
-      ],
-      "hull": [
-        -2,
-        -2,
-        -2
-      ],
-      "agility": [
-        3,
-        4,
-        6
-      ],
-      "systems": [
-        1,
-        2,
-        3
-      ],
-      "engineering": [
-        0,
-        1,
-        1
-      ],
-      "size": [
-        [
-          1
-        ],
-        [
-          1
-        ],
-        [
-          1
-        ]
-      ],
-      "activations": [
-        1,
-        1,
-        1
-      ]
-    },
-    "base_features": [
-      "npcf_ssc_flight_system_ace",
-      "npcf_missile_launcher_ace",
-      "npcf_barrel_roll_ace"
-    ],
-    "optional_features": [
-      "npcf_bombing_bay_ace",
-      "npcf_strafe_ace",
-      "npcf_missile_swarm_ace",
-      "npcf_rapid_response_ace",
-      "npcf_chaff_launchers_ace"
-    ],
-    "power": 100
-  } """
+lcp_data = open('npc_classes.json')
+# Later on we're gonna make this populate a list of LCPs and merge all the data before sifting through, or something like that. Just PH for now
 
-loaded_json = json.loads(lcp_data)
-Ace = load_npc_class(loaded_json)
+loaded_json = json.load(lcp_data)
+# for i in loaded_json:
+x = len(loaded_json)
+print(f'{x} NPC Classes loaded.')
 
 # Most of the above json stuff is placeholder until I can figure out what I'm actually doing with loading files and sorting through info
 
@@ -180,5 +84,5 @@ class NPC:
         engineering = self.npc_class.get_engineering(tier=self.tier)
         return (hull, agility, systems, engineering)
 
-bob_the_ace = NPC("Bob the Ace", Ace, tier=2)
-print(bob_the_ace.get_HASE())
+# bob_the_gladiator = NPC("Bob the Gladiator", Gladiator, tier=2)
+# print(bob_the_gladiator.get_HASE())
