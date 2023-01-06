@@ -1,0 +1,332 @@
+[
+    {
+        "id": "sdn_carrier",
+        "name": "CARRIER",
+        "role": "support",
+        "info": {
+            "flavor": "Carriers are a contemporary iteration of armored infantry tactics going back millennia. A synergistic platform that straddles the line between APC and IFV designed to rapidly escort squads of infantry into battle, Carrier doctrine emphasizes coordination between troop assets and chassis, each supporting the other to cover their respective tactical weaknesses. Even a single Carrier can act as a tremendous force multiplier in theaters where infantry are tasked with high-priority missions, and it isn't uncommon for infantry squads to develop close personal bonds with the pilots that regularly accompany them into danger.",
+            "tactics": "The Carrier is a unique support unit designed to work in conjunction with Squads and smaller mechs. These units can use the Carrier to grant them cover, but more important is the Rapid Deployment ability which gives them an unexpected amount of mobility, allowing them to quickly reposition around the battlefield. Without any such units to coordinate with though, many of this mech's systems quickly lose value."
+        },
+        "base_features": ["npc_carrier_RemoteMachineGun", "npc_carrier_MID","npc_carrier_RapidDeployment"],
+        "optional_features": ["npc_carrier_SmokeLaunchers", "npc_carrier_AGL", "npc_carrier_Masterkey", "npc_carrier_TriageDrones", "npc_carrier_FCC"],
+        "power": 100,
+        "stats": {
+            "activations": [1, 1, 1],
+            "stress": [1, 1, 1],
+            "structure": [1, 1, 1],
+            "hp": [14, 17, 20],
+            "armor": [0],
+            "evade": [10, 12, 14],
+            "edef": [8, 9, 10],
+            "heatcap": [8, 8, 8],
+            "hull": [1, 2, 3],
+            "agility": [1, 2, 3],
+            "systems": [0, 0, 0],
+            "engineering": [0, 0, 1],
+            "speed": [5, 5, 5],
+            "sensor": [10, 10, 10],
+            "save": [10, 12, 14],
+            "size": [[2], [2], [2]]
+        }
+    },
+    {
+        "id": "sdn_conscript",
+        "name": "CONSCRIPT",
+        "role": "defender",
+        "info": {
+            "flavor": "Conscripts represent the lower boundary of pilot skill to be found on the battlefield. Whether pressed into service due to expectations of patriotic duty or as a result of tyrannical oppression, they receive the bare minimum of training and are equipped with low-quality mass-produced chassis and weaponry as a cost saving measure. Conscripts occupy no particular role or tactical specialty. They exist largely to swell a commander's ranks, often serving as a first wave to soak up fire while more skilled and disciplined units advance behind them.",
+            "tactics": "Conscripts are a \"tar pit\" unit designed to be hurled into battle to bog down enemies through attrition, annoyance, and sheer numbers. The Cannon Fodder trait allows you to let Conscripts take hits for more valuable units while the Disposable PDW, though underpowered, can hit multiple enemies at once, spreading damage around. Panic Fire also provides another method to draw off the players' attention by harassing them with penalties. Don't forget that Conscripts can also serve to tie opponents up by taking advantage of engagement to interrupt opponents' movement simply by interposing themselves between allies and enemies, slowing advances towards more important backline units like artillery."
+        },
+        "base_features": ["npc_conscript_DisposablePDW", "npc_conscript_QoQ","npc_conscript_CannonFodder", "npc_conscript_PanicFire"],
+        "optional_features": ["npc_conscript_Panzerfaust", "npc_conscript_SurvivalInstincts", "npc_conscript_MilitiaRifle", "npc_conscript_CombatShield", "npc_conscript_AAD"],
+        "power": 100,
+        "stats": {
+            "activations": [1, 1, 1],
+            "stress": [1, 1, 1],
+            "structure": [1, 1, 1],
+            "hp": [8, 8, 8],
+            "armor": [0],
+            "evade": [8, 9, 10],
+            "edef": [8, 9, 10],
+            "heatcap": [5, 5, 5],
+            "hull": [-1, -1, 0],
+            "agility": [-1, -1, 0],
+            "systems": [-1, -1, 0],
+            "engineering": [-1, -1, 0],
+            "speed": [4, 4, 4],
+            "sensor": [5, 5, 5],
+            "save": [8, 10, 12],
+            "size": [[0.5, 1], [0.5, 1], [0.5, 1]]
+        }
+    },
+    {
+        "id": "sdn_gladiator",
+        "name": "GLADIATOR",
+        "role": "defender",
+        "info": {
+            "flavor": "A non-standard doctrine, Gladiators are as varied as the worlds and arenas they hail from. Some common factors emerge across sources; robust and durable chassis, frequently sourced from industrial and labor frames, augmented with additional armor plating and equipped with a variety of enhanced close-combat systems. If pressed into military service, Gladiators can serve in a front-line assault/shock-troop role with minimal modifications and pilot retraining, though equipment is likely to remain non-standardized as those who pilot these mechs tend to favor specific armament configurations regardless of logistical concerns.",
+            "tactics": "The Gladiator is an aggressive and disruptive melee tank that likes to brawl up close and personal. The combination of its Maul Fist and Hydraulic Claw allow it to drag enemies out of position before knocking them flat, while its Shoulder Charge can let it close the gap and interrupt a player's movement, intercepting them should they be trying to maneuver around it. Optional systems such as the Reciprocating Spear and Breaching Drill give you the ability to swap out the Gladiator's weapons and threaten players with a variety of debilitating conditions. Beyond this aggressive defense the Gladiator has no ways to directly shield or protect its allies however, and players with long-range firepower will be able to pick their targets freely."
+        },
+        "base_features": ["npc_gladiator_MaulFist","npc_gladiator_HydraulicClaw", "npc_gladiator_ShoulderCharge"],
+        "optional_features": ["npc_gladiator_G&P", "npc_gladiator_TorqueFlail", "npc_gladiator_BreachingDrill", "npc_gladiator_SpikedShield", "npc_gladiator_GDS"],
+        "power": 100,
+        "stats": {
+            "activations": [1, 1, 1],
+            "stress": [1, 1, 1],
+            "structure": [1, 1, 1],
+            "hp": [18, 20, 22],
+            "armor": [1, 1, 2],
+            "evade": [8, 10, 12],
+            "edef": [8, 9, 10],
+            "heatcap": [8, 5, 5],
+            "hull": [2, 3, 4],
+            "agility": [-1, -1, -1],
+            "systems": [-1, -1, -1],
+            "engineering": [1, 2, 3],
+            "speed": [4, 4, 4],
+            "sensor": [5, 5, 5],
+            "save": [11, 13, 15],
+            "size": [[2], [2], [2]]
+        }
+    },
+    {
+        "id": "sdn_nightmare",
+        "name": "NIGHTMARE",
+        "role": "controller",
+        "info": {
+            "flavor": "One of the more disturbing contemporary developments in tactical combat doctrine is the rise of anticognitive/neurohazardous weaponry, so-called ontological warfare. The use of such weaponry is often strictly regulated, if not proscribed outright due to its typically inhumane effects upon both biological and inorganic minds, but for commanders willing to disregard these conventions the strategic benefits of applied battlefield ontoloterrors can easily outweigh any ethical concerns. Pilots of these \"Nightmare\" frames are to be regularly screened both for psychological abnormalities as well as onset signs of hyperfractal-induced occipital lobe sclerosis and chronic memetic encephalopathy.",
+            "tactics": "The Nightmare is a manipulative controller that forces players to make difficult decisions. Fugue State as well as the optional Liberation and Ephialtes Strain systems saddle players with the dilemma of choosing which debilitating consequence to suffer through, while Paralytic Engram's debilitating effects linger even if quickly treated by allies. While the obvious solution is to simply destroy the Nightmare, its Integrated Basilisk can afflict players that focus too much attention upon it."
+        },
+        "base_features": ["npc_nightmare_FugueState", "npc_nightmare_ParalyticEngram","npc_nightmare_IntegratedBasilisk"],
+        "optional_features": ["npc_nightmare_AmygdalaSpike", "npc_nightmare_Liberation", "npc_nightmare_EphialtesStrain", "npc_nightmare_InductiveTalons", "npc_nightmare_RadiativeThanatocode"],
+        "power": 100,
+        "stats": {
+            "activations": [1, 1, 1],
+            "stress": [1, 1, 1],
+            "structure": [1, 1, 1],
+            "hp": [14, 16, 20],
+            "armor": [0, 0, 0],
+            "evade": [8, 9, 10],
+            "edef": [12, 14, 16],
+            "heatcap": [8, 8, 8],
+            "hull": [0, 0, 0],
+            "agility": [1, 2, 3],
+            "systems": [2, 4, 6],
+            "engineering": [-1, -1, -1],
+            "speed": [5, 5, 5],
+            "sensor": [10, 10, 10],
+            "save": [12, 15, 18],
+            "size": [[1], [1], [1]]
+        }
+    },
+    {
+        "id": "sdn_ogre",
+        "name": "OGRE",
+        "role": "striker",
+        "info": {
+            "flavor": "An uncommon design even among close-combat specialists, Ogre-doctrine chassis eschew weapons altogether in favor of an altogether more basic, brutal form of warfare, utilizing reinforced manipulators and powered gauntlets to hammer away at their opponents with their bare hands. Though their armaments appear simple, many Ogre pilots employ sophisticated techniques drawing from sources ranging from unarmed martial arts traditions to street fighting and gladiatorial sport, and their chassis are similarly enhanced with a variety of systems and modifications to bolster these unorthodox tactics such as reflex/response modules, reinforced limbs and joints, and augmented frame strength packages. Even moreso than other melee-focused doctrines, Ogres occupy an awkward place in contemporary military force compositions, and as such tend to see more use in specialized roles such as combat in highly volatile environments or other theaters where weapons fire is not permitted or not possible, though they also see frequent use among certain martial cultures, in fighting arenas, and within the ranks of non-standard forces such as pirates or mercenaries.",
+            "tactics": "The Ogre is a combo-oriented striker with the ability to string together hits with its Impact Gauntlets and other melee attacks. Its Meteor Fist ability allows it to quickly rush down opponents, and whenever it connects it can choose between several followup reactions such as Rising Uppercut or Backhand Strike to enhance its blows. The Ogre's biggest drawbacks are its need to engage enemies up close and personal, and its reliance on being able to use reactions. Conditions such as Slow or Immobilize can prevent it from closing the distance, and long range attacks can wear it down as it moves to engage."
+        },
+        "base_features": ["npc_ogre_ImpactGauntlets", "npc_ogre_MeteorFist","npc_ogre_RisingUppercut","npc_ogre_BackhandStrike","npc_ogre_Infighting"],
+        "optional_features": ["npc_ogre_Retribution", "npc_ogre_MachineGunKnuckle", "npc_ogre_CounterStance", "npc_ogre_PiledriverShockwave", "npc_ogre_CalamityThrow"],
+        "power": 100,
+        "stats": {
+            "activations": [1, 1, 1],
+            "stress": [1, 1, 1],
+            "structure": [1, 1, 1],
+            "hp": [18, 21, 24],
+            "armor": [2, 2, 2],
+            "evade": [10, 12, 14],
+            "edef": [7, 8, 9],
+            "heatcap": [6, 6, 6],
+            "hull": [4, 5, 6],
+            "agility": [1, 2, 3],
+            "systems": [-2, -2, -2],
+            "engineering": [0, 0, 0],
+            "speed": [4, 4, 4],
+            "sensor": [5, 5, 5],
+            "save": [12, 14, 16],
+            "size": [[1], [1], [1]]
+        }
+    },
+    {
+        "id": "sdn_phantom",
+        "name": "PHANTOM",
+        "role": "striker",
+        "info": {
+            "flavor": "Phantom doctrine chassis are based around the utilization of paracausal technology in combat, employing specialized systems which allow the pilot to desynchronize their mech with local reality, dipping in and out of what researchers refer to as the \"Firmament.\" This gives Phantoms an unrivaled ability to stalk opponents from otherwise impossible approaches, phasing through solid objects before rematerializing to strike. Pilots for these platforms are typically chosen for their mental fortitude as much as their combat skills as regular use of tactical phase drive technology is known to be psychologically taxing.",
+            "tactics": "The Phantom is a dual-state assassin whose unique Phase Generator allows it to approach targets from unexpected angles, moving through obstructions and even other mechs to set up for their attack. While phased the Phantom is harder to damage, but when it drops itself back into the real world its Phase Blade becomes supercharged, presenting players with a dilemma. Do they devote more of their time and effort focusing their firepower upon it while it's capable of soaking up more punishment, or do they wait for it to become vulnerable but risk the consequences of allowing it to strike first? If they can force the Phantom out of phasing though, such as through overheating, that presents them with the perfect opportunity to take it out of the fight for good."
+        },
+        "base_features": ["npc_phantom_PhaseBlade","npc_phantom_PhaseGenerator","npc_phantom_DistortionPulse","npc_phantom_Slipweave"],
+        "optional_features": ["npc_phantom_GITS", "npc_phantom_SpatialDisjunction", "npc_phantom_NullVectorDrive", "npc_phantom_WraithKnives", "npc_phantom_PhaseRipper"],
+        "power": 100,
+        "stats": {
+            "activations": [1, 1, 1],
+            "stress": [1, 1, 1],
+            "structure": [1, 1, 1],
+            "hp": [14, 14, 14],
+            "armor": [0, 0, 0],
+            "evade": [10, 12, 14],
+            "edef": [7, 8, 9],
+            "heatcap": [7, 7, 7],
+            "hull": [-1, -1, -1],
+            "agility": [2, 3, 4],
+            "systems": [0, 0, 0],
+            "engineering": [1, 2, 3],
+            "speed": [6, 6, 6],
+            "sensor": [5, 5, 5],
+            "save": [10, 12, 14],
+            "size": [[0.5, 1], [0.5, 1], [0.5, 1]]
+        }
+    },
+    {
+        "id": "sdn_reaver",
+        "name": "REAVER",
+        "role": "defender",
+        "info": {
+            "flavor": "Reaver doctrine chassis are frequently viewed with suspicion and distrust even by those who serve alongside them, as many pilots have heard horror stories of rampant greywash swarms consuming everything in their path without pause. Despite nanite weaponry's well-deserved fearsome reputation, these frames typically maintain strict operational safeguards over the thrumming nanohives embedded within them, turning them towards localized zone defense applications along with enhanced durability and self-repair functions, but more than one pilot has found that these \"tame\" nanites can be just as dangerous as their more aggressively weaponized counterparts.",
+            "tactics": "The Reaver is a durable tank with controller elements, creating a zone around it wherever it goes that damages and disables enemies caught in it. Though slow moving, its Displacement Lash can be used to drag foes into the zone created by its Legion Body trait, gradually eroding their hitpoints and potentially hampering their ability to escape. Though the Reaver has no armor, its high health pool and regeneration offered by Legion Body means that if it isn't properly focused it can soak up a large amount of punishment, but once it takes enough damage to trigger its Containment Breach trait it becomes even more vital to destroy it quickly as the zone surrounding it becomes increasingly dangerous."
+        },
+        "base_features": ["npc_reaver_DisplacementLash","npc_reaver_LegionBody","npc_reaver_ContainmentBreach","npc_reaver_HeavyFrame"],
+        "optional_features": ["npc_reaver_VeilHive", "npc_reaver_Cannibalize", "npc_reaver_GreywashCoating", "npc_reaver_FocusedDispersal", "npc_reaver_LingeringSwarm"],
+        "power": 100,
+        "stats": {
+            "activations": [1, 1, 1],
+            "stress": [1, 1, 1],
+            "structure": [1, 1, 1],
+            "hp": [20, 24, 28],
+            "armor": [0, 0, 0],
+            "evade": [6, 7, 8],
+            "edef": [10, 12, 14],
+            "heatcap": [6, 6, 6],
+            "hull": [2, 3, 4],
+            "agility": [-1, -1, -1],
+            "systems": [1, 2, 3],
+            "engineering": [-1, -1, -1],
+            "speed": [3, 3, 3],
+            "sensor": [10, 10, 10],
+            "save": [11, 13, 15],
+            "size": [[2], [2], [2]]
+        }
+    },
+    {
+        "id": "sdn_sergeant",
+        "name": "SERGEANT",
+        "role": "support",
+        "info": {
+            "flavor": "Squad-level tactical commanders form a vital link in the chain of command below theaterlevel strategic operations. Typically promoted from enlisted rank analogues both for leadership capabilities as well as battlefield competence, a skilled squad leader is capable of substantially improving a given unit's combat operation metrics through motivational means. Associated chassis are typically based upon frontline assault models, enhanced with improved communication and ECM capabilities for uninterrupted real-time coordination during tactical engagements.",
+            "tactics": "The Sergeant is a straightforward, no-nonsense support unit that bolsters allies within its sensor range, acting as the centerpiece of a tactical formation. The players may want to focus their fire upon the Sergeant to take them out of the fight early, and so screening them with defensive units and keeping them in a position where they can safely use Squad Leader and Coordinated Maneuvers to set up powerful attacks is key. Coordinated Maneuvers can also be used defensively as well to allow friendly units a chance to retreat or move out of dangerous areas. On its own the Sergeant isn't an especially powerful combatant, and if forced into a direct fight its options are limited."
+        },
+        "base_features": ["npc_sergeant_AssaultCarbine","npc_sergeant_SquadLeader","npc_sergeant_CoordinatedManeuvers"],
+        "optional_features": ["npc_sergeant_5RR", "npc_sergeant_AmbushTactics", "npc_sergeant_PourItOn", "npc_sergeant_TrueGrit", "npc_sergeant_JawsOfHell"],
+        "power": 100,
+        "stats": {
+            "activations": [1, 1, 1],
+            "stress": [1, 1, 1],
+            "structure": [1, 1, 1],
+            "hp": [15, 17, 19],
+            "armor": [1, 1, 1],
+            "evade": [8, 9, 10],
+            "edef": [10, 12, 14],
+            "heatcap": [10, 10, 10],
+            "hull": [1, 2, 3],
+            "agility": [0, 0, 0],
+            "systems": [2, 3, 4],
+            "engineering": [0, 0, 0],
+            "speed": [4, 4, 4],
+            "sensor": [10, 10, 10],
+            "save": [10, 12, 14],
+            "size": [[1], [1], [1]]
+        }
+    },
+    {
+        "id": "sdn_termite",
+        "name": "TERMITE",
+        "role": "controller",
+        "info": {
+            "flavor": "So-called \"Termite\" doctrine chassis act as frontline combat engineers, frequently moving ahead of primary assault forces in order to clear obstructions and create improvised pathways for allied units to traverse. Often organized into \"mouseholer\" squads, the Termite's compact, durable frame is ideally suited to operations in densely-constructed urban theaters, leveraging a robust suite of demolition tools to break through even hardened structures, destroy fixed emplacements, and disrupt enemy maneuvers across the battlefield. Though they excel at these tasks, Termite pilots are known to operate with a flagrant disregard for acceptable collateral damage restrictions and their deployment tend to be assigned accordingly.",
+            "tactics": "The Termite is an explosive controller with the ability to easily carve its way through the battlefield, creating its own flanking routes and chokepoints. Both its Laser Drill and Cratering Charge allow it to make short work of structures, and it can also create areas of difficult terrain to slow the players down or force them to take another path. Termites work best on maps with plenty of structures and terrain for them to work with, and their systems may be less useful in more open environments. Many of the Termite's systems are also relatively short-ranged, which forces them to maneuver close to the action in order to deploy Satchel Charges, Concussion Grenades, or create hazardous zones with the Detpaste Gun, but they can do surprising damage if players allow them to get close"
+        },
+        "base_features": ["npc_termite_LaserDrill","npc_termite_Bulwark", "npc_termite_DemoPlating", "npc_termite_CrateringCharge"],
+        "optional_features": ["npc_termite_ConcussionGrenade", "npc_termite_DetpasteGun", "npc_termite_ThermalSmoke", "npc_termite_ReactiveArmour", "npc_termite_SatchelCharge"],
+        "power": 100,
+        "stats": {
+            "activations": [1, 1, 1],
+            "stress": [1, 1, 1],
+            "structure": [1, 1, 1],
+            "hp": [8, 10, 12],
+            "armor": [2, 2, 3],
+            "evade": [7, 8, 9],
+            "edef": [8, 10, 12],
+            "heatcap": [7, 7, 7],
+            "hull": [1, 2, 3],
+            "agility": [-1, -1, -1],
+            "systems": [-2, -2, -2],
+            "engineering": [2, 3, 4],
+            "speed": [5, 5, 5],
+            "sensor": [5, 5, 5],
+            "save": [12, 14, 16],
+            "size": [[0.5], [0.5], [0.5]]
+        }
+    },
+    {
+        "id": "sdn_titan",
+        "name": "TITAN",
+        "role": "artillery",
+        "info": {
+            "flavor": "The Titan is less an example of practical military doctrine in action and more a symbol, designed to strike fear in the hearts of enemies and inspire allies as it slowly strides across the battlefield. Towering over even dedicated siege chassis, typically (though not always) quadra- or hexapedal in design, and bristling with heavy weapons and sturdy armor, the Titan's sheer size is a weapon in its own right, but its cumbersome nature and exorbitant costs lead many commanders to view it as little more than an impractical \"wonder weapon\" built to impress generals and stroke the ego of politicians. Nonetheless, combat data recordings from sorties in which Titan class platforms are deployed frequently report anomalously high enemy force depletion percentages across all theaters.",
+            "tactics": "The Titan is a superheavy artillery walker whose sheer size and implacability can help form the backbone for a slow and relentless advance forward. The Fire-Linked Batteries have a small dead zone around the Titan which players can seek to exploit, but this risks putting them in a position where the Titan can quite literally walk all over them with Unstoppable Force. The other important thing to note about the Titan is its Secondary Damage trait, which interacts uniquely with all of its optional systems, altering the battlefield or affecting its function in numerous ways. As a result, this NPC can require a bit more overhead to run than other classes, and care should be taken when building encounters featuring a Titan not to overburden yourself with too many moving parts to keep track of."
+        },
+        "base_features": ["npc_titan_FLB","npc_titan_Superweapon","npc_titan_UnstoppableForce","npc_titan_SecondaryDamage","npc_titan_SovereignShielding"],
+        "optional_features": ["npc_titan_SpinalLance", "npc_titan_LaunchDecks", "npc_titan_Dreadnought", "npc_titan_PDA", "npc_titan_PalisadeConfig"],
+        "power": 100,
+        "stats": {
+            "activations": [1, 1, 1],
+            "stress": [1, 1, 1],
+            "structure": [1, 1, 1],
+            "hp": [25, 30, 35],
+            "armor": [2, 3, 4],
+            "evade": [6, 6, 6],
+            "edef": [8, 11, 14],
+            "heatcap": [12, 12, 12],
+            "hull": [3, 4, 6],
+            "agility": [-3, -3, -3],
+            "systems": [0, 0, 0],
+            "engineering": [2, 3, 4],
+            "speed": [2, 2, 2],
+            "sensor": [10, 10, 10],
+            "save": [10, 12, 14],
+            "size": [[4], [4], [4]]
+        }
+    },
+    {
+        "id": "sdn_valkyrie",
+        "name": "VALKYRIE",
+        "role": "striker",
+        "info": {
+            "flavor": "The Valkyrie doctrine is an unusual hybridization of several extant chassis designations created to fulfill a unique battlefield role, that of a fast-moving and maneuverable aerial close-combat platform meant to bypass entrenched frontline defenses and seek out highvalue targets such as artillery units, field commanders, and electronic warfare platforms, engaging the enemy with rapid hit-and-run strikes to disorient and overwhelm them. The demanding engineering requirements of designing frames suitable for advanced flight as well as melee combat have kept the Valkyrie from seeing widespread deployment, routinely leading assigned pilots to form close-knit and exclusive circles within more traditional military hierarchies.",
+            "tactics": "The Valkyrie is a high-mobility attacker well suited to hit-and-run tactics. Hover flight and a generous Threat on its Nanocarbon Partizan allow it to skirt around frontline defenders without running afoul of engagement or reactions, then by using a combination of skirmish actions and Flyby Strike it can simultaneously attack and reposition, setting itself up for future attacks and pulling the players' attention in multiple directions. If the Valkyrie can be grounded then its combat effectiveness greatly diminishes."
+        },
+        "base_features": ["npc_valkyrie_NanocarbonPartizan","npc_valkyrie_SSCTotalSuite", "npc_valkyrie_FlybyStrike" ],
+        "optional_features": ["npc_valkyrie_BurnoutBoosterRig", "npc_valkyrie_FireflyMicromissiles", "npc_valkyrie_FlashblindHalo", "npc_valkyrie_ChaffLaunchers", "npc_valkyrie_ManeuveringThrusters"],
+        "power": 100,
+        "stats": {
+            "activations": [1, 1, 1],
+            "stress": [1, 1, 1],
+            "structure": [1, 1, 1],
+            "hp": [14, 14, 14],
+            "armor": [0, 0, 0],
+            "evade": [12, 14, 16],
+            "edef": [7,8,9],
+            "heatcap": [7, 7, 7],
+            "hull": [-1, -1, -1],
+            "agility": [3, 4, 6],
+            "systems": [0, 0, 0],
+            "engineering": [2, 3, 4],
+            "speed": [6, 6, 8],
+            "sensor": [10, 10, 10],
+            "save": [10, 12, 14],
+            "size": [[1], [1], [1]]
+        }
+    }
+]
