@@ -1,7 +1,6 @@
 from LCP_Reader import LCP_Reader
 import json
 
-
 class NPC_Class:
     # A class of NPC dictates how it will function in combat
     def __init__(self, name, role, info, stats, base_features, opt_features):
@@ -27,7 +26,8 @@ class NPC_Class:
 
 class NPC_Class_Stats:
   # These stats are largely unnecessary for the initial project of an "at a glance" combat balancer tool, but we're taking them into account anyway
-    def __init__(self, armor, hp, evade, edef, heatcap, speed, sensor, save, hull, agility, systems, engineering, size, activations):
+  # NOTE 1/12/23 - Loading Suldan NPCs gets weird when expecting the default NPC stat table because they added Stress and Structure. More elegant way to do this? v
+    def __init__(self, armor, hp, evade, edef, heatcap, speed, sensor, save, hull, agility, systems, engineering, size, activations, stress, structure):
       # TODO: Make this list auto-populate instead of all this being written out manually
         self.armor = armor
         self.hp = hp
@@ -45,6 +45,8 @@ class NPC_Class_Stats:
         self.engineering = engineering
         self.size = size
         self.activations = activations
+        self.stress = stress
+        self.structure = structure
 
     def get_hull(self, tier):
         return self.hull[tier - 1]
@@ -65,18 +67,6 @@ def load_npc_class(npc_data):
     stats = NPC_Class_Stats(**npc_data["stats"])
     return NPC_Class(name=npc_data["name"], role=npc_data["role"], info=npc_data["info"], stats=stats, base_features=npc_data["base_features"], opt_features=npc_data["optional_features"])
 
-
-lcp_data = open('npc_classes.json')
-# Later on we're gonna make this populate a list of LCPs and merge all the data before sifting through, or something like that. Just PH for now
-
-loaded_json = json.load(lcp_data)
-# for i in loaded_json:
-x = len(loaded_json)
-print(f'{x} NPC Classes loaded.')
-
-# Most of the above json stuff is placeholder until I can figure out what I'm actually doing with loading files and sorting through info
-
-
 class NPC:
     # Putting the band together
     def __init__(self, name, npc_class, tier):
@@ -91,8 +81,21 @@ class NPC:
         engineering = self.npc_class.get_engineering(tier=self.tier)
         return (hull, agility, systems, engineering)
 
-# bob_the_gladiator = NPC("Bob the Gladiator", Gladiator, tier=2)
-# print(bob_the_gladiator.get_HASE())
+lcpr = LCP_Reader('Field_Guide_To_Suldan_2.2.4.lcp')
 
-# lcpr = LCP_Reader('Field_Guide_To_Suldan_2.2.4.lcp')
-# print(lcpr.manifest)
+npc_class_data = open('npc_classes.json')
+# Later on we're gonna make this populate a list of LCPs and merge all the data before sifting through, or something like that. Just PH for now
+
+loaded_json = json.load(npc_class_data)
+loaded_npcs = {}
+for entry in loaded_json:
+    # thank you Tetragramm for correcting my foolish ways
+    thing = load_npc_class(entry)
+    print(thing.name)
+    loaded_npcs.update({thing.name: thing})
+x = len(loaded_json)
+print(f'{x} NPC Classes loaded.')
+
+#print(loaded_npcs['CARRIER'].stats.hp)
+bob_the_gladiator = NPC("Bob the Gladiator", loaded_npcs['GLADIATOR'], tier=2)
+print(bob_the_gladiator.get_HASE())
