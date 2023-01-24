@@ -1,5 +1,8 @@
 from LCP_Reader import LCP_Reader
 import json
+import os
+from pathlib import Path
+import glob
 
 class NPC_Class:
     # A class of NPC dictates how it will function in combat
@@ -81,21 +84,21 @@ class NPC:
         engineering = self.npc_class.get_engineering(tier=self.tier)
         return (hull, agility, systems, engineering)
 
-lcpr = LCP_Reader('Field_Guide_To_Suldan_2.2.4.lcp')
 
-npc_class_data = open('npc_classes.json')
-# Later on we're gonna make this populate a list of LCPs and merge all the data before sifting through, or something like that. Just PH for now
-
-loaded_json = json.load(npc_class_data)
 loaded_npcs = {}
-for entry in loaded_json:
-    # thank you Tetragramm for correcting my foolish ways
-    thing = load_npc_class(entry)
-    print(thing.name)
-    loaded_npcs.update({thing.name: thing})
-x = len(loaded_json)
-print(f'{x} NPC Classes loaded.')
+directory = 'LCPs'
+for filename in glob.iglob(f'{directory}/*.lcp'):
+    lcpr = LCP_Reader(f'{filename}')
+    npc_class_data = open('npc_classes.json')
+    loaded_json = json.load(npc_class_data)
+    for entry in loaded_json:
+        # thank you Tetragramm for correcting my foolish ways
+        thing = load_npc_class(entry)
+        print(thing.name)
+        loaded_npcs.update({thing.name: thing})
+    x = len(loaded_json)
+    print(f'{x} NPC Classes loaded from {filename}.')
 
 #print(loaded_npcs['CARRIER'].stats.hp)
 bob_the_gladiator = NPC("Bob the Gladiator", loaded_npcs['GLADIATOR'], tier=2)
-print(bob_the_gladiator.get_HASE())
+#print(bob_the_gladiator.get_HASE())
