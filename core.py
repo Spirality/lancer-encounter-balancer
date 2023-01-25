@@ -2,7 +2,6 @@ from LCP_Reader import LCP_Reader
 import json
 import os
 from pathlib import Path
-import glob
 
 class NPC_Class:
     # A class of NPC dictates how it will function in combat
@@ -86,8 +85,7 @@ class NPC:
 
 
 loaded_npcs = {}
-directory = 'LCPs'
-for filename in glob.iglob(f'{directory}/*.lcp'):
+for filename in Path('LCPs').glob('*.lcp'):
     lcpr = LCP_Reader(filename)
     npc_class_data = open('npc_classes.json')
     loaded_json = json.load(npc_class_data)
