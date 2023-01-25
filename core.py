@@ -34,7 +34,7 @@ class NPC_Class_Stats:
       # TODO: Make this list auto-populate instead of all this being written out manually
         self.armor = armor
         self.hp = hp
-        assert self.hp is not None, f'{self_name} must have a value for HP!'
+        assert self.hp is not None, f'{self.name} must have a value for HP!'
         # Learning error catching :)
         self.evade = evade
         self.edef = edef
@@ -88,7 +88,7 @@ class NPC:
 loaded_npcs = {}
 directory = 'LCPs'
 for filename in glob.iglob(f'{directory}/*.lcp'):
-    lcpr = LCP_Reader(f'{filename}')
+    lcpr = LCP_Reader(filename)
     npc_class_data = open('npc_classes.json')
     loaded_json = json.load(npc_class_data)
     for entry in loaded_json:

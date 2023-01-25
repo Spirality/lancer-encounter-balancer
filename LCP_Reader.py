@@ -76,7 +76,7 @@ class LCP_Reader:
         except json.JSONDecodeError as e:
             raise json.JSONDecodeError(
                 f'Error decoding the {name} file.') from e
-        except ValueError:
+        except ValueError as e:
             raise ValueError('Error: Zip file closed prematurely.') from e
         finally:
             return js
