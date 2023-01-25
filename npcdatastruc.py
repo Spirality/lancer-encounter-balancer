@@ -32,7 +32,7 @@ class NPC_Class_Stats:
         self.armor = armor
         self.hp = hp
         assert self.hp is not None, f'{self.name} must have a value for HP!'
-        # Can't have a unit without HP
+        # Can't have a unit without HP, but tbh that's basically the only thing you need for a character. See drones.
         self.evade = evade
         self.edef = edef
         self.heatcap = heatcap
@@ -91,8 +91,7 @@ def lcpload():
         lcpr = LCP_Reader(filename) # Load the LCP info and save to a name
         for entry in lcpr.npc_classes: # Loop through each NPC class in the json
             thing = load_npc_class(entry) # Just saving this expression to 'thing' for easy typing
-            print(thing.name) # Debug shenanigans, delete later
             loaded_npcs.update({thing.name: thing}) # Push the NPC entry to the loaded_npcs dictionary. Might be an issue if two LCPs have the same name of NPC?
         x = len(lcpr.npc_classes) # More debug
         print(f'{x} NPC Classes loaded from {filename}.') # More debug
-    return loaded_npcs
+    return loaded_npcs # Hand off the master list of NPCs!
