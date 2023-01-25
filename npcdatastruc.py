@@ -1,3 +1,4 @@
+from LCP_Reader import LCP_Reader
 from pathlib import Path
 import os
 
@@ -82,3 +83,16 @@ class NPC:
         systems = self.npc_class.get_systems(tier=self.tier)
         engineering = self.npc_class.get_engineering(tier=self.tier)
         return (hull, agility, systems, engineering)
+
+loaded_npcs = {}
+def lcpload():
+    for filename in Path('LCPs').glob('*.lcp'): # Loop through each LCP file
+        print(filename) # Debug shenanigans, delete later
+        lcpr = LCP_Reader(filename) # Load the LCP info and save to a name
+        for entry in lcpr.npc_classes: # Loop through each NPC class in the json
+            thing = load_npc_class(entry) # Just saving this expression to 'thing' for easy typing
+            print(thing.name) # Debug shenanigans, delete later
+            loaded_npcs.update({thing.name: thing}) # Push the NPC entry to the loaded_npcs dictionary. Might be an issue if two LCPs have the same name of NPC?
+        x = len(lcpr.npc_classes) # More debug
+        print(f'{x} NPC Classes loaded from {filename}.') # More debug
+    return loaded_npcs
