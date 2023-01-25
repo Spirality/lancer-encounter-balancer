@@ -29,7 +29,7 @@ class NPC_Class:
 class NPC_Class_Stats:
   # These stats are largely unnecessary for the initial project of an "at a glance" combat balancer tool, but we're taking them into account anyway
   # NOTE 1/12/23 - Loading Suldan NPCs gets weird when expecting the default NPC stat table because they added Stress and Structure. More elegant way to do this? v
-    def __init__(self, armor, hp, evade, edef, heatcap, speed, sensor, save, hull, agility, systems, engineering, size, activations, stress, structure):
+    def __init__(self, armor=None, hp=None, evade=None, edef=None, heatcap=None, speed=None, sensor=None, save=None, hull=None, agility=None, systems=None, engineering=None, size=None, activations=None, stress=[1,1,1], structure=[1,1,1]):
       # TODO: Make this list auto-populate instead of all this being written out manually
         self.armor = armor
         self.hp = hp
@@ -86,15 +86,15 @@ class NPC:
 
 loaded_npcs = {}
 for filename in Path('LCPs').glob('*.lcp'):
+    print(filename)
     lcpr = LCP_Reader(filename)
-    npc_class_data = open('npc_classes.json')
-    loaded_json = json.load(npc_class_data)
-    for entry in loaded_json:
+    npc_class_data = lcpr.npc_classes
+    for entry in lcpr.npc_classes:
         # thank you Tetragramm for correcting my foolish ways
         thing = load_npc_class(entry)
         print(thing.name)
         loaded_npcs.update({thing.name: thing})
-    x = len(loaded_json)
+    x = len(lcpr.npc_classes)
     print(f'{x} NPC Classes loaded from {filename}.')
 
 #print(loaded_npcs['CARRIER'].stats.hp)
