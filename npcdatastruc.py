@@ -95,3 +95,9 @@ def lcpload():
         x = len(lcpr.npc_classes) # More debug
         print(f'{x} NPC Classes loaded from {filename}.') # More debug
     return loaded_npcs # Hand off the master list of NPCs!
+
+# Call for specific stats of an NPC like this: loaded_npcs['CARRIER'].stats.hp
+# loaded_npcs is the dict of NPCs sorted by name, stats is the list you want, and hp is the value
+# Here are two examples for creating an NPC using all this info:
+# bob_the_gladiator = NPC("Bob the Gladiator", loaded_npcs['GLADIATOR'], tier=2)
+# jane_the_carrier = NPC("Jane the Carrier", loaded_npcs['CARRIER'], tier=1)
