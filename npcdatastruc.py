@@ -86,7 +86,7 @@ class NPC:
         return (hull, agility, systems, engineering)
 
 loaded_npcs = {}
-def lcpload():
+def npcload():
     for filename in Path('LCPs').glob('*.lcp'): # Loop through each LCP file
         print(filename) # Debug shenanigans, delete later
         lcpr = LCP_Reader(filename) # Load the LCP info and save to a name

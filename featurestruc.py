@@ -4,7 +4,7 @@ import os
 
 # There are a number of different formats of feature, and my knowledge of python is limited. Making four diff classes is the best I've got
 class Trait_Feature:
-    def __init__(self, id, name, type, origin, locked, effect, tags=None):
+    def __init__(self, id, name, type, origin, locked, effect, tags=[]):
         self.id = id
         self.name = name
         self.type = type
@@ -17,7 +17,7 @@ class Trait_Feature:
         self.effect = effect
 
 class Weapon_Feature:
-    def __init__(self, id, name, type, weapon_type, origin, locked, damage, range, attack_bonus=None, tags=None, effect=None, on_hit=None, on_crit=None):
+    def __init__(self, id, name, type, weapon_type, origin, locked, damage, range, attack_bonus=[0,0,0], tags=[], effect=None, on_hit=None, on_crit=None):
         self.id = id
         self.name = name
         self.type = type
@@ -33,7 +33,7 @@ class Weapon_Feature:
         self.tags = tags
 
 class System_Feature:
-    def __init__(self, id, name, type, origin, locked, effect, tags=None):
+    def __init__(self, id, name, type, origin, locked, effect, tags=[]):
         self.id = id
         self.name = name
         self.type = type
@@ -43,7 +43,7 @@ class System_Feature:
         self.effect = effect
 
 class Reaction_Feature:
-    def __init__(self, id, name, type, origin, locked, trigger, effect, tags=None):
+    def __init__(self, id, name, type, origin, locked, trigger, effect, tags=[]):
         self.id = id
         self.name = name
         self.type = type
@@ -54,7 +54,7 @@ class Reaction_Feature:
         self.effect = effect
 
 class Tech_Feature:
-    def __init__(self, id, name, type, origin, locked, effect, tech_type, tags=None, attack_bonus=None):
+    def __init__(self, id, name, type, origin, locked, effect, tech_type, tags=[], attack_bonus=[0,0,0]):
         self.id = id
         self.name = name
         self.type = type
@@ -69,22 +69,29 @@ def load_feature(feature_data):
     category = str.casefold(feature_data["type"])
     # Capitalization matters, apparently
     if category == "trait":
-        return Trait_Feature(id=feature_data["id"], name=feature_data["name"], type=feature_data["type"], origin=feature_data["origin"], locked=feature_data["locked"], effect=feature_data["effect"], tags=feature_data["tags"])
+        return Trait_Feature(id=feature_data["id"], name=feature_data["name"], type=feature_data["type"], origin=feature_data["origin"], locked=feature_data["locked"], effect=feature_data["effect"], tags=feature_data.get("tags", []))
+    elif category == "weapon":
+        return Weapon_Feature(id=feature_data["id"], name=feature_data["name"], type=feature_data["type"], weapon_type=feature_data["weapon_type"], origin=feature_data["origin"], locked=feature_data["locked"], range=feature_data["range"], damage=feature_data.get("damage", [0,0,0]), attack_bonus=feature_data.get("attack_bonus", [0,0,0]), tags=feature_data.get("tags", []), effect=feature_data.get("effect", None), on_hit=feature_data.get("on_hit", None), on_crit=feature_data.get("on_crit", None))
+    elif category == "system":
+        return System_Feature(id=feature_data["id"], name=feature_data["name"], type=feature_data["type"], origin=feature_data["origin"], locked=feature_data["locked"], effect=feature_data["effect"], tags=feature_data.get("tags", []))
+    elif category == "reaction":
+        return Reaction_Feature(id=feature_data["id"], name=feature_data["name"], type=feature_data["type"], origin=feature_data["origin"], locked=feature_data["locked"], trigger=feature_data["trigger"], effect=feature_data["effect"], tags=feature_data.get("tags", []))
+    elif category == "tech":
+        return Tech_Feature(id=feature_data["id"], name=feature_data["name"], type=feature_data["type"], origin=feature_data["origin"], locked=feature_data["locked"], effect=feature_data["effect"], tech_type=feature_data["tech_type"], tags=feature_data.get("tags", []), attack_bonus=feature_data.get("attack_bonus", [0,0,0]))
     else:
-        print("Not a Trait")
-        return False
+        print("Not a supported Feature type! Please contact a developer!")
+        return None
 
 loaded_features = {}
-def lcpload():
+def featload():
     for filename in Path('LCPs').glob('*.lcp'): # Loop through each LCP file
         print(filename) # Debug shenanigans, delete later
         lcpr = LCP_Reader(filename) # Load the LCP info and save to a name
         for entry in lcpr.npc_features: # Loop through each feature in the json
             thing = load_feature(entry) # Just saving this expression to 'thing' for easy typing
-            if thing == False:
+            if thing == None:
                 continue
             loaded_features.update({thing.name: thing}) # Push the NPC entry to the loaded_features dictionary
         x = len(loaded_features) # More debug
         print(f'{x} NPC Features loaded from {filename}.') # More debug
     return loaded_features # Hand off the master list of features
-lcpload()
