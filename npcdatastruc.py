@@ -69,6 +69,7 @@ def load_npc_class(npc_data):
     # Stats is a separate thing because we won't really need much of it for the initial part of the program
     # Also it's a whole different block in the json file so this is just easier to parse
 
+# This is for when we actually make an NPC, not part of the loading process
 class NPC:
     # First part, identifications
     def __init__(self, name, npc_class, tier):
@@ -92,7 +93,7 @@ def lcpload():
         for entry in lcpr.npc_classes: # Loop through each NPC class in the json
             thing = load_npc_class(entry) # Just saving this expression to 'thing' for easy typing
             loaded_npcs.update({thing.name: thing}) # Push the NPC entry to the loaded_npcs dictionary. Might be an issue if two LCPs have the same name of NPC?
-        x = len(lcpr.npc_classes) # More debug
+        x = len(loaded_npcs) # More debug
         print(f'{x} NPC Classes loaded from {filename}.') # More debug
     return loaded_npcs # Hand off the master list of NPCs!
 
