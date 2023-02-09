@@ -88,8 +88,6 @@ def featload():
         lcpr = LCP_Reader(filename) # Load the LCP info and save to a name
         for entry in lcpr.npc_features: # Loop through each feature in the json
             thing = load_feature(entry) # Just saving this expression to 'thing' for easy typing
-            if thing == None:
-                continue
             loaded_features.update({thing.name: thing}) # Push the NPC entry to the loaded_features dictionary
         x = len(loaded_features) # More debug
         print(f'{x} NPC Features loaded from {filename}.') # More debug
