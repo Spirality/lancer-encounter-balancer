@@ -79,8 +79,7 @@ def load_feature(feature_data):
     elif category == "tech":
         return Tech_Feature(id=feature_data["id"], name=feature_data["name"], type=feature_data["type"], origin=feature_data["origin"], locked=feature_data["locked"], effect=feature_data["effect"], tech_type=feature_data["tech_type"], tags=feature_data.get("tags", []), attack_bonus=feature_data.get("attack_bonus", [0,0,0]))
     else:
-        print("Not a supported Feature type! Please contact a developer!")
-        return None
+        raise ValueError("Not a supported Feature type!")
 
 loaded_features = {}
 def featload():
