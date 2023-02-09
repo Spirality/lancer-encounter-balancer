@@ -9,9 +9,12 @@ from featurestruc import System_Feature
 from featurestruc import Reaction_Feature
 from featurestruc import Tech_Feature
 from featurestruc import load_feature, featload
+from templatestruc import Template
+from templatestruc import templateload
 from pathlib import Path
 import os
 
 loaded_npcs = npcload()
 loaded_features = featload()
+loaded_templates = templateload()
 print(loaded_features['MECHANIZED INFANTRY DOCTRINE'].origin['name'])
