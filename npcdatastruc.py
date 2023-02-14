@@ -1,6 +1,6 @@
 from LCP_Reader import LCP_Reader
 from pathlib import Path
-from templatestruc import templateload
+from templatestruc import template_load
 import os
 
 class NPC_Class:
@@ -87,25 +87,15 @@ class NPC:
         base_engineering = self.npc_class.get_engineering(tier=self.tier)
         return (base_hull, base_agility, base_systems, base_engineering)
     
-    def get_baseFeats(self):
+    def get_basefeats(self):
         base_features = self.npc_class.base_features
         return base_features
     
-    def add_Template(self, template):
-        loaded_templates = templateload(1)
-        print(f'Searching for {template} in the list...')
-        if template in loaded_templates and template not in self.templates:
-            thing = loaded_templates.get(template)
-            self.templates[template] = thing
-        elif template in loaded_templates and template in self.templates:
-            print("This NPC is already that template.")
-        elif template not in loaded_templates:
-            print("Not a valid Template, check spelling.")
-        else:
-            print("Something has gone wrong.")
+    def add_template(self, template):
+        self.templates[template.name] = template
 
 loaded_npcs = {}
-def npcload(mode=None):
+def npc_load(mode=None):
     if mode == None:
         for filename in Path('LCPs').glob('*.lcp'): # Loop through each LCP file
             print(filename) # Debug shenanigans, delete later

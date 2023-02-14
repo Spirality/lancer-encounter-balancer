@@ -15,7 +15,7 @@ def load_npc_template(template_data):
     return Template(id= template_data["id"], name=template_data["name"], description=template_data["description"], base_features=template_data["base_features"], opt_features=template_data["optional_features"], power=template_data["power"])
 
 loaded_templates = {}
-def templateload(mode=None):
+def template_load(mode=None):
     if mode == None:
         for filename in Path('LCPs').glob('*.lcp'): # Loop through each LCP file
             print(filename) # Debug shenanigans, delete later
