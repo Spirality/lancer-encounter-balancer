@@ -18,13 +18,13 @@ loaded_templates = {}
 def template_load(mode=None):
     if mode == None:
         for filename in Path('LCPs').glob('*.lcp'): # Loop through each LCP file
-            print(filename) # Debug shenanigans, delete later
+            #print(filename) # Debug shenanigans, delete later
             lcpr = LCP_Reader(filename) # Load the LCP info and save to a name
             for entry in lcpr.npc_templates: # Loop through each NPC template in the json
                 thing = load_npc_template(entry) # Just saving this expression to 'thing' for easy typing
                 loaded_templates.update({thing.name: thing}) # Push the NPC entry to the loaded_templates dictionary. Might be an issue if two LCPs have the same name of NPC?
-            x = len(loaded_templates) # More debug
-            print(f'{x} NPC Templates loaded from {filename}.') # More debug
+            #x = len(loaded_templates) # More debug
+            #print(f'{x} NPC Templates loaded from {filename}.') # More debug
         return loaded_templates # Hand off the master list of templates!
     else:
         return loaded_templates

@@ -4,7 +4,7 @@ import os
 
 # There are a number of different formats of feature, and my knowledge of python is limited. Making four diff classes is the best I've got
 class Trait_Feature:
-    def __init__(self, id, name, type, origin, locked, effect, tags=[]):
+    def __init__(self, id, name, type, origin, locked, effect, tags=[], bonus=None):
         self.id = id
         self.name = name
         self.type = type
@@ -15,6 +15,7 @@ class Trait_Feature:
         self.locked = locked
         # Only true or false
         self.effect = effect
+        self.bonus = bonus
     
     def desc(self):
         print(self.effect)
@@ -99,11 +100,11 @@ def load_feature(feature_data):
 loaded_features = {}
 def feat_load():
     for filename in Path('LCPs').glob('*.lcp'): # Loop through each LCP file
-        print(filename) # Debug shenanigans, delete later
+        #print(filename) # Debug shenanigans, delete later
         lcpr = LCP_Reader(filename) # Load the LCP info and save to a name
         for entry in lcpr.npc_features: # Loop through each feature in the json
             thing = load_feature(entry) # Just saving this expression to 'thing' for easy typing
             loaded_features.update({thing.name: thing}) # Push the feature entry to the loaded_features dictionary
-        x = len(loaded_features) # More debug
-        print(f'{x} NPC Features loaded from {filename}.') # More debug
+        #x = len(loaded_features) # More debug
+        #print(f'{x} NPC Features loaded from {filename}.') # More debug
     return loaded_features # Hand off the master list of features

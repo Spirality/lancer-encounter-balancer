@@ -78,6 +78,8 @@ class NPC:
         self.npc_class = npc_class
         self.tier = tier
         self.templates = {}
+        self.features = {}
+        self.bonuses = {}
     
     # Second part, defining functions. More to come as we need them
     def get_baseHASE(self):
@@ -91,20 +93,28 @@ class NPC:
         base_features = self.npc_class.base_features
         return base_features
     
+    def calc_bonus(self):
+        for entry in self.features:
+            self.bonuses.update(entry.bonus)
+
     def add_template(self, template):
         self.templates[template.name] = template
+
+    def rm_template(self, template):
+        if template.name in self.templates:
+            del self.templates[template.name]
 
 loaded_npcs = {}
 def npc_load(mode=None):
     if mode == None:
         for filename in Path('LCPs').glob('*.lcp'): # Loop through each LCP file
-            print(filename) # Debug shenanigans, delete later
+            #print(filename) # Debug shenanigans, delete later
             lcpr = LCP_Reader(filename) # Load the LCP info and save to a name
             for entry in lcpr.npc_classes: # Loop through each NPC class in the json
                 thing = load_npc_class(entry) # Just saving this expression to 'thing' for easy typing
                 loaded_npcs.update({thing.name: thing}) # Push the NPC entry to the loaded_npcs dictionary. Might be an issue if two LCPs have the same name of NPC?
-            x = len(loaded_npcs) # More debug
-            print(f'{x} NPC Classes loaded from {filename}.') # More debug
+            #x = len(loaded_npcs) # More debug
+            #print(f'{x} NPC Classes loaded from {filename}.') # More debug
         return loaded_npcs # Hand off the master list of NPCs!
     else:
         return loaded_npcs
