@@ -15,6 +15,9 @@ class Trait_Feature:
         self.locked = locked
         # Only true or false
         self.effect = effect
+    
+    def desc(self):
+        print(self.effect)
 
 class Weapon_Feature:
     def __init__(self, id, name, type, weapon_type, origin, locked, damage, range, attack_bonus=[0,0,0], tags=[], effect=None, on_hit=None, on_crit=None):
@@ -31,6 +34,9 @@ class Weapon_Feature:
         self.attack_bonus = attack_bonus
         self.range = range
         self.tags = tags
+    
+    def desc(self):
+        print(self.effect)
 
 class System_Feature:
     def __init__(self, id, name, type, origin, locked, effect, tags=[]):
@@ -41,6 +47,9 @@ class System_Feature:
         self.locked = locked
         self.tags = tags
         self.effect = effect
+    
+    def desc(self):
+        print(self.effect)
 
 class Reaction_Feature:
     def __init__(self, id, name, type, origin, locked, trigger, effect, tags=[]):
@@ -52,6 +61,9 @@ class Reaction_Feature:
         self.tags = tags
         self.trigger = trigger
         self.effect = effect
+    
+    def desc(self):
+        print(self.effect)
 
 class Tech_Feature:
     def __init__(self, id, name, type, origin, locked, effect, tech_type, tags=[], attack_bonus=[0,0,0]):
@@ -64,6 +76,9 @@ class Tech_Feature:
         self.tags = tags
         self.tech_type = tech_type
         self.attack_bonus = attack_bonus
+    
+    def desc(self):
+        print(self.effect)
 
 def load_feature(feature_data):
     category = str.casefold(feature_data["type"])

@@ -1,5 +1,6 @@
 from LCP_Reader import LCP_Reader
 from pathlib import Path
+from templatestruc import templateload
 import os
 
 class NPC_Class:
@@ -76,26 +77,47 @@ class NPC:
         self.name = name
         self.npc_class = npc_class
         self.tier = tier
-        
+        self.templates = {}
+    
     # Second part, defining functions. More to come as we need them
-    def get_HASE(self):
-        hull = self.npc_class.get_hull(tier=self.tier)
-        agility = self.npc_class.get_agility(tier=self.tier)
-        systems = self.npc_class.get_systems(tier=self.tier)
-        engineering = self.npc_class.get_engineering(tier=self.tier)
-        return (hull, agility, systems, engineering)
+    def get_baseHASE(self):
+        base_hull = self.npc_class.get_hull(tier=self.tier)
+        base_agility = self.npc_class.get_agility(tier=self.tier)
+        base_systems = self.npc_class.get_systems(tier=self.tier)
+        base_engineering = self.npc_class.get_engineering(tier=self.tier)
+        return (base_hull, base_agility, base_systems, base_engineering)
+    
+    def get_baseFeats(self):
+        base_features = self.npc_class.base_features
+        return base_features
+    
+    def add_Template(self, template):
+        loaded_templates = templateload(1)
+        print(f'Searching for {template} in the list...')
+        if template in loaded_templates and template not in self.templates:
+            thing = loaded_templates.get(template)
+            self.templates[template] = thing
+        elif template in loaded_templates and template in self.templates:
+            print("This NPC is already that template.")
+        elif template not in loaded_templates:
+            print("Not a valid Template, check spelling.")
+        else:
+            print("Something has gone wrong.")
 
 loaded_npcs = {}
-def npcload():
-    for filename in Path('LCPs').glob('*.lcp'): # Loop through each LCP file
-        print(filename) # Debug shenanigans, delete later
-        lcpr = LCP_Reader(filename) # Load the LCP info and save to a name
-        for entry in lcpr.npc_classes: # Loop through each NPC class in the json
-            thing = load_npc_class(entry) # Just saving this expression to 'thing' for easy typing
-            loaded_npcs.update({thing.name: thing}) # Push the NPC entry to the loaded_npcs dictionary. Might be an issue if two LCPs have the same name of NPC?
-        x = len(loaded_npcs) # More debug
-        print(f'{x} NPC Classes loaded from {filename}.') # More debug
-    return loaded_npcs # Hand off the master list of NPCs!
+def npcload(mode=None):
+    if mode == None:
+        for filename in Path('LCPs').glob('*.lcp'): # Loop through each LCP file
+            print(filename) # Debug shenanigans, delete later
+            lcpr = LCP_Reader(filename) # Load the LCP info and save to a name
+            for entry in lcpr.npc_classes: # Loop through each NPC class in the json
+                thing = load_npc_class(entry) # Just saving this expression to 'thing' for easy typing
+                loaded_npcs.update({thing.name: thing}) # Push the NPC entry to the loaded_npcs dictionary. Might be an issue if two LCPs have the same name of NPC?
+            x = len(loaded_npcs) # More debug
+            print(f'{x} NPC Classes loaded from {filename}.') # More debug
+        return loaded_npcs # Hand off the master list of NPCs!
+    else:
+        return loaded_npcs
 
 # Call for specific stats of an NPC like this: loaded_npcs['CARRIER'].stats.hp
 # loaded_npcs is the dict of NPCs sorted by name, stats is the list you want, and hp is the value
