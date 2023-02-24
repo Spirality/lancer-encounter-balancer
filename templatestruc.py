@@ -1,15 +1,24 @@
 from LCP_Reader import LCP_Reader
 from pathlib import Path
+from featurestruc import feat_load
 import os
 
+loaded_features = feat_load()
+
+#TODO: Maybe instead of just template names, have initialization actually go look up the features and store them in the template class as the individual feature classes?
 class Template:
     def __init__(self, id, name, description, base_features, opt_features, power):
         self.id = id
         self.name = name
         self.description = description
-        self.base_features = base_features
-        self.opt_features = opt_features
+        self.base_features = base_features #list
+        self.opt_features = opt_features #list
+        self.feature_ids = self.base_features + self.opt_features #list
+        self.features = {x:loaded_features.get(x) for x in self.feature_ids if x in loaded_features} #dict
         self.power = power
+
+    def get_features(self):
+        return self.feature_ids
 
 def load_npc_template(template_data):
     return Template(id= template_data["id"], name=template_data["name"], description=template_data["description"], base_features=template_data["base_features"], opt_features=template_data["optional_features"], power=template_data["power"])

@@ -1,7 +1,11 @@
 from LCP_Reader import LCP_Reader
 from pathlib import Path
 from templatestruc import template_load
+from featurestruc import feat_load
 import os
+
+loaded_features = feat_load()
+loaded_templates = template_load()
 
 class NPC_Class:
     # A class of NPC dictates how it will function in combat
@@ -78,8 +82,12 @@ class NPC:
         self.npc_class = npc_class
         self.tier = tier
         self.templates = {}
-        self.features = {}
+        self.allowed_features = npc_class.base_features + npc_class.opt_features #list
+        self.features = {x:loaded_features.get(x) for x in npc_class.base_features if x in loaded_features} #dict
         self.bonuses = {}
+        self.activations = npc_class.stats.activations[self.tier]
+        self.weight = 1
+        # weight is basically the value of fielding the NPC. Grunts will have .25, Elites and Vets get 2 (3 if the templates are stacked), and 4 for Ultras
     
     # Second part, defining functions. More to come as we need them
     def get_baseHASE(self):
@@ -99,10 +107,23 @@ class NPC:
 
     def add_template(self, template):
         self.templates[template.name] = template
+        self.allowed_features.extend(template.feature_ids)
+        self.features.update({x:loaded_features.get(x) for x in template.base_features if x in loaded_features})
 
     def rm_template(self, template):
         if template.name in self.templates:
             del self.templates[template.name]
+            features_for_removal = template.get_features()
+            for entry in features_for_removal:
+                self.allowed_features.remove(entry)
+                try:
+                    if entry in features_for_removal:
+                        del self.features[entry]
+                except KeyError:
+                    continue
+            return print(f"Template {template.name} removed.")
+        else:
+            return print("Invalid template provided!")
 
 loaded_npcs = {}
 def npc_load(mode=None):
