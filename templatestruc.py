@@ -26,7 +26,7 @@ class Template:
         for f in self.base_feature_data.values(): #in the actual data of the feature
             if f.type == 'Trait': #if the feature is a Trait
                 if (f.bonus != None): #check if it has a bonus
-                    self.bonuses.update() #add bonus to dict
+                    self.bonuses.update(f.bonus) #add bonus to dict
         self.power = power
 
     def get_features(self):

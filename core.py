@@ -22,4 +22,3 @@ phil_the_carrier.add_template(loaded_templates["CHAMPION"])
 for x in loaded_templates["CHAMPION"].base_feature_data.values():
     print(type(x))
 print(phil_the_carrier.templates["CHAMPION"].bonuses)
-print(loaded_templates["CHAMPION"].bonuses)
