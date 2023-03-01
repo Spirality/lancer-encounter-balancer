@@ -1,6 +1,11 @@
 from LCP_Reader import LCP_Reader
 from pathlib import Path
-from featurestruc import feat_load
+from featurestruc import Trait_Feature
+from featurestruc import Weapon_Feature
+from featurestruc import System_Feature
+from featurestruc import Reaction_Feature
+from featurestruc import Tech_Feature
+from featurestruc import load_feature, feat_load
 import os
 
 loaded_features = feat_load()
@@ -14,8 +19,16 @@ class Template:
         self.base_features = base_features #list
         self.opt_features = opt_features #list
         self.feature_ids = self.base_features + self.opt_features #list
+        self.base_feature_data = {x:loaded_features.get(x) for x in self.base_features if x in loaded_features}
         self.features = {x:loaded_features.get(x) for x in self.feature_ids if x in loaded_features} #dict of ALL features
         # ^ this line is essentially using self.feature_ids as a list of keys to look up in the master feature list, then grabs them and saves them in the Template obj
+        self.bonuses = {}
+        for f in self.base_feature_data.values(): #in the actual data of the feature
+            if f.type == 'Trait': #if the feature is a Trait
+                print(f"Heehoo for {f.bonus} from init of {f.id}")
+                if (f.bonus != None): #check if it has a bonus
+                    print("Something")
+                    self.bonuses.update()
         self.power = power
 
     def get_features(self):

@@ -18,8 +18,7 @@ loaded_features = feat_load()
 loaded_templates = template_load()
 loaded_npcs = npc_load()
 phil_the_carrier = NPC("Phil the Carrier", loaded_npcs['CARRIER'], tier=1)
-value1 = phil_the_carrier.features
 phil_the_carrier.add_template(loaded_templates["CHAMPION"])
-phil_the_carrier.rm_template(loaded_templates["CHAMPION"])
-if (value1 == phil_the_carrier.features) == True:
-    print("Success!")
+for x in loaded_templates["CHAMPION"].base_feature_data.values():
+    print(type(x))
+print(phil_the_carrier.templates["CHAMPION"].bonuses)

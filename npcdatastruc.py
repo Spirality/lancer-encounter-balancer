@@ -114,13 +114,13 @@ class NPC:
     def rm_template(self, template):
         if template.name in self.templates:
             del self.templates[template.name]
-            for entry in template.get_features(): #Check if the feature is 
-                self.allowed_features.remove(entry)
+            for entry in template.get_features(): #For each feature of the template
+                self.allowed_features.remove(entry) #remove each feature from the allowed features list
                 if entry in self.features:
-                    del self.features[entry]
+                    del self.features[entry] #then remove any that have been assigned
                     return True
         else:
-            return print("Invalid template provided!")
+            return False
 
 loaded_npcs = {}
 def npc_load(mode=None):
