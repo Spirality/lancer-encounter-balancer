@@ -5,7 +5,7 @@ import os
 
 loaded_features = feat_load()
 
-#TODO: Maybe instead of just template names, have initialization actually go look up the features and store them in the template class as the individual feature classes?
+#TODO: Maybe instead of just feature names, have initialization actually go look up the features and store them in the template class as the individual feature classes?
 class Template:
     def __init__(self, id, name, description, base_features, opt_features, power):
         self.id = id
@@ -14,7 +14,8 @@ class Template:
         self.base_features = base_features #list
         self.opt_features = opt_features #list
         self.feature_ids = self.base_features + self.opt_features #list
-        self.features = {x:loaded_features.get(x) for x in self.feature_ids if x in loaded_features} #dict
+        self.features = {x:loaded_features.get(x) for x in self.feature_ids if x in loaded_features} #dict of ALL features
+        # ^ this line is essentially using self.feature_ids as a list of keys to look up in the master feature list, then grabs them and saves them in the Template obj
         self.power = power
 
     def get_features(self):

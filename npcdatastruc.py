@@ -88,6 +88,7 @@ class NPC:
         self.activations = npc_class.stats.activations[self.tier]
         self.weight = 1
         # weight is basically the value of fielding the NPC. Grunts will have .25, Elites and Vets get 2 (3 if the templates are stacked), and 4 for Ultras
+        # this value will get multiplied/modified if the NPC is fielded with classes that combo with it, like Mirage + Demolisher
     
     # Second part, defining functions. More to come as we need them
     def get_baseHASE(self):
@@ -113,15 +114,11 @@ class NPC:
     def rm_template(self, template):
         if template.name in self.templates:
             del self.templates[template.name]
-            features_for_removal = template.get_features()
-            for entry in features_for_removal:
+            for entry in template.get_features(): #Check if the feature is 
                 self.allowed_features.remove(entry)
-                try:
-                    if entry in features_for_removal:
-                        del self.features[entry]
-                except KeyError:
-                    continue
-            return print(f"Template {template.name} removed.")
+                if entry in self.features:
+                    del self.features[entry]
+                    return True
         else:
             return print("Invalid template provided!")
 
