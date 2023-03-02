@@ -14,6 +14,8 @@ from npcdatastruc import npc_load
 from pathlib import Path
 import os
 
+#To do: Load LCPs and pass as an argument to avoid compiling the LCP list three times over
+
 loaded_features = feat_load()
 loaded_templates = template_load(loaded_features)
 loaded_npcs = npc_load(loaded_features)
