@@ -113,7 +113,7 @@ class NPC:
         if template.name in self.templates:
             del self.templates[template.name]
             for entry in template.get_features(): #For each feature of the template
-                self.allowed_features.remove(entry) #remove each feature from the allowed features list
+                del self.allowed_features[entry] #remove each feature from the allowed features list
                 if entry in self.features:
                     del self.features[entry] #then remove any that have been assigned
                     return True
