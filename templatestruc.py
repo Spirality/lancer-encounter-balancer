@@ -1,18 +1,12 @@
 from LCP_Reader import LCP_Reader
 from pathlib import Path
-from featurestruc import Trait_Feature
-from featurestruc import Weapon_Feature
-from featurestruc import System_Feature
-from featurestruc import Reaction_Feature
-from featurestruc import Tech_Feature
-from featurestruc import load_feature, feat_load
 import os
 
-loaded_features = feat_load()
+# As of 3/2/2023, feature handling will no longer happen within the import space, but will handle the master list as an argument to save memory
 
 #TODO: Maybe instead of just feature names, have initialization actually go look up the features and store them in the template class as the individual feature classes?
 class Template:
-    def __init__(self, id, name, description, base_features, opt_features, power):
+    def __init__(self, id, name, description, base_features, opt_features, power, loaded_features):
         self.id = id
         self.name = name
         self.description = description
@@ -32,20 +26,17 @@ class Template:
     def get_features(self):
         return self.feature_ids
 
-def load_npc_template(template_data):
-    return Template(id= template_data["id"], name=template_data["name"], description=template_data["description"], base_features=template_data["base_features"], opt_features=template_data["optional_features"], power=template_data["power"])
+def load_npc_template(template_data, loaded_features):
+    return Template(id=template_data["id"], name=template_data["name"], description=template_data["description"], base_features=template_data["base_features"], opt_features=template_data["optional_features"], power=template_data["power"], loaded_features=loaded_features)
 
-loaded_templates = {}
-def template_load(mode=None):
-    if mode == None:
-        for filename in Path('LCPs').glob('*.lcp'): # Loop through each LCP file
-            #print(filename) # Debug shenanigans, delete later
-            lcpr = LCP_Reader(filename) # Load the LCP info and save to a name
-            for entry in lcpr.npc_templates: # Loop through each NPC template in the json
-                thing = load_npc_template(entry) # Just saving this expression to 'thing' for easy typing
-                loaded_templates.update({thing.name: thing}) # Push the NPC entry to the loaded_templates dictionary. Might be an issue if two LCPs have the same name of NPC?
-            #x = len(loaded_templates) # More debug
-            #print(f'{x} NPC Templates loaded from {filename}.') # More debug
-        return loaded_templates # Hand off the master list of templates!
-    else:
-        return loaded_templates
+def template_load(loaded_features):
+    loaded_templates = {}
+    for filename in Path('LCPs').glob('*.lcp'): # Loop through each LCP file
+        #print(filename) # Debug shenanigans, delete later
+        lcpr = LCP_Reader(filename) # Load the LCP info and save to a name
+        for entry in lcpr.npc_templates: # Loop through each NPC template in the json
+            thing = load_npc_template(entry, loaded_features) # Just saving this expression to 'thing' for easy typing
+            loaded_templates.update({thing.name: thing}) # Push the NPC entry to the loaded_templates dictionary. Might be an issue if two LCPs have the same name of NPC?
+        #x = len(loaded_templates) # More debug
+        #print(f'{x} NPC Templates loaded from {filename}.') # More debug
+    return loaded_templates # Hand off the master list of templates!

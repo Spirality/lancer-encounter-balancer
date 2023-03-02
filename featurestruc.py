@@ -2,6 +2,8 @@ from LCP_Reader import LCP_Reader
 from pathlib import Path
 import os
 
+# As of 3/2/2023, feature handling will no longer happen within the import space, but will handle the master list as an argument to save memory
+
 # There are a number of different formats of feature, and my knowledge of python is limited. Making four diff classes is the best I've got
 class Trait_Feature:
     def __init__(self, id, name, type, origin, locked, effect, tags=[], bonus=None):
@@ -97,8 +99,8 @@ def load_feature(feature_data):
     else:
         raise ValueError("Not a supported Feature type!")
 
-loaded_features = {}
 def feat_load():
+    loaded_features = {}
     for filename in Path('LCPs').glob('*.lcp'): # Loop through each LCP file
         #print(filename) # Debug shenanigans, delete later
         lcpr = LCP_Reader(filename) # Load the LCP info and save to a name
