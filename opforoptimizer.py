@@ -5,5 +5,4 @@ import os
 class Encounter:
     def __init__(self, name='New Encounter'):
         self.name = name
-        self.npcs = []
-        
+        self.opfor = []

@@ -21,7 +21,5 @@ loaded_templates = template_load(loaded_features)
 loaded_npcs = npc_load(loaded_features)
 phil_the_carrier = NPC("Phil the Carrier", loaded_npcs['CARRIER'], tier=1)
 phil_the_carrier.add_template(loaded_templates["CHAMPION"])
-for x in loaded_templates["CHAMPION"].base_feature_data.values():
-    print(type(x))
 print(phil_the_carrier.templates["CHAMPION"].bonuses)
 phil_the_carrier.rm_template(loaded_templates["CHAMPION"])
