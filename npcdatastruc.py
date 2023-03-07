@@ -82,7 +82,7 @@ class NPC:
         self.templates = {}
         self.allowed_features = npc_class.class_features
         self.features = npc_class.base_features
-        self.bonuses = {}
+        self.bonuses = {} # This feature is still incomplete!
         self.activations = npc_class.stats.activations[self.tier - 1]
         self.weight = 1
         # weight is basically the value of fielding the NPC. Grunts will have .25, Elites and Vets get 2 (3 if the templates are stacked), and 4 for Ultras
@@ -101,8 +101,11 @@ class NPC:
         return base_features
     
     def calc_bonus(self):
-        for entry in self.features:
-            self.bonuses.update(entry.bonus)
+        for entry in self.features.values():        #For each feature
+            if hasattr(entry, "bonus") == True:     # If it has a bonus
+                self.bonuses.update(entry.bonus)    # Add the bonus to the list
+            else:
+                continue
 
     def add_template(self, template):
         self.templates[template.name] = template
