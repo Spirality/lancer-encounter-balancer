@@ -3,7 +3,6 @@ from pathlib import Path
 import os
 
 # As of 3/2/2023, feature handling will no longer happen within the import space, but will handle the master list as an argument to save memory
-# Oh my god I think this is saving THE ENTIRE LIST of features IN EVERY SINGLE NPC CLASS. How the hell did I let this happen
 class NPC_Class:
     # A class of NPC dictates how it will function in combat
     def __init__(self, name, role, info, stats, base_features, opt_features, loaded_features):
@@ -108,18 +107,26 @@ class NPC:
         self.stress_bonus = 0
         self.struc_override = False
         self.stress_override = False
-        for entry in self.templates:
-            if hasattr(entry, "bonus") == True and entry.type == "trait":
-                for k in entry.keys():
-                    totals[k] = working.get(k, 0) + entry.get(k, 0)
-            else:
-                continue
-        return totals
+        if self.templates == {}: # In case of empty template dict, set bonuses to 0
+            return
+        else:
+            for entry in self.templates.items():
+                print(self.templates)       # PROBLEM
+                print(entry)                # PROBLEM
+                self.struc_bonus = self.struc_bonus + entry.struc_bonus
+                self.stress_bonus = self.stress_bonus + entry.stress_bonus
+                if entry.struc_override != False:
+                    assert self.struc_override is False, f'{self.name} is trying to stack overrides! (Attempting to apply {entry.name})'
+                    self.struc_override = entry.struc_override
+                if entry.stress_override != False:
+                    assert self.stress_override is False, f'{self.name} is trying to stack overrides! (Attempting to apply {entry.name})'
+                    self.stress_override = entry.stress_override
 
     def add_template(self, template):
         self.templates[template.name] = template
         self.allowed_features.update(template.features.items())
         self.features.update({x:template.base_feature_data.get(x) for x in template.base_features})
+        self.calc_bonus()
 
     def rm_template(self, template):
         if template.name in self.templates:
@@ -128,7 +135,8 @@ class NPC:
                 del self.allowed_features[entry] #remove each feature from the allowed features list
                 if entry in self.features:
                     del self.features[entry] #then remove any that have been assigned
-                    return True
+            calc_bonus()
+            return True
         else:
             return False
 

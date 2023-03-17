@@ -6,7 +6,7 @@ import os
 
 # There are a number of different formats of feature, and my knowledge of python is limited. Making four diff classes is the best I've got
 class Trait_Feature:
-    def __init__(self, id, name, type, origin, locked, effect, tags=[], bonus=None, override={}):
+    def __init__(self, id, name, type, origin, locked, effect, tags=[], bonus={}, override={}):
         self.id = id
         self.name = name
         self.type = type
