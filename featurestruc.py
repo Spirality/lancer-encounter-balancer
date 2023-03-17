@@ -6,7 +6,7 @@ import os
 
 # There are a number of different formats of feature, and my knowledge of python is limited. Making four diff classes is the best I've got
 class Trait_Feature:
-    def __init__(self, id, name, type, origin, locked, effect, tags=[], bonus=None):
+    def __init__(self, id, name, type, origin, locked, effect, tags=[], bonus=None, override={}):
         self.id = id
         self.name = name
         self.type = type
@@ -18,9 +18,34 @@ class Trait_Feature:
         # Only true or false
         self.effect = effect
         self.bonus = bonus
+        self.override = override
     
     def desc(self):
         print(self.effect)
+    
+    def struc_bonus(self):
+        if 'structure' in self.bonus.keys():
+            return self.bonus['structure']
+        else:
+            return 0
+
+    def stress_bonus(self):
+        if 'stress' in self.bonus.keys():
+            return self.bonus['stress']
+        else:
+            return 0
+    
+    def struc_override(self):
+        if 'structure' in self.override.keys():
+            return self.override['structure']
+        else:
+            return False
+    
+    def stress_override(self):
+        if 'stress' in self.override.keys():
+            return self.override['stress']
+        else:
+            return False
 
 class Weapon_Feature:
     def __init__(self, id, name, type, weapon_type, origin, locked, damage, range, attack_bonus=[0,0,0], tags=[], effect=None, on_hit=None, on_crit=None):

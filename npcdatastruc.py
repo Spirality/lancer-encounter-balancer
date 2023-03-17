@@ -3,6 +3,7 @@ from pathlib import Path
 import os
 
 # As of 3/2/2023, feature handling will no longer happen within the import space, but will handle the master list as an argument to save memory
+# Oh my god I think this is saving THE ENTIRE LIST of features IN EVERY SINGLE NPC CLASS. How the hell did I let this happen
 class NPC_Class:
     # A class of NPC dictates how it will function in combat
     def __init__(self, name, role, info, stats, base_features, opt_features, loaded_features):
@@ -80,9 +81,12 @@ class NPC:
         self.npc_class = npc_class
         self.tier = tier
         self.templates = {}
-        self.allowed_features = npc_class.class_features
-        self.features = npc_class.base_features
-        self.bonuses = self.calc_bonus() # This feature is still incomplete!
+        self.allowed_features = npc_class.class_features.copy()
+        self.features = npc_class.base_features.copy()
+        self.struc_bonus = 0
+        self.stress_bonus = 0
+        self.struc_override = False
+        self.stress_override = False
         self.activations = npc_class.stats.activations[self.tier - 1]
         self.weight = 1
         # weight is basically the value of fielding the NPC. Grunts will have .25, Elites and Vets get 2 (3 if the templates are stacked), and 4 for Ultras
@@ -101,12 +105,14 @@ class NPC:
         return base_features
     
     def calc_bonus(self):
-        working = {}
-        totals = {}
-        for entry in self.features.values():        #For each feature
-            if hasattr(entry, "bonus") == True and entry.type == "trait":     # If it has a bonus
+        self.struc_bonus = 0
+        self.stress_bonus = 0
+        self.struc_override = False
+        self.stress_override = False
+        for entry in self.templates:
+            if hasattr(entry, "bonus") == True and entry.type == "trait":
                 for k in entry.keys():
-                    totals[k] = working.get(k, 0) + entry.get(k, 0)    # Add the bonus to the list
+                    totals[k] = working.get(k, 0) + entry.get(k, 0)
             else:
                 continue
         return totals

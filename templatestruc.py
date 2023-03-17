@@ -4,7 +4,6 @@ import os
 
 # As of 3/2/2023, feature handling will no longer happen within the import space, but will handle the master list as an argument to save memory
 
-#TODO: Maybe instead of just feature names, have initialization actually go look up the features and store them in the template class as the individual feature classes?
 class Template:
     def __init__(self, id, name, description, base_features, opt_features, power, loaded_features):
         self.id = id
@@ -16,12 +15,19 @@ class Template:
         self.base_feature_data = {x:loaded_features.get(x) for x in self.base_features if x in loaded_features}
         self.features = {x:loaded_features.get(x) for x in self.feature_ids if x in loaded_features} #dict of ALL features
         # ^ this line is essentially using self.feature_ids as a list of keys to look up in the master feature list, then grabs them and saves them in the Template obj
-        self.bonuses = {}
+        self.struc_bonus = 0
+        self.stress_bonus = 0
+        self.struc_override = False
+        self.stress_override = False
         for f in self.base_feature_data.values(): #in the actual data of the feature
             if f.type == 'Trait': #if the feature is a Trait
                 if (f.bonus != None): #check if it has a bonus
-                    self.bonuses.update(f.bonus) #add bonus to dict
-        self.power = power
+                    self.struc_bonus = self.struc_bonus + f.struc_bonus()  #add bonus to dict
+                    self.stress_bonus = self.stress_bonus + f.stress_bonus()
+                if (f.override != False):
+                    self.struc_override = f.struc_override()
+                    self.stress_override = f.stress_override()
+        self.power = power # Vestigial stat
 
     def get_features(self):
         return self.feature_ids
