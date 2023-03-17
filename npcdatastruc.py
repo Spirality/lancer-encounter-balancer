@@ -11,9 +11,8 @@ class NPC_Class:
         self.role = role
         self.info = info
         self.stats = stats
-        self.loaded_features = loaded_features
-        self.base_features = {x:self.loaded_features.get(x) for x in base_features} #dict
-        self.opt_features = {x:self.loaded_features.get(x) for x in opt_features} #dict
+        self.base_features = {x:loaded_features.get(x) for x in base_features} #dict
+        self.opt_features = {x:loaded_features.get(x) for x in opt_features} #dict
         self.class_features = {**self.base_features, **self.opt_features}
 
     def get_hull(self, tier):
@@ -120,7 +119,7 @@ class NPC:
     def add_template(self, template):
         self.templates[template.name] = template
         self.allowed_features.update(template.features.items())
-        self.features.update({x:self.npc_class.loaded_features.get(x) for x in template.base_features if x in self.npc_class.loaded_features})
+        self.features.update({x:template.base_feature_data.get(x) for x in template.base_features})
 
     def rm_template(self, template):
         if template.name in self.templates:
