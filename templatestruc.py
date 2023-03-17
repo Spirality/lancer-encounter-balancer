@@ -15,6 +15,15 @@ class Template:
         self.base_feature_data = {x:loaded_features.get(x) for x in self.base_features if x in loaded_features}
         self.features = {x:loaded_features.get(x) for x in self.feature_ids if x in loaded_features} #dict of ALL features
         # ^ this line is essentially using self.feature_ids as a list of keys to look up in the master feature list, then grabs them and saves them in the Template obj
+        self.bonuses = {}
+        for f in self.base_feature_data.values():
+            if hasattr(f, "bonus"):
+                for n in f.bonus:
+                    print(n)
+                    if self.bonuses.get(n.values()) != None:
+                        self.bonuses[n.keys()] = self.bonuses[n.values()] + f.bonus[n].values()
+                    else:
+                        self.bonuses.update(n)
         self.struc_bonus = 0
         self.stress_bonus = 0
         self.struc_override = False
