@@ -108,7 +108,7 @@ class NPC:
         self.struc_override = False
         self.stress_override = False
         if self.templates == {}: # In case of empty template dict, set bonuses to 0
-            return
+            return # 3/17/23: Retool this to create new bonuses as found in the bonus dict instead of doing it manually
         else:
             for entry in self.templates.values():
                 self.struc_bonus = self.struc_bonus + entry.struc_bonus
