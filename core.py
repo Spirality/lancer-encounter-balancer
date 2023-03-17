@@ -16,6 +16,7 @@ from pathlib import Path
 import os
 
 #To do: Load LCPs and pass as an argument to avoid compiling the LCP list three times over
+# 3/17/23: Crisis. You need to decide right here whether we're going to play the dictionary juggling game for bonuses, or if we're going to just add them all up at the end
 
 loaded_features = feat_load()
 loaded_templates = template_load(loaded_features)

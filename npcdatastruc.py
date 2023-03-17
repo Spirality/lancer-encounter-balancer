@@ -110,9 +110,7 @@ class NPC:
         if self.templates == {}: # In case of empty template dict, set bonuses to 0
             return
         else:
-            for entry in self.templates.items():
-                print(self.templates)       # PROBLEM
-                print(entry)                # PROBLEM
+            for entry in self.templates.values():
                 self.struc_bonus = self.struc_bonus + entry.struc_bonus
                 self.stress_bonus = self.stress_bonus + entry.stress_bonus
                 if entry.struc_override != False:
@@ -135,7 +133,7 @@ class NPC:
                 del self.allowed_features[entry] #remove each feature from the allowed features list
                 if entry in self.features:
                     del self.features[entry] #then remove any that have been assigned
-            calc_bonus()
+            self.calc_bonus()
             return True
         else:
             return False
