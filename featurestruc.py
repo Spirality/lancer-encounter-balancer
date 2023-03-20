@@ -27,7 +27,7 @@ class Feature_Bonuses:
         if len(self.input) != 0:
             for k, v in self.input.items():
                 name = f"{k}_bonus"
-                setattr(self,k,v)
+                setattr(self,name,v)
 
 class Feature_Overrides:
     def __init__(self, overrides={}):
@@ -53,7 +53,7 @@ class Feature_Overrides:
         if len(self.input) != 0:
             for k, v in self.input.items():
                 name = f"{k}_override"
-                setattr(self,k,v)
+                setattr(self,name,v)
 
 
 # There are a number of different formats of feature, and my knowledge of python is limited. Making four diff classes is the best I've got
