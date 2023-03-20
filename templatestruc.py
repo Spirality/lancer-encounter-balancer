@@ -16,14 +16,15 @@ class Template:
         self.features = {x:loaded_features.get(x) for x in self.feature_ids if x in loaded_features} #dict of ALL features
         # ^ this line is essentially using self.feature_ids as a list of keys to look up in the master feature list, then grabs them and saves them in the Template obj
         self.bonuses = {}
+        # 3/20/23: Start weeding this out, we need to simplify
         for f in self.base_feature_data.values():
             if hasattr(f, "bonus"): # Making sure it's a trait
                 if f.bonus != None:   # Weeding out the blanks
-                    for k, v in f.bonus.items():
-                        if self.bonuses.get(k) != None:
-                            self.bonuses[k] = self.bonuses[k] + v
-                        else:
-                            self.bonuses.update({k: v})
+                    for k, v in f.bonus.items():    # for key and value,
+                        if self.bonuses.get(k) != None: # if the value exists
+                            self.bonuses[k] = self.bonuses[k] + v   # add the value to the value already in the dict
+                        else:                                       # otherwise,
+                            self.bonuses.update({k: v})             # just add the whole entry
         self.struc_bonus = 0
         self.stress_bonus = 0
         self.struc_override = False
