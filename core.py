@@ -36,9 +36,7 @@ TestEncounter = Encounter(name="Battle of UwU", players=3)
 #TestEncounter.structure_cost = 5
 #del TestEncounter.structure_cost
 print(loaded_features["npcf_reinforced_ultra"].bonus)
-print(loaded_features["npcf_reinforced_ultra"].struc_bonus())
-print(loaded_features["npcf_reinforced_ultra"].struc_override())
-print(loaded_templates["ULTRA"].struc_bonus)
-print(loaded_templates["ULTRA"].bonuses)
+print(loaded_features["npcf_reinforced_ultra"].get_bonus("structure"))
+print(loaded_features["npcf_reinforced_ultra"].get_override("structure"))
 print(loaded_features["npcf_reinforced_ultra"].c_bonus.structure_bonus)
 code.interact(local=locals())

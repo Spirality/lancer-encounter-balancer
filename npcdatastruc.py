@@ -103,22 +103,7 @@ class NPC:
         return base_features
     
     def calc_bonus(self):
-        self.struc_bonus = 0
-        self.stress_bonus = 0
-        self.struc_override = False
-        self.stress_override = False
-        if self.templates == {}: # In case of empty template dict, set bonuses to 0
-            return # 3/17/23: Retool this to create new bonuses as found in the bonus dict instead of doing it manually
-        else:
-            for entry in self.templates.values():
-                self.struc_bonus = self.struc_bonus + entry.struc_bonus
-                self.stress_bonus = self.stress_bonus + entry.stress_bonus
-                if entry.struc_override != False:
-                    assert self.struc_override is False, f'{self.name} is trying to stack overrides! (Attempting to apply {entry.name})'
-                    self.struc_override = entry.struc_override
-                if entry.stress_override != False:
-                    assert self.stress_override is False, f'{self.name} is trying to stack overrides! (Attempting to apply {entry.name})'
-                    self.stress_override = entry.stress_override
+        return #3/20/23: Removed a bad process of thinking, but as a result I've made an awful lot more work for myself
 
     def add_template(self, template):
         self.templates[template.name] = template

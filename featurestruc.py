@@ -77,29 +77,13 @@ class Trait_Feature:
     def desc(self):
         print(self.effect)
     
-    def struc_bonus(self):
-        if 'structure' in self.bonus.keys():
-            return self.bonus['structure']
-        else:
-            return 0
+    def get_bonus(self, stat):
+        name = f"{stat}_bonus"
+        return getattr(self.c_bonus, name)
 
-    def stress_bonus(self):
-        if 'stress' in self.bonus.keys():
-            return self.bonus['stress']
-        else:
-            return 0
-    
-    def struc_override(self):
-        if 'structure' in self.override.keys():
-            return self.override['structure']
-        else:
-            return False
-    
-    def stress_override(self):
-        if 'stress' in self.override.keys():
-            return self.override['stress']
-        else:
-            return False
+    def get_override(self, stat):
+        name = f"{stat}_override"
+        return getattr(self.c_override, name)
 
 class Weapon_Feature:
     def __init__(self, id, name, type, weapon_type, origin, locked, damage, range, attack_bonus=[0,0,0], tags=[], effect=None, on_hit=None, on_crit=None):
