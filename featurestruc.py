@@ -2,7 +2,59 @@ from LCP_Reader import LCP_Reader
 from pathlib import Path
 import os
 
-# As of 3/2/2023, feature handling will no longer happen within the import space, but will handle the master list as an argument to save memory
+class Feature_Bonuses:
+  # Honestly I don't know if this is warranted but hopefully it saves me some typing
+    def __init__(self, bonuses={}):
+        self.input = bonuses
+        if self.input == None:
+            self.input = {}
+        self.armor_bonus = 0
+        self.hp_bonus = 0
+        self.evade_bonus = 0
+        self.edef_bonus = 0
+        self.heatcap_bonus = 0
+        self.speed_bonus = 0
+        self.sensor_bonus = 0
+        self.save_bonus = 0
+        self.hull_bonus = 0
+        self.agility_bonus = 0
+        self.systems_bonus = 0
+        self.engineering_bonus = 0
+        self.size_bonus = 0
+        self.activations_bonus = 0
+        self.stress_bonus = 0
+        self.structure_bonus = 0
+        if len(self.input) != 0:
+            for k, v in self.input.items():
+                name = f"{k}_bonus"
+                setattr(self,k,v)
+
+class Feature_Overrides:
+    def __init__(self, overrides={}):
+        self.input = overrides
+        if self.input == None:
+            self.input = {}
+        self.armor_override = None
+        self.hp_override = None
+        self.evade_override = None
+        self.edef_override = None
+        self.heatcap_override = None
+        self.speed_override = None
+        self.sensor_override = None
+        self.save_override = None
+        self.hull_override = None
+        self.agility_override = None
+        self.systems_override = None
+        self.engineering_override = None
+        self.size_override = None
+        self.activations_override = None
+        self.stress_override = None
+        self.structure_override = None
+        if len(self.input) != 0:
+            for k, v in self.input.items():
+                name = f"{k}_override"
+                setattr(self,k,v)
+
 
 # There are a number of different formats of feature, and my knowledge of python is limited. Making four diff classes is the best I've got
 class Trait_Feature:
@@ -19,6 +71,8 @@ class Trait_Feature:
         self.effect = effect
         self.bonus = bonus
         self.override = override
+        self.c_bonus = Feature_Bonuses(bonuses=self.bonus)
+        self.c_override = Feature_Overrides(overrides=self.override)
     
     def desc(self):
         print(self.effect)

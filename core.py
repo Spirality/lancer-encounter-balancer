@@ -4,6 +4,8 @@ from featurestruc import Weapon_Feature
 from featurestruc import System_Feature
 from featurestruc import Reaction_Feature
 from featurestruc import Tech_Feature
+from featurestruc import Feature_Bonuses
+from featurestruc import Feature_Overrides
 from featurestruc import feat_load
 from templatestruc import Template
 from templatestruc import template_load
@@ -14,6 +16,7 @@ from npcdatastruc import npc_load
 from opforoptimizer import Encounter
 from pathlib import Path
 import os
+import code
 
 #To do: Load LCPs and pass as an argument to avoid compiling the LCP list three times over
 # 3/20/23: I've gotten some advice, and it's better to save myself effort than overcomplicate things. RAM is plentiful. Simplify the bonuses on the feature level.
@@ -37,3 +40,5 @@ print(loaded_features["npcf_reinforced_ultra"].struc_bonus())
 print(loaded_features["npcf_reinforced_ultra"].struc_override())
 print(loaded_templates["ULTRA"].struc_bonus)
 print(loaded_templates["ULTRA"].bonuses)
+print(loaded_features["npcf_reinforced_ultra"].c_bonus.structure_bonus)
+code.interact(local=locals())
