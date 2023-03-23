@@ -10,10 +10,9 @@ class NPC_Class:
         self.role = role
         self.info = info
         self.stats = stats
-        self.loaded_features = loaded_features
-        self.base_features = {x:self.loaded_features.get(x) for x in base_features} #dict
-        self.opt_features = {x:self.loaded_features.get(x) for x in opt_features} #dict
-        self.class_features = {**self.base_features, **self.opt_features}
+        self.base_features = {x:loaded_features.get(x) for x in base_features} #dict
+        self.opt_features = {x:loaded_features.get(x) for x in opt_features} #dict
+        self.class_features = {**self.base_features, **self.opt_features} #dict
 
     def get_hull(self, tier):
         return self.stats.get_hull(tier=tier)
@@ -79,16 +78,24 @@ class NPC:
         self.name = name
         self.npc_class = npc_class
         self.tier = tier
-        self.templates = {}
-        self.allowed_features = npc_class.class_features
-        self.features = npc_class.base_features
-        self.bonuses = {}
-        self.activations = npc_class.stats.activations[self.tier - 1]
+        self.templates = {} #dict
+        self.allowed_features = npc_class.class_features.copy() #dict
+        self.features = npc_class.base_features.copy() #dict
+        self.activations = npc_class.stats.activations[self.tier - 1] #list
         self.weight = 1
         # weight is basically the value of fielding the NPC. Grunts will have .25, Elites and Vets get 2 (3 if the templates are stacked), and 4 for Ultras
         # this value will get multiplied/modified if the NPC is fielded with classes that combo with it, like Mirage + Demolisher
     
     # Second part, defining functions. More to come as we need them
+    def get_stat(self, stat):
+        if self.get_override(stat) == False:
+            return getattr(self.npc_class.stats, stat)[self.tier - 1] + self.calc_bonus(stat)
+        else:
+            return self.get_override(stat)
+    
+    def get_basestat(self, stat):
+        return getattr(self.npc_class.stats, stat)[self.tier - 1]
+
     def get_baseHASE(self):
         base_hull = self.npc_class.get_hull(tier=self.tier)
         base_agility = self.npc_class.get_agility(tier=self.tier)
@@ -96,27 +103,59 @@ class NPC:
         base_engineering = self.npc_class.get_engineering(tier=self.tier)
         return (base_hull, base_agility, base_systems, base_engineering)
     
-    def get_basefeats(self):
-        base_features = self.npc_class.base_features
-        return base_features
+    def get_HASE(self):
+        hull = self.npc_class.get_hull(tier=self.tier) + self.calc_bonus("hull")
+        agility = self.npc_class.get_agility(tier=self.tier) + self.calc_bonus("agility")
+        systems = self.npc_class.get_systems(tier=self.tier) + self.calc_bonus("systems")
+        engineering = self.npc_class.get_engineering(tier=self.tier) + self.calc_bonus("engineering")
+        return (hull, agility, systems, engineering)
     
-    def calc_bonus(self):
-        for entry in self.features:
-            self.bonuses.update(entry.bonus)
+    def get_basefeats(self):
+        return self.npc_class.base_features
+    
+    def calc_bonus(self, stat):
+        return sum([getattr(f.c_bonus, stat+"_bonus") for key, f in self.features.items() if hasattr(f, "c_bonus")])
+    
+    def get_override(self, stat):
+        for key, f in self.features.items():
+            if hasattr(f, "c_override"):
+                override = getattr(f.c_override, stat+"_override")
+                if override == None:
+                    continue
+                else:
+                    return override # Maybe later I need to detect multiple overrides? There shouldn't be a case where that happens
+            else:
+                continue
+        return False
 
     def add_template(self, template):
         self.templates[template.name] = template
         self.allowed_features.update(template.features.items())
-        self.features.update({x:self.npc_class.loaded_features.get(x) for x in template.base_features if x in self.npc_class.loaded_features})
+        self.features.update({x:template.base_feature_data.get(x) for x in template.base_features})
+        return True
+    
+    def add_feature(self, feature):
+        if feature in self.allowed_features.values():
+            self.features[feature.id] = feature
+            return True
+        else:
+            return False
 
     def rm_template(self, template):
-        if template.name in self.templates:
+        if template.name in self.templates.keys():
             del self.templates[template.name]
             for entry in template.get_features(): #For each feature of the template
                 del self.allowed_features[entry] #remove each feature from the allowed features list
                 if entry in self.features:
                     del self.features[entry] #then remove any that have been assigned
-                    return True
+            return True
+        else:
+            return False
+    
+    def rm_feature(self, feature):
+        if feature.id in self.features.keys():
+            del self.features[feature.id]
+            return True
         else:
             return False
 
