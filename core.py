@@ -19,7 +19,6 @@ import os
 import code
 
 #To do: Load LCPs and pass as an argument to avoid compiling the LCP list three times over
-# 3/20/23: I've gotten some advice, and it's better to save myself effort than overcomplicate things. RAM is plentiful. Simplify the bonuses on the feature level.
 
 loaded_features = feat_load()
 loaded_templates = template_load(loaded_features)
