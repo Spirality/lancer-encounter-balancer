@@ -87,6 +87,15 @@ class NPC:
         # this value will get multiplied/modified if the NPC is fielded with classes that combo with it, like Mirage + Demolisher
     
     # Second part, defining functions. More to come as we need them
+    def get_stat(self, stat):
+        if self.get_override(stat) == False:
+            return getattr(self.npc_class.stats, stat)[self.tier - 1] + self.calc_bonus(stat)
+        else:
+            return self.get_override(stat)
+    
+    def get_basestat(self, stat):
+        return getattr(self.npc_class.stats, stat)[self.tier - 1]
+
     def get_baseHASE(self):
         base_hull = self.npc_class.get_hull(tier=self.tier)
         base_agility = self.npc_class.get_agility(tier=self.tier)
@@ -95,17 +104,29 @@ class NPC:
         return (base_hull, base_agility, base_systems, base_engineering)
     
     def get_HASE(self):
-        hull = self.npc_class.get_hull(tier=self.tier) + self.calc_bonus("hull_bonus")
-        agility = self.npc_class.get_agility(tier=self.tier) + self.calc_bonus("agility_bonus")
-        systems = self.npc_class.get_systems(tier=self.tier) + self.calc_bonus("systems_bonus")
-        engineering = self.npc_class.get_engineering(tier=self.tier) + self.calc_bonus("engineering_bonus")
+        hull = self.npc_class.get_hull(tier=self.tier) + self.calc_bonus("hull")
+        agility = self.npc_class.get_agility(tier=self.tier) + self.calc_bonus("agility")
+        systems = self.npc_class.get_systems(tier=self.tier) + self.calc_bonus("systems")
+        engineering = self.npc_class.get_engineering(tier=self.tier) + self.calc_bonus("engineering")
         return (hull, agility, systems, engineering)
     
     def get_basefeats(self):
         return self.npc_class.base_features
     
-    def calc_bonus(self, stat_bonus):
-            return sum([getattr(f.c_bonus, stat_bonus) for key, f in self.features.items() if hasattr(f, "c_bonus")])
+    def calc_bonus(self, stat):
+        return sum([getattr(f.c_bonus, stat+"_bonus") for key, f in self.features.items() if hasattr(f, "c_bonus")])
+    
+    def get_override(self, stat):
+        for key, f in self.features.items():
+            if hasattr(f, "c_override"):
+                override = getattr(f.c_override, stat+"_override")
+                if override == None:
+                    continue
+                else:
+                    return override # Maybe later I need to detect multiple overrides? There shouldn't be a case where that happens
+            else:
+                continue
+        return False
 
     def add_template(self, template):
         self.templates[template.name] = template

@@ -150,7 +150,7 @@ def load_feature(feature_data):
     category = str.casefold(feature_data["type"])
     # Capitalization matters, apparently
     if category == "trait":
-        return Trait_Feature(id=feature_data["id"], name=feature_data["name"], type=feature_data["type"], origin=feature_data["origin"], locked=feature_data["locked"], effect=feature_data["effect"], tags=feature_data.get("tags", []), bonus=feature_data.get("bonus", None))
+        return Trait_Feature(id=feature_data["id"], name=feature_data["name"], type=feature_data["type"], origin=feature_data["origin"], locked=feature_data["locked"], effect=feature_data["effect"], tags=feature_data.get("tags", []), bonus=feature_data.get("bonus", {}), override=feature_data.get("override", {}))
     elif category == "weapon":
         return Weapon_Feature(id=feature_data["id"], name=feature_data["name"], type=feature_data["type"], weapon_type=feature_data["weapon_type"], origin=feature_data["origin"], locked=feature_data["locked"], range=feature_data["range"], damage=feature_data.get("damage", [0,0,0]), attack_bonus=feature_data.get("attack_bonus", [0,0,0]), tags=feature_data.get("tags", []), effect=feature_data.get("effect", None), on_hit=feature_data.get("on_hit", None), on_crit=feature_data.get("on_crit", None))
     elif category == "system":
