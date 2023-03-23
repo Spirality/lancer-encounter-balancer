@@ -12,7 +12,7 @@ class NPC_Class:
         self.stats = stats
         self.base_features = {x:loaded_features.get(x) for x in base_features} #dict
         self.opt_features = {x:loaded_features.get(x) for x in opt_features} #dict
-        self.class_features = {**self.base_features, **self.opt_features}
+        self.class_features = {**self.base_features, **self.opt_features} #dict
 
     def get_hull(self, tier):
         return self.stats.get_hull(tier=tier)
@@ -72,20 +72,17 @@ def load_npc_class(npc_data, loaded_features):
     # Also it's a whole different block in the json file so this is just easier to parse
 
 # This is for when we actually make an NPC, not part of the loading process
+# 3/23/23: The plan is
 class NPC:
     # First part, identifications
     def __init__(self, name, npc_class, tier):
         self.name = name
         self.npc_class = npc_class
         self.tier = tier
-        self.templates = {}
-        self.allowed_features = npc_class.class_features.copy()
-        self.features = npc_class.base_features.copy()
-        self.struc_bonus = 0
-        self.stress_bonus = 0
-        self.struc_override = False
-        self.stress_override = False
-        self.activations = npc_class.stats.activations[self.tier - 1]
+        self.templates = {} #dict
+        self.allowed_features = npc_class.class_features.copy() #dict
+        self.features = npc_class.base_features.copy() #dict
+        self.activations = npc_class.stats.activations[self.tier - 1] #list
         self.weight = 1
         # weight is basically the value of fielding the NPC. Grunts will have .25, Elites and Vets get 2 (3 if the templates are stacked), and 4 for Ultras
         # this value will get multiplied/modified if the NPC is fielded with classes that combo with it, like Mirage + Demolisher
@@ -99,17 +96,15 @@ class NPC:
         return (base_hull, base_agility, base_systems, base_engineering)
     
     def get_basefeats(self):
-        base_features = self.npc_class.base_features
-        return base_features
+        return self.npc_class.base_features
     
-    def calc_bonus(self):
-        return #3/20/23: Removed a bad process of thinking, but as a result I've made an awful lot more work for myself
+    def calc_bonus(self, stat_bonus):
+            return sum([getattr(f.c_bonus, stat_bonus) for key, f in self.features.items() if getattr(f, "type") == "trait"]) #3/20/23: Removed a bad process of thinking, but as a result I've made an awful lot more work for myself
 
     def add_template(self, template):
         self.templates[template.name] = template
         self.allowed_features.update(template.features.items())
         self.features.update({x:template.base_feature_data.get(x) for x in template.base_features})
-        self.calc_bonus()
 
     def rm_template(self, template):
         if template.name in self.templates:
@@ -118,7 +113,6 @@ class NPC:
                 del self.allowed_features[entry] #remove each feature from the allowed features list
                 if entry in self.features:
                     del self.features[entry] #then remove any that have been assigned
-            self.calc_bonus()
             return True
         else:
             return False
