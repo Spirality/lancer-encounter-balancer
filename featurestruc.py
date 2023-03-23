@@ -61,7 +61,7 @@ class Trait_Feature:
     def __init__(self, id, name, type, origin, locked, effect, tags=[], bonus={}, override={}):
         self.id = id
         self.name = name
-        self.type = type
+        self.type = str.casefold(type)
         # Only seen Trait, System, Weapon, Reaction, and Tech
         self.origin = origin
         # This is a list
@@ -89,7 +89,7 @@ class Weapon_Feature:
     def __init__(self, id, name, type, weapon_type, origin, locked, damage, range, attack_bonus=[0,0,0], tags=[], effect=None, on_hit=None, on_crit=None):
         self.id = id
         self.name = name
-        self.type = type
+        self.type = str.casefold(type)
         self.weapon_type = weapon_type
         self.origin = origin
         self.locked = locked
@@ -108,7 +108,7 @@ class System_Feature:
     def __init__(self, id, name, type, origin, locked, effect, tags=[]):
         self.id = id
         self.name = name
-        self.type = type
+        self.type = str.casefold(type)
         self.origin = origin
         self.locked = locked
         self.tags = tags
@@ -121,7 +121,7 @@ class Reaction_Feature:
     def __init__(self, id, name, type, origin, locked, trigger, effect, tags=[]):
         self.id = id
         self.name = name
-        self.type = type
+        self.type = str.casefold(type)
         self.origin = origin
         self.locked = locked
         self.tags = tags
@@ -135,7 +135,7 @@ class Tech_Feature:
     def __init__(self, id, name, type, origin, locked, effect, tech_type, tags=[], attack_bonus=[0,0,0]):
         self.id = id
         self.name = name
-        self.type = type
+        self.type = str.casefold(type)
         self.origin = origin
         self.locked = locked
         self.effect = effect

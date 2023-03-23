@@ -72,7 +72,6 @@ def load_npc_class(npc_data, loaded_features):
     # Also it's a whole different block in the json file so this is just easier to parse
 
 # This is for when we actually make an NPC, not part of the loading process
-# 3/23/23: The plan is
 class NPC:
     # First part, identifications
     def __init__(self, name, npc_class, tier):
@@ -95,24 +94,46 @@ class NPC:
         base_engineering = self.npc_class.get_engineering(tier=self.tier)
         return (base_hull, base_agility, base_systems, base_engineering)
     
+    def get_HASE(self):
+        hull = self.npc_class.get_hull(tier=self.tier) + self.calc_bonus("hull_bonus")
+        agility = self.npc_class.get_agility(tier=self.tier) + self.calc_bonus("agility_bonus")
+        systems = self.npc_class.get_systems(tier=self.tier) + self.calc_bonus("systems_bonus")
+        engineering = self.npc_class.get_engineering(tier=self.tier) + self.calc_bonus("engineering_bonus")
+        return (hull, agility, systems, engineering)
+    
     def get_basefeats(self):
         return self.npc_class.base_features
     
     def calc_bonus(self, stat_bonus):
-            return sum([getattr(f.c_bonus, stat_bonus) for key, f in self.features.items() if getattr(f, "type") == "trait"]) #3/20/23: Removed a bad process of thinking, but as a result I've made an awful lot more work for myself
+            return sum([getattr(f.c_bonus, stat_bonus) for key, f in self.features.items() if hasattr(f, "c_bonus")])
 
     def add_template(self, template):
         self.templates[template.name] = template
         self.allowed_features.update(template.features.items())
         self.features.update({x:template.base_feature_data.get(x) for x in template.base_features})
+        return True
+    
+    def add_feature(self, feature):
+        if feature in self.allowed_features.values():
+            self.features[feature.id] = feature
+            return True
+        else:
+            return False
 
     def rm_template(self, template):
-        if template.name in self.templates:
+        if template.name in self.templates.keys():
             del self.templates[template.name]
             for entry in template.get_features(): #For each feature of the template
                 del self.allowed_features[entry] #remove each feature from the allowed features list
                 if entry in self.features:
                     del self.features[entry] #then remove any that have been assigned
+            return True
+        else:
+            return False
+    
+    def rm_feature(self, feature):
+        if feature.id in self.features.keys():
+            del self.features[feature.id]
             return True
         else:
             return False
