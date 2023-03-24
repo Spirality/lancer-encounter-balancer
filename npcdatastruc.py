@@ -87,6 +87,12 @@ class NPC:
         # this value will get multiplied/modified if the NPC is fielded with classes that combo with it, like Mirage + Demolisher
     
     # Second part, defining functions. More to come as we need them
+    def grunt_check(self):
+        if "GRUNT" in self.templates.keys():
+            self.weight = .25
+        else:
+            self.weight = self.get_stat("structure")
+
     def get_stat(self, stat):
         if self.get_override(stat) == False:
             return getattr(self.npc_class.stats, stat)[self.tier - 1] + self.calc_bonus(stat)
@@ -132,6 +138,7 @@ class NPC:
         self.templates[template.name] = template
         self.allowed_features.update(template.features.items())
         self.features.update({x:template.base_feature_data.get(x) for x in template.base_features})
+        self.grunt_check()
         return True
     
     def add_feature(self, feature):
@@ -148,6 +155,7 @@ class NPC:
                 del self.allowed_features[entry] #remove each feature from the allowed features list
                 if entry in self.features:
                     del self.features[entry] #then remove any that have been assigned
+            self.grunt_check()
             return True
         else:
             return False

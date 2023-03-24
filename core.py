@@ -26,22 +26,22 @@ loaded_npcs = npc_load(loaded_features)
 
 phil_the_carrier = NPC("Phil the Carrier", loaded_npcs['CARRIER'], tier=1)
 joe_the_assault = NPC("Joe the Assault", loaded_npcs["ASSAULT"], tier=1)
+tom_the_ronin = NPC("Tom_the_Ronin", loaded_npcs['RONIN'], tier=2)
 
 phil_the_carrier.add_template(loaded_templates["CHAMPION"])
 joe_the_assault.add_template(loaded_templates["GRUNT"])
+tom_the_ronin.add_template(loaded_templates["ULTRA"])
 
 TestEncounter = Encounter(name="Battle of UwU", players=3)
 #print(TestEncounter.structure_cost)
 #TestEncounter.structure_cost = 5
 #del TestEncounter.structure_cost
-print(loaded_features["npcf_reinforced_ultra"].bonus)
-print(loaded_features["npcf_reinforced_ultra"].get_bonus("structure"))
-print(loaded_features["npcf_reinforced_ultra"].get_override("structure"))
-print(loaded_features["npcf_reinforced_ultra"].c_bonus.structure_bonus)
 print("Champion Superiority structure bonus: {}".format(loaded_features["npc_champion_Superiority"].c_bonus.structure_bonus))
 print("Phil's structure bonus: {}".format(phil_the_carrier.calc_bonus("structure")))
 print("Phil's Champion Superiority structure bonus: {}".format(phil_the_carrier.features["npc_champion_Superiority"].c_bonus.structure_bonus))
 print("Phil's current structure: {}".format(phil_the_carrier.get_stat("structure")))
 print("Joe's current HP: {}".format(joe_the_assault.get_stat("hp")))
 print("Joe's base HP: {}".format(joe_the_assault.get_basestat("hp")))
+print("Joe's combat weight: {}".format(joe_the_assault.weight))
+print("Phil's combat weight: {}".format(phil_the_carrier.weight))
 #code.interact(local=locals())
