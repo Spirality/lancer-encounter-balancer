@@ -48,8 +48,8 @@ print("Phil's Champion Superiority structure bonus: {}".format(phil_the_carrier.
 print("Phil's current structure: {}".format(phil_the_carrier.get_stat("structure")))
 print("Joe's current HP: {}".format(joe_the_assault.get_stat("hp")))
 print("Joe's base HP: {}".format(joe_the_assault.get_basestat("hp")))
-print(joe_the_assault.weight)
-
+print("Joe's combat weight: {}".format(joe_the_assault.weight))
+print("Phil's combat weight: {}".format(phil_the_carrier.weight))
 #code.interact(local=locals())
 def start():
     print("Welcome to the Lancer Encounter Balancer, project name METAVAULT!")

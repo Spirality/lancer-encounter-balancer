@@ -48,3 +48,21 @@
 #                if entry.stress_override != False:
 #                    assert self.stress_override is False, f'{self.name} is trying to stack overrides! (Attempting to apply {entry.name})'
 #                    self.stress_override = entry.stress_override
+
+#        self._structure_cost = 0 # Currently working but needs more improvement
+#
+#    @property
+#    def structure_cost(self):
+#        """Structure Cost of an Encounter"""
+#        print("getter of structure_cost called")
+#        return self._structure_cost
+
+#    @structure_cost.setter
+#    def structure_cost(self, value):
+#        print("setter of structure_cost called")
+#        self._structure_cost = value
+
+#    @structure_cost.deleter
+#    def structure_cost(self):
+#        print("deleter of structure_cost called")
+#        self._structure_cost = 0
