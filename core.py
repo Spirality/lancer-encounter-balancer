@@ -17,7 +17,10 @@ from opforoptimizer import Encounter
 from pathlib import Path
 import os
 import code
+from consolemenu import *
+from consolemenu.items import *
 
+version = "v0.1"
 #To do: Load LCPs and pass as an argument to avoid compiling the LCP list three times over
 # 3/20/23: I've gotten some advice, and it's better to save myself effort than overcomplicate things. RAM is plentiful. Simplify the bonuses on the feature level.
 # 4/3/23: Core will probably contain all the text menu navigation fluff. Working on saveload.py concurrently
@@ -51,47 +54,12 @@ print("Joe's base HP: {}".format(joe_the_assault.get_basestat("hp")))
 print("Joe's combat weight: {}".format(joe_the_assault.weight))
 print("Phil's combat weight: {}".format(phil_the_carrier.weight))
 #code.interact(local=locals())
-def start():
-    print("Welcome to the Lancer Encounter Balancer, project name METAVAULT!")
-    main_menu()
 
-def main_menu():
-    desc = """
-    Main Menu
-    ------------
-    Select option:
-    1. Encounter Balancer
-    2. NPC Wizard
-    3. Options
-    4. Exit
-    ------------
-    """
-    print(desc)
-    selection = int(input("Select an option:"))
-    while selection != 0:
-        if selection==1:
-            print("Blinking to Encounter Balancer...")
-            print("Unfortunately, there is no Encounter Balancer to blink to. Whoops.")
-            print(desc)
-            selection = int(input("Select an option:"))
-            ## You can add your code or functions here
-        elif selection==2:
-            print("Blinking to NPC Wizard...")
-            print("Unfortunately, there is no NPC Wizard to blink to. Whoops.")
-            print(desc)
-            selection = int(input("Select an option:"))
-        elif selection==3:
-            print("Blinking to Options...")
-            print("Unfortunately, there are no options to blink to. Whoops.")
-            print(desc)
-            selection = int(input("Select an option:"))
-        elif selection ==4:
-            print("Exiting Blinkspace...")
-            selection = 0
-        else:
-            # Any integer inputs other than values 1-4 we print an error message
-            print("Wrong option selection. Enter any key to try again..")
-            print(desc)
-            selection = int(input("Select an option:"))
+main_menu = ConsoleMenu("METAVAULT Main Menu", f"Current version number: {version}", prologue_text="Select your destination:")
+balancer_menu = ConsoleMenu("Encounter Balancer Menu", "Unfortunately, there is no Encounter Balancer to blink to. Whoops.")
 
-start()
+goto_encounter_balancer = SubmenuItem("Encounter Balancer", balancer_menu, main_menu)
+
+main_menu.append_item(goto_encounter_balancer)
+
+main_menu.show()
