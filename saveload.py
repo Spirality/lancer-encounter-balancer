@@ -21,3 +21,16 @@ import json
 
 # https://stackoverflow.com/questions/24030284/method-to-serialize-custom-object-to-json-in-python
 # This is going to be a slight nightmare but here we go I guess
+
+class MyEncoder(json.JSONEncoder):
+    """
+    JSONEncoder subclass that leverages an object's `__json__()` method,
+    if available, to obtain its default JSON representation. 
+
+    """
+    def default(self, obj):
+        if hasattr(obj, '__json__'):
+            return obj.__json__()
+        return json.JSONEncoder.default(self, obj)
+
+#>>> json.dumps(MyClass(), cls=MyEncoder)
