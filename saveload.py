@@ -32,5 +32,10 @@ class MyEncoder(json.JSONEncoder):
         if hasattr(obj, '__json__'):
             return obj.__json__()
         return json.JSONEncoder.default(self, obj)
+#Call via: json.dumps(MyClass(), cls=MyEncoder)
 
-#>>> json.dumps(MyClass(), cls=MyEncoder)
+def save_npc(npc):
+    npc_json = json.dumps(npc, cls=MyEncoder, indent=4)
+    filename = str.casefold(npc.name.replace(' ', '_') + '.json')
+    with open('NPCs/' + filename, "w") as outfile:
+        outfile.write(npc_json)

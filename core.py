@@ -15,6 +15,7 @@ from npcdatastruc import NPC
 from npcdatastruc import npc_load
 from opforoptimizer import Encounter
 from saveload import MyEncoder
+from saveload import save_npc
 from pathlib import Path
 import json
 import os
@@ -23,6 +24,11 @@ from consolemenu import *
 from consolemenu.items import *
 
 version = "v0.1"
+
+if not os.path.exists('LCPs'):
+    os.makedirs('LCPs')
+if not os.path.exists('NPCs'):
+    os.makedirs('NPCs')
 #To do: Load LCPs and pass as an argument to avoid compiling the LCP list three times over
 # 3/20/23: I've gotten some advice, and it's better to save myself effort than overcomplicate things. RAM is plentiful. Simplify the bonuses on the feature level.
 # 4/3/23: Core will probably contain all the text menu navigation fluff. Working on saveload.py concurrently
@@ -57,6 +63,8 @@ print("Joe's base HP: {}".format(joe_the_assault.get_basestat("hp")))
 print("Joe's combat weight: {}".format(joe_the_assault.weight))
 print("Phil's combat weight: {}".format(phil_the_carrier.weight))
 #code.interact(local=locals())
+def debug():
+    save_npc(phil_the_carrier)
 
 main_menu = ConsoleMenu("METAVAULT Main Menu", f"Current version number: {version}", prologue_text="Select your destination:")
 balancer_menu = ConsoleMenu("Encounter Balancer Menu", "Unfortunately, there is no Encounter Balancer to blink to. Whoops.")
@@ -66,11 +74,13 @@ options_menu = ConsoleMenu("Options Menu", "I'll hopefully have more stuff here 
 goto_encounter_balancer = SubmenuItem("Encounter Balancer", balancer_menu, main_menu)
 goto_npc_wizard = SubmenuItem("NPC Wizard", npc_wizard, main_menu)
 goto_options = SubmenuItem("Options", options_menu, main_menu)
+goto_debug = FunctionItem("Perform Debug", debug)
 
 main_menu.append_item(goto_encounter_balancer)
 main_menu.append_item(goto_npc_wizard)
 main_menu.append_item(goto_options)
+main_menu.append_item(goto_debug)
 
-#main_menu.show()
+main_menu.show()
 
-print(json.dumps(phil_the_carrier, indent=4, cls=MyEncoder))
+#print(json.dumps(phil_the_carrier, indent=4, cls=MyEncoder))
