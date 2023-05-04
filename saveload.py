@@ -34,6 +34,7 @@ class MyEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 #Call via: json.dumps(MyClass(), cls=MyEncoder)
 
+# Right, so, at the moment this is barebones as hell. I think it's best to revisit later and figure out how it overwrites and maybe toss in a classic "are you sure" prompt
 def save_npc(npc):
     npc_json = json.dumps(npc, cls=MyEncoder, indent=4)
     filename = str.casefold(npc.name.replace(' ', '_') + '.json')

@@ -1,0 +1,39 @@
+{
+    "name": "Phil the Carrier",
+    "class_name": "CARRIER",
+    "tier": 1,
+    "templates": [
+        "CHAMPION"
+    ],
+    "allowed_features": [
+        "npc_carrier_RemoteMachineGun",
+        "npc_carrier_MID",
+        "npc_carrier_RapidDeployment",
+        "npc_carrier_SmokeLaunchers",
+        "npc_carrier_AGL",
+        "npc_carrier_Masterkey",
+        "npc_carrier_TriageDrones",
+        "npc_carrier_FCC",
+        "npc_champion_Superiority",
+        "npc_champion_Peerless",
+        "npc_champion_Challenger",
+        "npc_champion_ChampionsRaiment",
+        "npc_champion_Nemesis",
+        "npc_champion_Unassailable",
+        "npc_champion_HonorGuard",
+        "npc_champion_IntoTheFray",
+        "npc_champion_ShatteredVisage",
+        "npc_champion_GlorySeeker"
+    ],
+    "features": [
+        "npc_carrier_RemoteMachineGun",
+        "npc_carrier_MID",
+        "npc_carrier_RapidDeployment",
+        "npc_champion_Superiority",
+        "npc_champion_Peerless",
+        "npc_champion_Challenger",
+        "npc_champion_ChampionsRaiment"
+    ],
+    "activations": 1,
+    "weight": 2
+}
