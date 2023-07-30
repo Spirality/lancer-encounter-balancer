@@ -33,13 +33,14 @@ if not os.path.exists('NPCs'):
 # 3/20/23: I've gotten some advice, and it's better to save myself effort than overcomplicate things. RAM is plentiful. Simplify the bonuses on the feature level.
 # 4/3/23: Core will probably contain all the text menu navigation fluff. Working on saveload.py concurrently
 # 4/5/23: https://console-menu.readthedocs.io/en/latest/usage.html < documentation for the consolemenu module. Prone to change? Probably?
+# 7/26/23: If you're starting a new gitpod instance, you probably need to reinstall console-menu (pip install console-menu), and also reupload the base Lancer LCP
 
 loaded_features = feat_load()
 loaded_templates = template_load(loaded_features)
 loaded_npc_classes = npc_load(loaded_features)
 
 phil_the_carrier = NPC("Phil the Carrier", loaded_npc_classes['CARRIER'], tier=1)
-joe_the_assault = NPC("Joe the Assault", loaded_npc_classes["ASSAULT"], tier=1)
+joe_the_assault = NPC("Joe the Assault", loaded_npc_classes['ASSAULT'], tier=1)
 n_berserker = NPC("Normal Berserker", loaded_npc_classes['BERSERKER'], tier=1)
 v_engineer = NPC("Veteran Engineer", loaded_npc_classes['ENGINEER'], tier=1)
 n_bastion = NPC("Normal Bastion", loaded_npc_classes['BASTION'], tier=1)
