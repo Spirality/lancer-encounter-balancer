@@ -23,12 +23,17 @@ import code
 from consolemenu import *
 from consolemenu.items import *
 
-version = "v0.1"
+version = "v0.1a"
 
-if not os.path.exists('LCPs'):
-    os.makedirs('LCPs')
-if not os.path.exists('NPCs'):
-    os.makedirs('NPCs')
+parent_dir = os.getcwd()
+if not os.path.exists(parent_dir + '/LCPs'):
+    os.makedirs(parent_dir+'/LCPs')
+if not os.path.exists(parent_dir+'/NPCs'):
+    os.makedirs(parent_dir+'/NPCs')
+if not os.path.exists(parent_dir+'/Data'):
+    os.makedirs(parent_dir+'/Data')
+if not os.path.exists(parent_dir+'/Data/OPFORs'):
+    os.makedirs(parent_dir+'/Data/OPFORs')
 #To do: Load LCPs and pass as an argument to avoid compiling the LCP list three times over
 # 3/20/23: I've gotten some advice, and it's better to save myself effort than overcomplicate things. RAM is plentiful. Simplify the bonuses on the feature level.
 # 4/3/23: Core will probably contain all the text menu navigation fluff. Working on saveload.py concurrently
@@ -52,20 +57,24 @@ joe_the_assault.add_template(loaded_templates["GRUNT"])
 v_engineer.add_template(loaded_templates["VETERAN"])
 
 TestEncounter = Encounter(name="Battle of UwU", players=3)
-#print(TestEncounter.structure_cost)
-#TestEncounter.structure_cost = 5
-#del TestEncounter.structure_cost
-print("Champion Superiority structure bonus: {}".format(loaded_features["npc_champion_Superiority"].c_bonus.structure_bonus))
-print("Phil's structure bonus: {}".format(phil_the_carrier.calc_bonus("structure")))
-print("Phil's Champion Superiority structure bonus: {}".format(phil_the_carrier.features["npc_champion_Superiority"].c_bonus.structure_bonus))
-print("Phil's current structure: {}".format(phil_the_carrier.get_stat("structure")))
-print("Joe's current HP: {}".format(joe_the_assault.get_stat("hp")))
-print("Joe's base HP: {}".format(joe_the_assault.get_basestat("hp")))
-print("Joe's combat weight: {}".format(joe_the_assault.weight))
-print("Phil's combat weight: {}".format(phil_the_carrier.weight))
+TestEncounter.add_NPC(n_ronin)
+TestEncounter.add_NPC(n_archer)
+TestEncounter.add_NPC(n_bastion)
+TestEncounter.add_NPC(joe_the_assault)
+print(TestEncounter.get_opfor())
+print(TestEncounter.get_combatcost())
+#print("Champion Superiority structure bonus: {}".format(loaded_features["npc_champion_Superiority"].c_bonus.structure_bonus))
+#print("Phil's structure bonus: {}".format(phil_the_carrier.calc_bonus("structure")))
+#print("Phil's Champion Superiority structure bonus: {}".format(phil_the_carrier.features["npc_champion_Superiority"].c_bonus.structure_bonus))
+#print("Phil's current structure: {}".format(phil_the_carrier.get_stat("structure")))
+#print("Joe's current HP: {}".format(joe_the_assault.get_stat("hp")))
+#print("Joe's base HP: {}".format(joe_the_assault.get_basestat("hp")))
+#print("Joe's combat weight: {}".format(joe_the_assault.weight))
+#print("Phil's combat weight: {}".format(phil_the_carrier.weight))
 #code.interact(local=locals())
 def debug():
-    save_npc(phil_the_carrier)
+    print(parent_dir)
+    #save_npc(phil_the_carrier)
 
 main_menu = ConsoleMenu("METAVAULT Main Menu", f"Current version number: {version}", prologue_text="Select your destination:")
 balancer_menu = ConsoleMenu("Encounter Balancer Menu", "Unfortunately, there is no Encounter Balancer to blink to. Whoops.")
@@ -82,6 +91,5 @@ main_menu.append_item(goto_npc_wizard)
 main_menu.append_item(goto_options)
 main_menu.append_item(goto_debug)
 
-main_menu.show()
-
+#main_menu.show()
 #print(json.dumps(phil_the_carrier, indent=4, cls=MyEncoder))

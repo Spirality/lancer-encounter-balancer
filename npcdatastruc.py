@@ -98,7 +98,7 @@ class NPC:
         'weight': self.weight}
         # wow I didn't know you could stratify things like this
     
-    def grunt_check(self):
+    def grunt_check(self): # Used in method later on
         if "GRUNT" in self.templates.keys():
             self.weight = .25
         else:
@@ -133,7 +133,7 @@ class NPC:
     def calc_bonus(self, stat):
         return sum([getattr(f.c_bonus, stat+"_bonus") for key, f in self.features.items() if hasattr(f, "c_bonus")])
     
-    def get_override(self, stat):
+    def get_override(self, stat): # 8/4/23: I don't remember how this works, but I think it calculates override on the fly instead of keeping it as a list now
         for key, f in self.features.items():
             if hasattr(f, "c_override"):
                 override = getattr(f.c_override, stat+"_override")
