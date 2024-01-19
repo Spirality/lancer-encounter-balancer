@@ -66,3 +66,49 @@
 #    def structure_cost(self):
 #        print("deleter of structure_cost called")
 #        self._structure_cost = 0
+
+def start():
+    print("Welcome to the Lancer Encounter Balancer, project name METAVAULT!")
+    print(f"Current version number: {version}")
+    main_menu()
+
+def main_menu():
+    desc = """
+    Main Menu
+    ------------
+    Select option:
+    1. Encounter Balancer
+    2. NPC Wizard
+    3. Options
+    4. Exit
+    ------------
+    """
+    print(desc)
+    selection = int(input("Select an option:"))
+    while selection != 0:
+        if selection==1:
+            print("Blinking to Encounter Balancer...")
+            print("Unfortunately, there is no Encounter Balancer to blink to. Whoops.")
+            print(desc)
+            selection = int(input("Select an option:"))
+            ## You can add your code or functions here
+        elif selection==2:
+            print("Blinking to NPC Wizard...")
+            print("Unfortunately, there is no NPC Wizard to blink to. Whoops.")
+            print(desc)
+            selection = int(input("Select an option:"))
+        elif selection==3:
+            print("Blinking to Options...")
+            print("Unfortunately, there are no options to blink to. Whoops.")
+            print(desc)
+            selection = int(input("Select an option:"))
+        elif selection ==4:
+            print("Exiting Blinkspace...")
+            selection = 0
+        else:
+            # Any integer inputs other than values 1-4 we print an error message
+            print("Wrong option selection. Enter any key to try again..")
+            print(desc)
+            selection = int(input("Select an option:"))
+
+start()

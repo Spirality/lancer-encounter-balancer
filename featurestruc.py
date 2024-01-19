@@ -4,6 +4,8 @@ import os
 
 class Feature_Bonuses:
   # Honestly I don't know if this is warranted but hopefully it saves me some typing
+  # This class is going to contain all of the bonuses a feature has or could possibly have
+  # There is absolutely a more elegant way to handle this value but I am not a smart man
     def __init__(self, bonuses={}):
         self.input = bonuses
         if self.input == None:
@@ -30,6 +32,7 @@ class Feature_Bonuses:
                 setattr(self,name,v)
 
 class Feature_Overrides:
+    # Same thing as the above, but instead of bonuses, it's overrides. So far I've only had to deal with one override, that being the Grunt modifier, but just in case...
     def __init__(self, overrides={}):
         self.input = overrides
         if self.input == None:
@@ -56,7 +59,7 @@ class Feature_Overrides:
                 setattr(self,name,v)
 
 
-# There are a number of different formats of feature, and my knowledge of python is limited. Making four diff classes is the best I've got
+# There are a number of different formats of feature, and my knowledge of python is limited. Five types of feature.
 class Trait_Feature:
     def __init__(self, id, name, type, origin, locked, effect, tags=[], bonus={}, override={}):
         self.id = id
@@ -160,7 +163,7 @@ def load_feature(feature_data):
     elif category == "tech":
         return Tech_Feature(id=feature_data["id"], name=feature_data["name"], type=feature_data["type"], origin=feature_data["origin"], locked=feature_data["locked"], effect=feature_data["effect"], tech_type=feature_data["tech_type"], tags=feature_data.get("tags", []), attack_bonus=feature_data.get("attack_bonus", [0,0,0]))
     else:
-        raise ValueError("Not a supported Feature type!")
+        raise ValueError("Not a supported Feature type! Honestly, I never expected this error to be thrown, but if it does, you should probably tell someone!")
 
 def feat_load():
     loaded_features = {}

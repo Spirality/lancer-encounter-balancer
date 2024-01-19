@@ -75,9 +75,9 @@ def load_npc_class(npc_data, loaded_features):
 class NPC:
     # First part, identifications
     def __init__(self, name, npc_class, tier):
-        self.name = name
-        self.npc_class = npc_class
-        self.tier = tier
+        self.name = name #str
+        self.npc_class = npc_class #NPC_Class object
+        self.tier = tier #int
         self.templates = {} #dict
         self.allowed_features = npc_class.class_features.copy() #dict
         self.features = npc_class.base_features.copy() #dict
@@ -85,8 +85,25 @@ class NPC:
         self.weight = 1
         # weight is basically the value of fielding the NPC. Grunts will have .25, Elites and Vets get 2 (3 if the templates are stacked), and 4 for Ultras
         # this value will get multiplied/modified if the NPC is fielded with classes that combo with it, like Mirage + Demolisher
+
+    # CUSTOM ENCODER CLAUSE
+    def __json__(self):
+        return {'name': self.name, 
+        'class_name': self.npc_class.name, 
+        'tier': self.tier, 
+        'templates': list(self.templates.keys()), 
+        'allowed_features': list(self.allowed_features.keys()), 
+        'features': list(self.features.keys()), 
+        'activations': self.activations, 
+        'weight': self.weight}
+        # wow I didn't know you could stratify things like this
     
-    # Second part, defining functions. More to come as we need them
+    def grunt_check(self): # Used in method later on
+        if "GRUNT" in self.templates.keys():
+            self.weight = .25
+        else:
+            self.weight = self.get_stat("structure")
+
     def get_stat(self, stat):
         if self.get_override(stat) == False:
             return getattr(self.npc_class.stats, stat)[self.tier - 1] + self.calc_bonus(stat)
@@ -116,7 +133,7 @@ class NPC:
     def calc_bonus(self, stat):
         return sum([getattr(f.c_bonus, stat+"_bonus") for key, f in self.features.items() if hasattr(f, "c_bonus")])
     
-    def get_override(self, stat):
+    def get_override(self, stat): # 8/4/23: I don't remember how this works, but I think it calculates override on the fly instead of keeping it as a list now
         for key, f in self.features.items():
             if hasattr(f, "c_override"):
                 override = getattr(f.c_override, stat+"_override")
@@ -132,6 +149,7 @@ class NPC:
         self.templates[template.name] = template
         self.allowed_features.update(template.features.items())
         self.features.update({x:template.base_feature_data.get(x) for x in template.base_features})
+        self.grunt_check()
         return True
     
     def add_feature(self, feature):
@@ -148,6 +166,7 @@ class NPC:
                 del self.allowed_features[entry] #remove each feature from the allowed features list
                 if entry in self.features:
                     del self.features[entry] #then remove any that have been assigned
+            self.grunt_check()
             return True
         else:
             return False
@@ -160,16 +179,16 @@ class NPC:
             return False
 
 def npc_load(loaded_features):
-    loaded_npcs = {}
+    loaded_npc_classes = {}
     for filename in Path('LCPs').glob('*.lcp'): # Loop through each LCP file
         #print(filename) # Debug shenanigans, delete later
         lcpr = LCP_Reader(filename) # Load the LCP info and save to a name
         for entry in lcpr.npc_classes: # Loop through each NPC class in the json
             thing = load_npc_class(entry, loaded_features) # Just saving this expression to 'thing' for easy typing
-            loaded_npcs.update({thing.name: thing}) # Push the NPC entry to the loaded_npcs dictionary. Might be an issue if two LCPs have the same name of NPC?
+            loaded_npc_classes.update({thing.name: thing}) # Push the NPC entry to the loaded_npcs dictionary. Might be an issue if two LCPs have the same name of NPC?
         #x = len(loaded_npcs) # More debug
         #print(f'{x} NPC Classes loaded from {filename}.') # More debug
-    return loaded_npcs # Hand off the master list of NPCs!
+    return loaded_npc_classes # Hand off the master list of NPCs!
 
 # Call for specific stats of an NPC like this: loaded_npcs['CARRIER'].stats.hp
 # loaded_npcs is the dict of NPCs sorted by name, stats is the list you want, and hp is the value
