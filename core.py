@@ -39,10 +39,12 @@ if not os.path.exists(parent_dir+'/Data/OPFORs'):
 # 4/3/23: Core will probably contain all the text menu navigation fluff. Working on saveload.py concurrently
 # 4/5/23: https://console-menu.readthedocs.io/en/latest/usage.html < documentation for the consolemenu module. Prone to change? Probably?
 # 7/26/23: If you're starting a new gitpod instance, you probably need to reinstall console-menu (pip install console-menu), and also reupload the base Lancer LCP
+# 1/19/24: Back from a mental breakdown but I'm not exactly free of it. Saveload.py is on hold until I can get the minimum viable product done.
 
 loaded_features = feat_load()
 loaded_templates = template_load(loaded_features)
 loaded_npc_classes = npc_load(loaded_features)
+loaded_encounters = []
 
 phil_the_carrier = NPC("Phil the Carrier", loaded_npc_classes['CARRIER'], tier=1)
 joe_the_assault = NPC("Joe the Assault", loaded_npc_classes['ASSAULT'], tier=1)
@@ -62,7 +64,7 @@ TestEncounter.add_NPC(n_archer)
 TestEncounter.add_NPC(n_bastion)
 TestEncounter.add_NPC(joe_the_assault)
 print(TestEncounter.get_opfor())
-print(TestEncounter.get_combatcost())
+print(TestEncounter.get_combatCost())
 #print("Champion Superiority structure bonus: {}".format(loaded_features["npc_champion_Superiority"].c_bonus.structure_bonus))
 #print("Phil's structure bonus: {}".format(phil_the_carrier.calc_bonus("structure")))
 #print("Phil's Champion Superiority structure bonus: {}".format(phil_the_carrier.features["npc_champion_Superiority"].c_bonus.structure_bonus))
@@ -76,10 +78,13 @@ def debug():
     print(parent_dir)
     #save_npc(phil_the_carrier)
 
-main_menu = ConsoleMenu("METAVAULT Main Menu", f"Current version number: {version}", prologue_text="Select your destination:")
-balancer_menu = ConsoleMenu("Encounter Balancer Menu", "Unfortunately, there is no Encounter Balancer to blink to. Whoops.")
-npc_wizard = ConsoleMenu("NPC Wizard Menu", "Unfortunately, this feature is incomplete. Check back later!")
-options_menu = ConsoleMenu("Options Menu", "I'll hopefully have more stuff here later aaaaaa")
+def build_encounterMenu(loaded_encounters):
+    return 
+
+main_menu = ConsoleMenu(title="METAVAULT Main Menu", subtitle=f"Current version number: {version}", prologue_text="Select your destination:")
+balancer_menu = ConsoleMenu(title="Encounter Balancer Menu", subtitle="Please select the Encounter you want to edit:")
+npc_wizard = ConsoleMenu(title="NPC Wizard Menu", subtitle="Unfortunately, this feature is incomplete. Check back later!")
+options_menu = ConsoleMenu(title="Options Menu", subtitle="I'll hopefully have more stuff here later aaaaaa")
 
 goto_encounter_balancer = SubmenuItem("Encounter Balancer", balancer_menu, main_menu)
 goto_npc_wizard = SubmenuItem("NPC Wizard", npc_wizard, main_menu)
@@ -90,6 +95,8 @@ main_menu.append_item(goto_encounter_balancer)
 main_menu.append_item(goto_npc_wizard)
 main_menu.append_item(goto_options)
 main_menu.append_item(goto_debug)
+
+encounter_stats_menu = ConsoleMenu(title="Showing Encounter stats for Encounter: {encounter}", subtitle=None)
 
 main_menu.show()
 #print(json.dumps(phil_the_carrier, indent=4, cls=MyEncoder))
