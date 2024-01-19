@@ -91,5 +91,5 @@ main_menu.append_item(goto_npc_wizard)
 main_menu.append_item(goto_options)
 main_menu.append_item(goto_debug)
 
-#main_menu.show()
+main_menu.show()
 #print(json.dumps(phil_the_carrier, indent=4, cls=MyEncoder))
