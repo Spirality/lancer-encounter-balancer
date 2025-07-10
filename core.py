@@ -25,7 +25,7 @@ from consolemenu.items import *
 
 version = "v0.1a"
 
-parent_dir = os.getcwd()
+parent_dir = os.getcwd() # Define parent directory as current folder. The following stack is going to make our folders
 if not os.path.exists(parent_dir + '/LCPs'):
     os.makedirs(parent_dir+'/LCPs')
 if not os.path.exists(parent_dir+'/NPCs'):
@@ -34,11 +34,14 @@ if not os.path.exists(parent_dir+'/Data'):
     os.makedirs(parent_dir+'/Data')
 if not os.path.exists(parent_dir+'/Data/OPFORs'):
     os.makedirs(parent_dir+'/Data/OPFORs')
+if not os.path.exists(parent_dir+'/Config'):
+    os.makedirs(parent_dir+'/Config')
 #To do: Load LCPs and pass as an argument to avoid compiling the LCP list three times over
 # 3/20/23: I've gotten some advice, and it's better to save myself effort than overcomplicate things. RAM is plentiful. Simplify the bonuses on the feature level.
 # 4/3/23: Core will probably contain all the text menu navigation fluff. Working on saveload.py concurrently
 # 4/5/23: https://console-menu.readthedocs.io/en/latest/usage.html < documentation for the consolemenu module. Prone to change? Probably?
 # 7/26/23: If you're starting a new gitpod instance, you probably need to reinstall console-menu (pip install console-menu), and also reupload the base Lancer LCP
+# 7/10/25: Okay for real though we need to figure out a solution to the UI problem, sooner rather than later
 
 loaded_features = feat_load()
 loaded_templates = template_load(loaded_features)
@@ -61,8 +64,8 @@ TestEncounter.add_NPC(n_ronin)
 TestEncounter.add_NPC(n_archer)
 TestEncounter.add_NPC(n_bastion)
 TestEncounter.add_NPC(joe_the_assault)
-print(TestEncounter.get_opfor())
-print(TestEncounter.get_combatcost())
+#print(TestEncounter.get_opfor())
+#print(TestEncounter.get_combatcost())
 #print("Champion Superiority structure bonus: {}".format(loaded_features["npc_champion_Superiority"].c_bonus.structure_bonus))
 #print("Phil's structure bonus: {}".format(phil_the_carrier.calc_bonus("structure")))
 #print("Phil's Champion Superiority structure bonus: {}".format(phil_the_carrier.features["npc_champion_Superiority"].c_bonus.structure_bonus))
@@ -75,6 +78,7 @@ print(TestEncounter.get_combatcost())
 def debug():
     print(parent_dir)
     #save_npc(phil_the_carrier)
+debug()
 
 main_menu = ConsoleMenu("METAVAULT Main Menu", f"Current version number: {version}", prologue_text="Select your destination:")
 balancer_menu = ConsoleMenu("Encounter Balancer Menu", "Unfortunately, there is no Encounter Balancer to blink to. Whoops.")
@@ -91,5 +95,5 @@ main_menu.append_item(goto_npc_wizard)
 main_menu.append_item(goto_options)
 main_menu.append_item(goto_debug)
 
-main_menu.show()
+#main_menu.show()
 #print(json.dumps(phil_the_carrier, indent=4, cls=MyEncoder))

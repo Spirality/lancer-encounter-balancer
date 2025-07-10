@@ -18,9 +18,13 @@ from pathlib import Path
 import os
 import zipfile as zf
 import json
+import configparser
 
 # https://stackoverflow.com/questions/24030284/method-to-serialize-custom-object-to-json-in-python
 # This is going to be a slight nightmare but here we go I guess
+# 7/10/25: I think I am going to want a client settings file. Challenges are, what's the best case for that kind of
+# data storage, and also, in the event that I push an update that needs more lines in the setting file, how do
+# I update that file without obliterating existing settings?
 
 class MyEncoder(json.JSONEncoder):
     """
@@ -34,7 +38,19 @@ class MyEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 #Call via: json.dumps(MyClass(), cls=MyEncoder)
 
-# Right, so, at the moment this is barebones as hell. I think it's best to revisit later and figure out how it overwrites and maybe toss in a classic "are you sure" prompt
+class MyDecoder(json.JSONDecoder):
+    """
+    JSONDecoder subclass that leverages an object's 'from_json()' method,
+    if available, to obtain its default JSON representation.
+    """
+    def default(self, obj):
+        if hasattr(obj, 'from_json'):
+            return obj.from_json()
+        return json.JSONDecoder.default(self, obj)
+
+# Right, so, at the moment this is barebones as hell. 
+# I think it's best to revisit later and figure out how it overwrites 
+# and maybe toss in a classic "are you sure" prompt
 def save_npc(npc):
     npc_json = json.dumps(npc, cls=MyEncoder, indent=4)
     filename = str.casefold(npc.name.replace(' ', '_') + '.json')

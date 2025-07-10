@@ -4,7 +4,10 @@ import os
 
 # As of 3/2/2023, feature handling will no longer happen within the import space, but will handle the master list as an argument to save memory
 class NPC_Class:
-    # A class of NPC dictates how it will function in combat
+    """
+    An object that stores the gameplay class data from Lancer, containing the information about the stats, role, and even what features the class is permitted to use.
+
+    """
     def __init__(self, name, role, info, stats, base_features, opt_features, loaded_features):
         self.name = name
         self.role = role
@@ -28,8 +31,10 @@ class NPC_Class:
 
 
 class NPC_Class_Stats:
-  # NPC Combat Stats, might not use them but we're collecting them in case we need them later
-  # Need to attach a default to most of these, since some LCPs have these defined and some don't
+    """
+    Object that stores the specific stat values from a Lancer gameplay class, almost always later packaged into the NPC_Class object.
+
+    """
     def __init__(self, armor=None, hp=None, evade=None, edef=None, heatcap=None, speed=None, sensor=None, save=None, hull=None, agility=None, systems=None, engineering=None, size=None, activations=None, stress=[1,1,1], structure=[1,1,1]):
         self.armor = armor
         self.hp = hp
@@ -50,7 +55,7 @@ class NPC_Class_Stats:
         self.stress = stress
         self.structure = structure
 
-    # These are mostly just here for later
+    # These are mostly just here for later as easy methods instead of calling specific properties
     # Between saving all three values of the tier and having a separate class for each tier, I chose to just save the list
     def get_hull(self, tier):
         return self.hull[tier - 1]
@@ -64,10 +69,17 @@ class NPC_Class_Stats:
     def get_engineering(self, tier):
         return self.engineering[tier - 1]
 
-
+# func for packing all our raw lcp data into a nice little digestible container
 def load_npc_class(npc_data, loaded_features):
     stats = NPC_Class_Stats(**npc_data["stats"])
-    return NPC_Class(name=npc_data["name"], role=npc_data["role"], info=npc_data["info"], stats=stats, base_features=npc_data["base_features"], opt_features=npc_data["optional_features"], loaded_features=loaded_features)
+    return NPC_Class(
+        name=npc_data["name"], 
+        role=npc_data["role"], 
+        info=npc_data["info"], 
+        stats=stats, 
+        base_features=npc_data["base_features"], 
+        opt_features=npc_data["optional_features"], 
+        loaded_features=loaded_features)
     # Stats is a separate thing because we won't really need much of it for the initial part of the program
     # Also it's a whole different block in the json file so this is just easier to parse
 
@@ -82,7 +94,7 @@ class NPC:
         self.allowed_features = npc_class.class_features.copy() #dict
         self.features = npc_class.base_features.copy() #dict
         self.activations = npc_class.stats.activations[self.tier - 1] #list
-        self.weight = 1
+        self.weight = 1 #int
         # weight is basically the value of fielding the NPC. Grunts will have .25, Elites and Vets get 2 (3 if the templates are stacked), and 4 for Ultras
         # this value will get multiplied/modified if the NPC is fielded with classes that combo with it, like Mirage + Demolisher
 
@@ -136,7 +148,7 @@ class NPC:
     def get_override(self, stat): # 8/4/23: I don't remember how this works, but I think it calculates override on the fly instead of keeping it as a list now
         for key, f in self.features.items():
             if hasattr(f, "c_override"):
-                override = getattr(f.c_override, stat+"_override")
+                override = getattr(f.c_override, stat+"_override") # ...I have no memory of this place...
                 if override == None:
                     continue
                 else:
@@ -174,6 +186,7 @@ class NPC:
     def rm_feature(self, feature):
         if feature.id in self.features.keys():
             del self.features[feature.id]
+            self.grunt_check()
             return True
         else:
             return False
