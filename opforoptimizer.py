@@ -37,7 +37,7 @@ class Encounter:
         'weight': self.weight}
         # wow I didn't know you could stratify things like this
 
-    def get_combatcost(self): # might try an iterator next time?
+    def get_combatCost(self): # might try an iterator next time?
         s = 0
         for n in self.opfor:
             s = s + n.weight
