@@ -22,8 +22,9 @@ import os
 import code
 from consolemenu import *
 from consolemenu.items import *
+import tkinter as tk
 
-version = "v0.1a"
+version = "v0.1b"
 
 parent_dir = os.getcwd() # Define parent directory as current folder. The following stack is going to make our folders
 if not os.path.exists(parent_dir + '/LCPs'):
