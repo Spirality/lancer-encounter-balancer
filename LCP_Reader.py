@@ -78,5 +78,6 @@ class LCP_Reader:
                 f'Error decoding the {name} file.') from e
         except ValueError as e:
             raise ValueError('Error: Zip file closed prematurely.') from e
-        finally:
-            return js
+        except KeyError as e:
+            js = None
+        return js

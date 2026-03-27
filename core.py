@@ -20,8 +20,8 @@ from pathlib import Path
 import json
 import os
 import code
-from consolemenu import *
-from consolemenu.items import *
+from tkinter import *
+from tkinter import ttk
 
 version = "v0.1a"
 
@@ -34,6 +34,9 @@ if not os.path.exists(parent_dir+'/Data'):
     os.makedirs(parent_dir+'/Data')
 if not os.path.exists(parent_dir+'/Data/OPFORs'):
     os.makedirs(parent_dir+'/Data/OPFORs')
+if not os.path.exists(parent_dir+'/Config'):
+    os.makedirs(parent_dir+'/Config')
+    
 #To do: Load LCPs and pass as an argument to avoid compiling the LCP list three times over
 # 3/20/23: I've gotten some advice, and it's better to save myself effort than overcomplicate things. RAM is plentiful. Simplify the bonuses on the feature level.
 # 4/3/23: Core will probably contain all the text menu navigation fluff. Working on saveload.py concurrently
@@ -78,25 +81,4 @@ def debug():
     print(parent_dir)
     #save_npc(phil_the_carrier)
 
-def build_encounterMenu(loaded_encounters):
-    return 
-
-main_menu = ConsoleMenu(title="METAVAULT Main Menu", subtitle=f"Current version number: {version}", prologue_text="Select your destination:")
-balancer_menu = ConsoleMenu(title="Encounter Balancer Menu", subtitle="Please select the Encounter you want to edit:")
-npc_wizard = ConsoleMenu(title="NPC Wizard Menu", subtitle="Unfortunately, this feature is incomplete. Check back later!")
-options_menu = ConsoleMenu(title="Options Menu", subtitle="I'll hopefully have more stuff here later aaaaaa")
-
-goto_encounter_balancer = SubmenuItem("Encounter Balancer", balancer_menu, main_menu)
-goto_npc_wizard = SubmenuItem("NPC Wizard", npc_wizard, main_menu)
-goto_options = SubmenuItem("Options", options_menu, main_menu)
-goto_debug = FunctionItem("Perform Debug", debug)
-
-main_menu.append_item(goto_encounter_balancer)
-main_menu.append_item(goto_npc_wizard)
-main_menu.append_item(goto_options)
-main_menu.append_item(goto_debug)
-
-encounter_stats_menu = ConsoleMenu(title="Showing Encounter stats for Encounter: {encounter}", subtitle=None)
-
-main_menu.show()
 #print(json.dumps(phil_the_carrier, indent=4, cls=MyEncoder))
